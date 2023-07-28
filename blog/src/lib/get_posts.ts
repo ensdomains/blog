@@ -5,7 +5,7 @@ import {
     BlogPostMetadataSchema,
 } from '@/types/BlogPostMetadata';
 
-type BlogPostMetadataPlus = BlogPostMetadata & {
+export type BlogPostMetadataPlus = BlogPostMetadata & {
     file: string;
 };
 

@@ -1,8 +1,8 @@
 import { getPost } from '@/lib/get_post';
-import { getPosts } from '@/lib/get_posts';
+import { BlogPostMetadataPlus, getPosts } from '@/lib/get_posts';
 
 type PageProperties = {
-    params: { slug: string[]; file: string };
+    params: { slug: string[]; post: BlogPostMetadataPlus };
 };
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 
 const page = async ({ params }: PageProperties) => {
     console.log({ params });
-    const post = await getPost(params.file);
+    const post = await getPost(params.post?.file);
 
     return (
         <div>
