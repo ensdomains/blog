@@ -17,7 +17,7 @@ export const BlogPostPreview = ({ post }: Properties) => {
             <span className="bg-ens-grey1 aspect-video w-full">
                 <img
                     src={post.cover}
-                    className="h-full w-full object-cover"
+                    className="aspect-video h-full w-full object-cover"
                     alt={post.title}
                 />
             </span>
