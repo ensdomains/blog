@@ -1,3 +1,6 @@
+import { MDXProps } from 'mdx/types';
+import { JSX } from 'react';
+
 import { PostCoverImage } from '@/components/PostCoverImage';
 import { PostHeader } from '@/components/PostHeader';
 import { getPostBySlug } from '@/lib/get_post_by_slug';
@@ -21,14 +24,17 @@ const page = async ({ params }: PageProperties) => {
 
     const post = await getPostBySlug(params.slug[0]);
 
+    const { default: PostContent } = (await import(
+        `../../../content/${post.file}/readme.mdx`
+    )) as {
+        default: (properties: MDXProps) => JSX.Element;
+    };
+
     return (
         <div>
             <PostHeader post={post} />
             <PostCoverImage post={post} />
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis at
-                quia voluptatum, voluptatibus, quibusdam, quos voluptas quae
-            </p>
+            <PostContent />
         </div>
     );
 };
