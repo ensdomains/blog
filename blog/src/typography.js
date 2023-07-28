@@ -192,14 +192,14 @@ module.exports = ({ theme }) => ({
             h2: {
                 color: 'var(--tw-prose-headings)',
                 fontWeight: '600',
-                fontSize: theme('fontSize.lg')[0],
+                fontSize: theme('fontSize.2xl')[0],
                 ...theme('fontSize.lg')[1],
-                marginTop: theme('spacing.12'),
+                marginTop: theme('spacing.8'),
                 marginBottom: theme('spacing.2'),
             },
             h3: {
                 color: 'var(--tw-prose-headings)',
-                fontSize: theme('fontSize.base')[0],
+                fontSize: theme('fontSize.xl')[0],
                 ...theme('fontSize.base')[1],
                 fontWeight: '600',
                 marginTop: theme('spacing.10'),
