@@ -30,5 +30,7 @@ export const getPostsMetadata = cache(async () => {
         posts.push({ ...pageMetadata, file });
     }
 
-    return posts;
+    return posts.sort((a, b) => {
+        return new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1;
+    });
 });
