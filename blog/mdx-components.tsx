@@ -1,6 +1,8 @@
 import type { MDXComponents } from 'mdx/types';
 import { default as a } from 'next/link';
 
+import { DynImage } from '@/components/DynImage';
+
 // import { Button } from '@/components/Button';
 // import { Code, Pre } from '@/components/mdx/Code';
 // import { CodeGroup } from '@/components/mdx/code/CodeGroup';
@@ -19,7 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         // Allows customizing built-in components, e.g. to add styling.
         // h1: ({ children }) => <h1 style={{ fontSize: "100px" }}>{children}</h1>,
         a: a as any,
-        img: () => (<span>this is an image</span>) as any,
+        img: DynImage as any,
         // h2,
         // Note,
         // Row,
