@@ -10,7 +10,7 @@ export const BlogPostMetadataSchema = z.object({
     // Tags for the post
     tags: z.array(z.string()).default([]),
     // ENS Name of the author
-    author: z.string(),
+    authors: z.array(z.string()),
 });
 
 export type BlogPostMetadata = z.infer<typeof BlogPostMetadataSchema>;
