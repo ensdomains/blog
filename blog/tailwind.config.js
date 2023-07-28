@@ -8,7 +8,10 @@
  * @type {import('tailwindcss').Config}
  */
 module.exports = {
-    content: ['./{pages,app,content,src,mdx}/**/*.{js,mjs,jsx,mdx,tsx}'],
+    content: [
+        './{pages,app,content,src,mdx}/**/*.{js,mjs,jsx,mdx,tsx}',
+        '../content/**/*.{mdx}',
+    ],
     darkMode: 'class',
     plugins: [require('@tailwindcss/typography')],
     theme: {

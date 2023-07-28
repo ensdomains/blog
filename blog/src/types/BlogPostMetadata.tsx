@@ -15,6 +15,8 @@ export const BlogPostMetadataSchema = z.object({
     tags: z.array(z.string()).default([]),
     // ENS Name of the author
     authors: z.array(z.string()),
+    // ENS Name of the author
+    youtube: z.string().optional(),
 });
 
 export type BlogPostMetadata = z.infer<typeof BlogPostMetadataSchema>;

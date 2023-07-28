@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types';
 import { default as a } from 'next/link';
 
 import { DynImage } from '@/components/DynImage';
+import { Youtube } from '@/components/Youtube';
 
 // import { Button } from '@/components/Button';
 // import { Code, Pre } from '@/components/mdx/Code';
@@ -22,6 +23,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         // h1: ({ children }) => <h1 style={{ fontSize: "100px" }}>{children}</h1>,
         a: a as any,
         img: DynImage as any,
+        Youtube: Youtube,
         // h2,
         // Note,
         // Row,

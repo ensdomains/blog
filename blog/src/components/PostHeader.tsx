@@ -7,7 +7,7 @@ const capFirst = (string_: string) =>
 
 export const PostHeader = ({ post }: { post: BlogPostMetadata }) => {
     return (
-        <div className="mt-8 w-full">
+        <div className="not-prose mt-8 w-full">
             <h1 className="text-4xl font-bold">{post.title}</h1>
             <div className="my-2 flex items-center gap-2">
                 <div className="flex -space-x-2">

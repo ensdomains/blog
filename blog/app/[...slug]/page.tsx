@@ -71,13 +71,11 @@ const page = async ({ params }: PageProperties) => {
     };
 
     return (
-        <div>
+        <article className="prose lg:prose-xl">
             <PostHeader post={post} />
             <PostCoverImage post={post} />
-            <article className="prose lg:prose-xl">
-                <PostContent />
-            </article>
-        </div>
+            <PostContent />
+        </article>
     );
 };
 
