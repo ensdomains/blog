@@ -38,6 +38,9 @@ export const generateMetadata = async (
                 description: post.description,
                 tags: post.tags,
             },
+            twitter: {
+                card: 'summary_large_image',
+            },
             authors: post.authors?.map((author) => ({
                 name: author,
                 url: `https://ens.app/${author}`,
