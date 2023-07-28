@@ -1,4 +1,5 @@
 import { readdir, readFile } from 'node:fs/promises';
+import { cache } from 'react';
 
 import {
     BlogPostMetadata,
@@ -9,7 +10,7 @@ export type BlogPostMetadataPlus = BlogPostMetadata & {
     file: string;
 };
 
-export const getPosts = async () => {
+export const getPostsMetadata = cache(async () => {
     const posts: BlogPostMetadataPlus[] = [];
 
     // Load all posts from the content directory
@@ -30,4 +31,4 @@ export const getPosts = async () => {
     }
 
     return posts;
-};
+});

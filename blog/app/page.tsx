@@ -1,8 +1,8 @@
 import { BlogPostPreview } from '@/components/BlogPostPreview';
-import { getPosts } from '@/lib/get_posts';
+import { getPostsMetadata } from '@/lib/get_posts';
 
 const page = async () => {
-    const posts = await getPosts();
+    const posts = await getPostsMetadata();
 
     return (
         <>
