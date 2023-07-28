@@ -19,6 +19,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         // Allows customizing built-in components, e.g. to add styling.
         // h1: ({ children }) => <h1 style={{ fontSize: "100px" }}>{children}</h1>,
         a: a as any,
+        img: () => (<span>this is an image</span>) as any,
         // h2,
         // Note,
         // Row,

@@ -35,7 +35,7 @@ const page = async ({ params }: PageProperties) => {
         <div>
             <PostHeader post={post} />
             <PostCoverImage post={post} />
-            <article className="prose">
+            <article className="prose lg:prose-xl">
                 <PostContent />
             </article>
         </div>

@@ -3,10 +3,16 @@
  */
 
 /* eslint-disable unicorn/no-empty-file */
+
+/**
+ * @type {import('tailwindcss').Config}
+ */
 module.exports = {
     content: ['./{pages,app,content,src,mdx}/**/*.{js,mjs,jsx,mdx,tsx}'],
     darkMode: 'class',
+    plugins: [require('@tailwindcss/typography')],
     theme: {
+        typography: require('./src/typography'),
         extend: {
             colors: {
                 ens: {
