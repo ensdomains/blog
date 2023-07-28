@@ -4,6 +4,7 @@
     "description": "",
     "scripts": {
         "dev": "next dev",
+        "build": "next build",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint -c .eslintrc.json --ext .ts ./src"
     },
@@ -12,6 +13,9 @@
     "license": "MIT",
     "dependencies": {
         "@next/mdx": "^13.4.12",
+        "@types/mdx": "^2.0.5",
+        "eslint-plugin-tailwindcss": "^3.13.0",
+        "mdx": "^0.3.1",
         "next": "^13.4.12",
         "postcss": "^8.4.27",
         "tailwindcss": "^3.3.3"

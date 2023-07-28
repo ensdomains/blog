@@ -1,5 +1,5 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import nextMDX from '@next/mdx';
+// import nextMDX from '@next/mdx';
 
 // import { recmaPlugins } from './mdx/recma.mjs';
 // import { rehypePlugins } from './mdx/rehype.mjs';
