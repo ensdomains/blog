@@ -1,3 +1,5 @@
+import { PostCoverImage } from '@/components/PostCoverImage';
+import { PostHeader } from '@/components/PostHeader';
 import { getPostBySlug } from '@/lib/get_post_by_slug';
 import { getPostsMetadata } from '@/lib/get_posts';
 
@@ -21,10 +23,12 @@ const page = async ({ params }: PageProperties) => {
 
     return (
         <div>
-            <h1>{post.title}</h1>
-            <div>
-                
-            </div>
+            <PostHeader post={post} />
+            <PostCoverImage post={post} />
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis at
+                quia voluptatum, voluptatibus, quibusdam, quos voluptas quae
+            </p>
         </div>
     );
 };

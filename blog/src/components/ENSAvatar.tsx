@@ -18,7 +18,7 @@ export const ENSAvatar: FC<{ name: string }> = async ({ name }) => {
             alt={name}
             width={16}
             height={16}
-            className="rounded-full"
+            className="aspect-square h-8 w-8 rounded-full"
         />
     );
 };

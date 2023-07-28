@@ -12,6 +12,7 @@
     "author": "Lucemans",
     "license": "MIT",
     "dependencies": {
+        "@ensdomains/thorin": "^0.6.42",
         "@next/mdx": "^13.4.12",
         "@types/mdx": "^2.0.5",
         "autoprefixer": "^10.4.14",
@@ -20,6 +21,7 @@
         "next": "^13.4.12",
         "postcss": "^8.4.27",
         "postcss-focus-visible": "^9.0.0",
+        "react-icons": "^4.10.1",
         "tailwindcss": "^3.3.3",
         "zod": "^3.21.4"
     },

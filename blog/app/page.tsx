@@ -1,12 +1,11 @@
-import { BlogPostPreview } from '@/components/BlogPostPreview';
+import { BlogPostPreview } from '@/components/PostPreview';
 import { getPostsMetadata } from '@/lib/get_posts';
 
 const page = async () => {
     const posts = await getPostsMetadata();
 
     return (
-        <>
-            <div>main page</div>
+        <div className="mt-2">
             <ul className="grid grid-cols-3 gap-2">
                 {posts.map((post) => (
                     <li key={post.slug} className="w-full">
@@ -14,7 +13,7 @@ const page = async () => {
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
 };
 
