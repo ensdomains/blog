@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
             <body>
-                <div className="mx-auto w-full max-w-4xl px-4">
+                <div className="mx-auto mb-36 w-full max-w-4xl px-4">
                     <Navbar />
                     {children}
                 </div>
