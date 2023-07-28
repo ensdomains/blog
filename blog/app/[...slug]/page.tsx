@@ -21,7 +21,10 @@ const page = async ({ params }: PageProperties) => {
 
     return (
         <div>
-            page: {JSON.stringify(params)} - {JSON.stringify(post)}
+            <h1>{post.title}</h1>
+            <div>
+                
+            </div>
         </div>
     );
 };
