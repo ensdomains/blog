@@ -1,6 +1,5 @@
-import { getPost } from '@/get_post';
-
-import { getPosts } from './get_posts';
+import { getPost } from '@/lib/get_post';
+import { getPosts } from '@/lib/get_posts';
 
 type PageProperties = {
     params: { slug: string[]; file: string };
@@ -8,21 +7,23 @@ type PageProperties = {
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export async function generateStaticParams() {
+    console.log('GENERATING MAP OF ALL POSTS');
+
     const pages = await getPosts();
 
     return pages.map((post) => ({
         slug: post.slug.split('/'),
-        // Other post data:
-        file: post.file,
+        post,
     }));
 }
 
-const page = async (properties: PageProperties) => {
-    const post = await getPost(properties.params.file);
+const page = async ({ params }: PageProperties) => {
+    console.log({ params });
+    const post = await getPost(params.file);
 
     return (
         <div>
-            page: {JSON.stringify(properties.params)} - {JSON.stringify(post)}
+            page: {JSON.stringify(params)} - {JSON.stringify(post)}
         </div>
     );
 };

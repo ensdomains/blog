@@ -4,6 +4,8 @@
 
 /* eslint-disable unicorn/no-empty-file */
 module.exports = {
+    content: ['./{pages,app,content,src,mdx}/**/*.{js,mjs,jsx,mdx,tsx}'],
+    darkMode: 'class',
     theme: {
         extend: {
             colors: {
