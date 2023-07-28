@@ -1,0 +1,45 @@
+name: 🚚 Deploy
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-[0-9]+'
+
+env:
+  NODE_OPTIONS: "--max_old_space_size=8192"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Tools & Dependencies
+        uses: ./.github/actions/install
+
+      - name: Build
+        working-directory: ./blog
+        run: pnpm run build
+
+      - name: Prepare tag
+        id: prepare_tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG_NAME="${GITHUB_REF##refs/tags/}"
+          echo "::set-output name=tag_name::${TAG_NAME}"
+          echo "::set-output name=deploy_tag_name::deploy-${TAG_NAME}"
+
+      - name: Edgeserver Upload
+        uses: lvkdotsh/edgeserver-action@v0.1.2-pre.4
+        with:
+          app_id: "207907816382402560"
+          server: https://api.edgeserver.io
+          token: ${{ secrets.SIGNAL_TOKEN }} # ${{ secrets.EDGESERVER_TOKEN }}
+          directory: blog/out
