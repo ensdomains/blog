@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 }
 
 const page = async ({ params }: PageProperties) => {
-    if (params.slug.length !== 1) throw new Error('Invalid slug');
+    if (params.slug.length !== 1)
+        throw new Error('Invalid slug ' + params.slug.join('/'));
 
     const post = await getPostBySlug(params.slug[0]);
 
@@ -34,7 +35,9 @@ const page = async ({ params }: PageProperties) => {
         <div>
             <PostHeader post={post} />
             <PostCoverImage post={post} />
-            <PostContent />
+            <article className="prose">
+                <PostContent />
+            </article>
         </div>
     );
 };
