@@ -91,10 +91,12 @@ const page = async ({ params }: PageProperties) => {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
             />
 
-            <article className="prose lg:prose-xl">
+            <article>
                 <PostHeader post={post} />
                 <PostCoverImage post={post} />
-                <PostContent />
+                <div className="prose lg:prose-xl mx-auto block w-full max-w-3xl">
+                    <PostContent />
+                </div>
             </article>
         </section>
     );

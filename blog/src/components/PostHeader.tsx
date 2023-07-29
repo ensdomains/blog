@@ -5,7 +5,7 @@ import { BigTag } from './tags/BigTag';
 
 export const PostHeader = ({ post }: { post: BlogPostMetadata }) => {
     return (
-        <div className="not-prose mt-8 w-full">
+        <div className="not-prose mx-auto mt-6 w-full max-w-2xl lg:max-w-3xl">
             <h1 className="text-4xl font-bold">{post.title}</h1>
             <div className="my-2 flex items-center gap-2">
                 <div className="flex -space-x-2">

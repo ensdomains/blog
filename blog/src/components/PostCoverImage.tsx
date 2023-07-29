@@ -9,7 +9,7 @@ export const PostCoverImage: FC<{ post: BlogPostMetadata }> = ({ post }) => {
     const isYoutube = post.youtube !== undefined;
 
     return (
-        <div className="not-prose relative mb-2 mt-6 w-full lg:mb-8">
+        <div className="not-prose relative mx-auto my-6 w-full max-w-2xl lg:mb-8 lg:max-w-3xl">
             <div className="lg:-mx-10">
                 {isYoutube ? (
                     <Youtube src={post.youtube} />
