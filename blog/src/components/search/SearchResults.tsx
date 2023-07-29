@@ -1,11 +1,26 @@
 'use client';
 
+import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
+
+type MatchesPosition = { start: number; length: number }[];
 
 type SearchEntry = {
     slug: string;
     title: string;
     description: string;
+    _formatted: {
+        content: string;
+        slug: string;
+        title: string;
+        description: string;
+    };
+    _matchesPosition: {
+        content: MatchesPosition;
+        slug: MatchesPosition;
+        title: MatchesPosition;
+        description: MatchesPosition;
+    };
 };
 
 type SearchResult = {
@@ -30,6 +45,11 @@ const doSearch = async (search: string): Promise<SearchResult> => {
             body: JSON.stringify({
                 q: search,
                 limit: 5,
+                showMatchesPosition: true,
+                attributesToCrop: ['content'],
+                attributesToRetrieve: ['title', 'slug'],
+                cropLength: 10,
+                attributesToHighlight: ['content', 'title'],
             }) as any,
         }
     );
@@ -113,12 +133,31 @@ export const SearchResults: FC = () => {
                     <div className="text-ens-grey2">
                         {searchResults?.hits?.map((hit) => (
                             <div key={hit.slug}>
-                                <a
-                                    href={`/blog/${hit.slug}`}
-                                    className="hover:text-ens-blue"
+                                <Link
+                                    href={`/${hit.slug}`}
+                                    className="hover:text-ens-blue search-highlight"
                                 >
-                                    {hit.title}
-                                </a>
+                                    <img src="" alt="" />
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: hit._formatted.title,
+                                        }}
+                                    ></div>
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: hit._formatted.description,
+                                        }}
+                                    ></div>
+                                    <div>
+                                        {
+                                            <img
+                                                src="https://metadata.ens.domains/mainnet/avatar/luc.eth"
+                                                alt=""
+                                                className="h-4 w-4 rounded-full"
+                                            />
+                                        }
+                                    </div>
+                                </Link>
                             </div>
                         ))}
                     </div>
