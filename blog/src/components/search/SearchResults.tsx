@@ -40,7 +40,7 @@ const doSearch = async (search: string): Promise<SearchResult> => {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization:
-                    'Bearer fbe212eee1d3d67c388a1dbc517b87a9eeb4b9267ec50021e03072ec322b56cf',
+                    'Bearer a80fa71092699b4dc1c4d11fd6cf96968a2e1dd3c5b7c4b43c7339c111b1982b',
             } as any,
             body: JSON.stringify({
                 q: search,
@@ -57,45 +57,9 @@ const doSearch = async (search: string): Promise<SearchResult> => {
     return result.json();
 };
 
-export const SearchResults: FC = () => {
-    const [isFocused, setFocused] = useState(false);
+export const SearchResults: FC<{ query: string }> = ({ query }) => {
     const [searchResults, setSearchResults] = useState<SearchResult>();
     const [loading, setLoading] = useState(false);
-    const [query, setQuery] = useState('');
-
-    useEffect(() => {
-        console.log('hooking');
-        const field = document.querySelector('#search');
-
-        if (!field) {
-            return;
-        }
-
-        field.addEventListener('focus', () => {
-            setFocused(true);
-        });
-
-        field.addEventListener('blur', () => {
-            setFocused(false);
-        });
-
-        field.addEventListener('input', (event: InputEvent) => {
-            const target: HTMLInputElement = event.target as HTMLInputElement;
-
-            setQuery(target.value);
-        });
-        field.addEventListener('keydown', (event: KeyboardEvent) => {
-            console.log('keydown', event.key);
-
-            if (event.key === 'Escape') {
-                console.log('escape');
-            }
-
-            if (event.key === 'Enter') {
-                console.log('enter');
-            }
-        });
-    }, []);
 
     useEffect(() => {
         const validQuery = query.length > 2;
@@ -114,13 +78,11 @@ export const SearchResults: FC = () => {
         });
     }, [query]);
 
-    if (!isFocused) return;
-
     const validQuery = query.length > 2;
     const hasResults = searchResults?.hits?.length > 0;
 
     return (
-        <div className="absolute inset-x-0 top-full pt-2">
+        <div className="absolute inset-x-0 top-full z-10 hidden pt-2 group-focus-within:block">
             <div className="rounded-lg border bg-white p-4">
                 {loading && <div>Loading...</div>}
                 {!loading && !validQuery && (
