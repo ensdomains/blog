@@ -1,7 +1,7 @@
 import type { MDXComponents } from 'mdx/types';
-import { default as a } from 'next/link';
 
 import { DynImage } from '@/components/DynImage';
+import { DynLink } from '@/components/DynLink';
 import { Youtube } from '@/components/Youtube';
 
 // import { Button } from '@/components/Button';
@@ -21,7 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     return {
         // Allows customizing built-in components, e.g. to add styling.
         // h1: ({ children }) => <h1 style={{ fontSize: "100px" }}>{children}</h1>,
-        a: a as any,
+        a: DynLink as any,
         img: DynImage as any,
         Youtube: Youtube,
         // h2,
