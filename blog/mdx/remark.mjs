@@ -47,12 +47,6 @@ export const remarkImportAsNextImages = () => {
      * @param {import('unist').Parent} tree
      */
     return async (tree, file) => {
-        if (
-            file.path !==
-            '/home/jakob/dev/v3xlabs/ens-blog/content/001_ens_cards_devcon/readme.mdx'
-        )
-            return;
-
         visit(
             tree,
             /**
