@@ -29,7 +29,7 @@ export const DynImage = async (properties) => {
             </span> */}
             {/* {JSON.stringify(object)}
             {imagepath}*/}
-            <img src={properties.src} alt="" className="w-full" />
+            <img src={properties.src} alt={properties.alt} className="w-full" />
         </span>
     );
 };

@@ -22,7 +22,7 @@ const nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
     experimental: {
         // scrollRestoration: process.env.NODE_ENV === 'production',
-        mdxRs: true,
+        // mdxRs: true,
     },
     images: {
         unoptimized: true,
