@@ -59,5 +59,5 @@ body {
 }
 
 .search-highlight em {
-    @apply bg-ens-blue text-white inline-flex py-0.5 px-0.5 rounded-md;
+    @apply bg-ens-blue text-white inline-flex px-0.5 rounded-sm;
 }
