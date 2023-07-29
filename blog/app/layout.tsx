@@ -6,7 +6,7 @@ import { Navbar } from '@/components/navbar/Navbar';
 
 export const metadata = {
     title: 'ENS Blog',
-    description: 'A blog about ENS',
+    description: 'The official blog of the Ethereum Name Service',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
