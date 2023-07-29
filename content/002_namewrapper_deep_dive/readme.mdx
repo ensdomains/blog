@@ -85,16 +85,16 @@ However, the Name Wrapper contract provides all the necessary methods so that yo
 
 ### States of an ENS Name
 
-We’re almost ready to see some visual examples! But first, let’s get some terminology out of the way…
+We're almost ready to see some visual examples! But first, let's get some terminology out of the way…
 
 In addition to all the functionality that the name gains from being a fully-fledged ERC-1155 NFT, the Name Wrapper provides a number of ENS-specific features as well.
 
-It does this with a “fuse” system. Each “fuse” represents some kind of permission for the name. When you burn a fuse, you are usually revoking some kind of permission. In the ENS Manager UI, this is available in the “Permissions” section of the name.
+It does this with a "fuse" system. Each "fuse" represents some kind of permission for the name. When you burn a fuse, you are usually revoking some kind of permission. In the ENS Manager UI, this is available in the "Permissions" section of the name.
 
-For example, by default when you wrap a name, you can transfer that NFT around freely, just as you can with other NFTs. However, if the “Cannot Transfer” fuse is burned, then the NFT becomes non-transferrable. In the ENS Manager UI, you would do this by revoking the “Can send this name” permission.
+For example, by default when you wrap a name, you can transfer that NFT around freely, just as you can with other NFTs. However, if the "Cannot Transfer" fuse is burned, then the NFT becomes non-transferrable. In the ENS Manager UI, you would do this by revoking the "Can send this name" permission.
 
 As the name implies, once you burn a fuse, you cannot undo that action, until the expiry at least.
 
 The expiry is how long the fuses are active for. The expiry on a name is set by the parent owner. For .eth second-level names, the expiry is set to the same expiry from the .eth registrar. When the expiry is reached, all fuses reset. In addition, if your name is Emancipated or Locked, then you lose ownership of the name when it expires. There is a section later that goes into greater detail about the expiry.
 
-There are also special fuses that determine the relationship between “parent” and “child” names, or alter the state of the wrapped name. A name can be in one of these possible states:
+There are also special fuses that determine the relationship between "parent" and "child" names, or alter the state of the wrapped name. A name can be in one of these possible states:
