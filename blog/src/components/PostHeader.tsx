@@ -1,9 +1,7 @@
 import { BlogPostMetadata } from '@/types/BlogPostMetadata';
 
 import { ENSAvatar } from './ENSAvatar';
-
-const capFirst = (string_: string) =>
-    string_.charAt(0).toUpperCase() + string_.slice(1);
+import { BigTag } from './tags/BigTag';
 
 export const PostHeader = ({ post }: { post: BlogPostMetadata }) => {
     return (
@@ -20,12 +18,7 @@ export const PostHeader = ({ post }: { post: BlogPostMetadata }) => {
             </div>
             <div className="my-2 flex gap-2">
                 {post.tags.map((tag) => (
-                    <a
-                        href="/"
-                        className="text-ens-blue rounded-full bg-white px-2 text-base font-bold transition hover:scale-105"
-                    >
-                        {capFirst(tag)}
-                    </a>
+                    <BigTag tag={tag} />
                 ))}
             </div>
         </div>

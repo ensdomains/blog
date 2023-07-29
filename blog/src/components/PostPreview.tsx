@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { BlogPostMetadata } from '@/types/BlogPostMetadata';
 
 import { ENSAvatar } from './ENSAvatar';
+import { SmallTag } from './tags/SmallTag';
 
 type Properties = {
     post: BlogPostMetadata;
@@ -25,6 +26,13 @@ export const BlogPostPreview = ({ post }: Properties) => {
                 <span className="text-ens-grey2 text-xs">{post.date}</span>
                 <span className="text-lg">{post.title}</span>
             </span>
+            {post.tags && (
+                <span className="flex flex-wrap gap-1 px-2 pb-2">
+                    {post.tags.map((tag) => (
+                        <SmallTag tag={tag} />
+                    ))}
+                </span>
+            )}
             <span className="border-ens-grey1 flex items-center gap-2 border-t p-2">
                 <span className="flex -space-x-2">
                     {post.authors.map((author) => (
