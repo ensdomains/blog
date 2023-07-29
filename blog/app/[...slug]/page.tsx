@@ -1,6 +1,7 @@
 import { MDXProps } from 'mdx/types';
 import { ResolvingMetadata } from 'next';
 import { JSX } from 'react';
+import { Article, WithContext } from 'schema-dts';
 
 import { PostCoverImage } from '@/components/PostCoverImage';
 import { PostHeader } from '@/components/PostHeader';
@@ -70,12 +71,32 @@ const page = async ({ params }: PageProperties) => {
         default: (properties: MDXProps) => JSX.Element;
     };
 
+    const schema: WithContext<Article> = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: post.title,
+        image: post.cover,
+        datePublished: new Date(post.date).toISOString(),
+        author: post.authors?.map((author) => ({
+            '@type': 'Person',
+            name: author,
+            url: 'https://ens.app/' + author,
+        })),
+    };
+
     return (
-        <article className="prose lg:prose-xl">
-            <PostHeader post={post} />
-            <PostCoverImage post={post} />
-            <PostContent />
-        </article>
+        <section>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
+
+            <article className="prose lg:prose-xl">
+                <PostHeader post={post} />
+                <PostCoverImage post={post} />
+                <PostContent />
+            </article>
+        </section>
     );
 };
 
