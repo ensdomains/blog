@@ -19,11 +19,11 @@ const socials = [
     { icon: <FaMedium />, to: 'https://medium.com/the-ethereum-name-service' },
     {
         icon: <FiMessageCircle />,
-        to: '"https://discuss.ens.domains/',
+        to: 'https://discuss.ens.domains/',
     },
     {
         icon: <FaYoutube />,
-        to: '"https://youtube.com/ensdomains',
+        to: 'https://youtube.com/ensdomains',
     },
 ];
 
