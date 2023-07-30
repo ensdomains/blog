@@ -98,25 +98,26 @@ export const SearchResults: FC<{ query: string }> = ({ query }) => {
                     <div className="text-ens-grey2">No results</div>
                 )}
                 {!loading && validQuery && hasResults && (
-                    <div className="text-ens-grey2">
+                    <div className="text-ens-grey2 flex flex-col gap-1">
                         {searchResults?.hits?.map((hit) => (
                             <div key={hit.slug}>
                                 <Link
                                     href={`/${hit.slug}`}
-                                    className="hover:text-ens-blue search-highlight"
+                                    className="search-highlight flex flex-col p-2 hover:bg-neutral-100"
                                 >
                                     <img src="" alt="" />
-                                    <div
+                                    <span
+                                        className="text-lg text-neutral-700"
                                         dangerouslySetInnerHTML={{
                                             __html: hit._formatted.title,
                                         }}
-                                    ></div>
-                                    <div
+                                    />
+                                    <span
                                         dangerouslySetInnerHTML={{
                                             __html: hit._formatted.description,
                                         }}
-                                    ></div>
-                                    <div>
+                                    ></span>
+                                    <div className="mt-3">
                                         {
                                             <img
                                                 src="https://metadata.ens.domains/mainnet/avatar/luc.eth"
