@@ -17,9 +17,10 @@ export const SearchBar = () => {
                 </div>
                 <input
                     type="search"
-                    className="focus:border-ens-blue focus:outline-ens-blue h-full w-80 rounded-full border bg-white py-1 pl-12 pr-10"
+                    className="focus:border-ens-blue focus:outline-ens-blue h-full w-full rounded-full border bg-white py-1 pl-12 pr-10 md:w-80"
                     placeholder="Search for a post"
                     id="search"
+                    autoComplete="off"
                     onChange={(event) => setQuery(event.target.value)}
                     ref={reference}
                 />
