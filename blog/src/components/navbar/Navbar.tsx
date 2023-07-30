@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 import { SearchBar } from '../search/SearchBar';
 import { HamburgerMenu } from './HamburgerMenu';
+import { MobileSearchMenu } from './MobileSearchMenu';
 
 export const Navbar: FC = () => {
     return (
@@ -21,6 +22,7 @@ export const Navbar: FC = () => {
             </div>
             <div className="text-ens-grey2 flex items-center gap-2">
                 <div className="hidden md:block">ENS Domains</div>
+                <MobileSearchMenu />
                 <HamburgerMenu />
             </div>
         </div>
