@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import { SearchBar } from '../search/SearchBar';
-import { MenuButton } from './MenuButton';
+import { HamburgerMenu } from './HamburgerMenu';
 
 export const Navbar: FC = () => {
     return (
@@ -16,12 +16,12 @@ export const Navbar: FC = () => {
                     />
                 </Link>
             </div>
-            <SearchBar />
+            <div className="hidden sm:block">
+                <SearchBar />
+            </div>
             <div className="text-ens-grey2 flex items-center gap-2">
-                <div>ENS Domains</div>
-                <div className="text-ens-grey2 fill-ens-grey2">
-                    <MenuButton />
-                </div>
+                <div className="hidden md:block">ENS Domains</div>
+                <HamburgerMenu />
             </div>
         </div>
     );
