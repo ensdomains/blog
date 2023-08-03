@@ -7,8 +7,8 @@ import { MobileSearchMenu } from './MobileSearchMenu';
 
 export const Navbar: FC = () => {
     return (
-        <div className="mt-5 flex w-full items-center justify-between pb-3 pt-5">
-            <div className="flex items-center justify-start gap-4">
+        <div className="mt-5 flex w-full items-center pb-3 pt-5">
+            <div className="flex flex-1 items-center justify-start gap-4">
                 <Link href="/">
                     <img
                         src="/icons/ens_logo_primary.svg"
@@ -20,7 +20,7 @@ export const Navbar: FC = () => {
             <div className="hidden sm:block">
                 <SearchBar />
             </div>
-            <div className="text-ens-grey2 flex items-center gap-2">
+            <div className="text-ens-grey2 flex flex-1 items-center justify-end gap-2">
                 <div className="hidden md:block">ENS Domains</div>
                 <MobileSearchMenu />
                 <HamburgerMenu />
