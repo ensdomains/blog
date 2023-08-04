@@ -34,7 +34,6 @@
     "src/next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/SectionProvider.jsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [
