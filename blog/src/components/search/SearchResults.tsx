@@ -40,7 +40,7 @@ const doSearch = async (search: string): Promise<SearchResult> => {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization:
-                    'Bearer 881ba3430f3bdf912045bd7c462a32a90fd7e26d9c6fd992a6a358cedcd97013',
+                    'Bearer b77dacb494c3272351784097847e34c59b22510b30aa0ed662f1e79e1df658a0',
             } as any,
             body: JSON.stringify({
                 q: search,
