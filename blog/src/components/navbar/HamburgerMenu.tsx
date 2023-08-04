@@ -1,9 +1,11 @@
 'use client';
 
-import { Card, CrossSVG, DynamicPopover, MenuSVG } from '@ensdomains/thorin';
-import { FC, useRef, useState } from 'react';
+import { CrossSVG, MenuSVG } from '@ensdomains/thorin';
+import { FC, useState } from 'react';
 import { FaDiscord, FaMedium, FaYoutube } from 'react-icons/fa';
 import { FiGithub, FiMessageCircle, FiTwitter } from 'react-icons/fi';
+
+import { cx } from '../../lib/cx';
 
 const links = [
     { name: 'ENS Manager', to: 'https://app.ens.domains' },
@@ -63,13 +65,10 @@ const Content: FC = () => {
 export const HamburgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const buttonReference = useRef<HTMLButtonElement>(null);
-
     return (
         <>
             <div className="text-ens-grey2 fill-ens-grey2">
                 <button
-                    ref={buttonReference}
                     className="hover:bg-ens-grey2/20 flex items-center rounded-full p-2"
                     onClick={() => setIsOpen(!isOpen)}
                 >
@@ -78,28 +77,23 @@ export const HamburgerMenu = () => {
             </div>
             {isOpen && (
                 <div className="absolute left-0 top-24 block w-full md:hidden">
-                    <Card className="w-full !gap-0 !rounded-none !p-0">
+                    <div className="card w-full !rounded-none">
                         <Content />
-                    </Card>
+                    </div>
                 </div>
             )}
-            <DynamicPopover
-                isOpen={isOpen}
-                mobileWidth="0"
-                mobilePlacement="top"
-                anchorRef={buttonReference}
-                popover={
-                    <div className="hidden md:block">
-                        <Card className="!gap-0 !p-0">
-                            <Content />
-                        </Card>
+            <div
+                className={cx(
+                    'w-80 absolute top-24',
+                    isOpen ? 'hidden md:block' : 'hidden'
+                )}
+            >
+                <div className="hidden md:block">
+                    <div className="card">
+                        <Content />
                     </div>
-                }
-                placement="bottom"
-                width={320}
-                transitionDuration={150}
-                align="end"
-            />
+                </div>
+            </div>
         </>
     );
 };
