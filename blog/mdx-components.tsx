@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types';
 
 import { DynImage } from '@/components/DynImage';
 import { DynLink } from '@/components/DynLink';
+import { Heading } from '@/components/mdx/heading';
 import { Youtube } from '@/components/Youtube';
 
 // import { Button } from '@/components/Button';
@@ -24,7 +25,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         a: DynLink as any,
         img: DynImage as any,
         Youtube: Youtube,
-        // h2,
+        h2: (properties: any) => <Heading level={2} {...properties} />,
         // Note,
         // Row,
         // Col,
