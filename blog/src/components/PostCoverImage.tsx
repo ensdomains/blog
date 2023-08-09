@@ -20,6 +20,7 @@ export const PostCoverImage: FC<{ post: BlogPostMetadata }> = ({ post }) => {
                         width="900"
                         height={(1080 / 1920) * 900}
                         className="w-full rounded-lg"
+                        priority
                     />
                 )}
             </div>
