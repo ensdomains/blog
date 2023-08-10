@@ -1,8 +1,9 @@
 'use client';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import Modal from 'react-modal';
 
-export const Providers: FC<{ children: ReactNode }> = ({ children }) => {
-    return <>{children}</>;
+export const ModalProvider: FC = () => {
+    return <></>;
 };
+
 Modal.setAppElement('body');

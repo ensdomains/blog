@@ -3,7 +3,7 @@ import './globals.css';
 import { ReactNode } from 'react';
 
 import { Navbar } from '@/components/navbar/Navbar';
-import { Providers } from '@/components/Providers';
+import { ModalProvider } from '@/components/Providers';
 
 export const metadata = {
     title: 'ENS Blog',
@@ -14,12 +14,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
             <body>
-                <Providers>
-                    <div className="mx-auto mb-36 w-full max-w-4xl px-4">
-                        <Navbar />
-                        {children}
-                    </div>
-                </Providers>
+                <ModalProvider />
+                <div className="mx-auto mb-36 w-full max-w-4xl px-4">
+                    <Navbar />
+                    {children}
+                </div>
             </body>
         </html>
     );
