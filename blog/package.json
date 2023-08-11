@@ -35,6 +35,7 @@
         "react-dom": "^18.2.0",
         "react-icons": "^4.10.1",
         "react-transition-state": "^1.1.4",
+        "reading-time": "^1.5.0",
         "remark-gfm": "^3.0.1",
         "schema-dts": "^1.1.2",
         "shiki": "^0.14.3",

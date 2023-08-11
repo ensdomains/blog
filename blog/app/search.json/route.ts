@@ -15,6 +15,7 @@ export async function GET() {
     const data = posts.map((post) => ({
         ...post.meta,
         content: post.content.plainContent,
+        readingTime: post.content.readingTime,
     }));
 
     return NextResponse.json(data);
