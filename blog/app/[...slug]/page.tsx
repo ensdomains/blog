@@ -65,10 +65,11 @@ const page = async ({ params }: PageProperties) => {
 
     const post = await getPostBySlug(params.slug[0]);
 
-    const { default: PostContent } = (await import(
+    const { default: PostContent, readingTime } = (await import(
         `../../../content/${post.file}/readme.mdx`
     )) as {
         default: (properties: MDXProps) => JSX.Element;
+        readingTime: string;
     };
 
     const schema: WithContext<Article> = {
@@ -92,7 +93,7 @@ const page = async ({ params }: PageProperties) => {
             />
 
             <article>
-                <PostHeader post={post} />
+                <PostHeader post={post} readingTime={readingTime} />
                 <PostCoverImage post={post} />
                 <div className="prose lg:prose-xl mx-auto block w-full max-w-3xl">
                     <PostContent />

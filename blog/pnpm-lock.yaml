@@ -74,6 +74,9 @@ dependencies:
   react-transition-state:
     specifier: ^1.1.4
     version: 1.1.5(react-dom@18.2.0)(react@18.2.0)
+  reading-time:
+    specifier: ^1.5.0
+    version: 1.5.0
   remark-gfm:
     specifier: ^3.0.1
     version: 3.0.1
@@ -3950,6 +3953,10 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+    dev: false
+
+  /reading-time@1.5.0:
+    resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
     dev: false
 
   /redent@1.0.0:

@@ -1,6 +1,9 @@
 /* eslint-disable no-extra-boolean-cast */
 /* eslint-disable unicorn/no-null */
+import * as acorn from 'acorn';
+import { toString } from 'mdast-util-to-string';
 import { mdxAnnotations } from 'mdx-annotations';
+import getReadingTime from 'reading-time';
 import gfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 
@@ -249,6 +252,34 @@ export const remarkImportAsNextImages = () => {
     };
 };
 
+function remarkReadingTime() {
+    return function (tree, { data }) {
+        const textOnPage = toString(tree, {
+            includeHtml: false,
+            includeImageAltText: false,
+        });
+
+        const readingTime = getReadingTime(textOnPage);
+
+        if (!readingTime) return;
+        // readingTime.text will give us minutes read as a friendly string,
+        // i.e. "3 min read"
+
+        const exportString = `export const readingTime = "${readingTime.text}"`;
+
+        tree.children.push({
+            type: 'mdxjsEsm',
+            value: exportString,
+            data: {
+                estree: acorn.parse(exportString, {
+                    sourceType: 'module',
+                    ecmaVersion: 'latest',
+                }),
+            },
+        });
+    };
+}
+
 export const remarkPlugins = [
     /**
      * Add support for annotations to MDX.
@@ -261,4 +292,5 @@ export const remarkPlugins = [
      */
     gfm,
     remarkImportAsNextImages,
+    remarkReadingTime,
 ];
