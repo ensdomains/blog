@@ -3,7 +3,6 @@ import { ResolvingMetadata } from 'next';
 import { PageButtons } from '@/components/PageButtons';
 import { BlogPostPreview } from '@/components/PostPreview';
 import { getPostsMetadata } from '@/lib/get_posts';
-import { getTags } from '@/lib/get_tags';
 import { createMetadata } from '@/lib/metadata';
 import { splitArray } from '@/lib/split_array';
 

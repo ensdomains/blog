@@ -6,7 +6,7 @@ import { Article, WithContext } from 'schema-dts';
 import { PostCoverImage } from '@/components/PostCoverImage';
 import { PostHeader } from '@/components/PostHeader';
 import { getPostBySlug } from '@/lib/get_post_by_slug';
-import { getPostsSlugs } from '@/lib/get_posts';
+import { getPostsMetadata } from '@/lib/get_posts';
 import { createMetadata } from '@/lib/metadata';
 
 type PageProperties = {
@@ -52,7 +52,11 @@ export const generateMetadata = async (
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export async function generateStaticParams() {
-    return getPostsSlugs();
+    const pages = await getPostsMetadata();
+
+    return pages.map((post) => ({
+        slug: post.slug.split('/'),
+    }));
 }
 
 const page = async ({ params }: PageProperties) => {

@@ -40,15 +40,3 @@ export const getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
 
     return result;
 };
-
-export const getPostsSlugs = async (): Promise<
-    {
-        slug: string[];
-    }[]
-> => {
-    const pages = await getPostsMetadata();
-
-    return pages.map((post) => ({
-        slug: post.slug.split('/'),
-    }));
-};

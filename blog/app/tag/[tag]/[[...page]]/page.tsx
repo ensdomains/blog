@@ -3,7 +3,7 @@ import { ResolvingMetadata } from 'next';
 import { PageButtons } from '@/components/PageButtons';
 import { BlogPostPreview } from '@/components/PostPreview';
 import { parseTag } from '@/components/tags/tagutils';
-import { getTags, getTagSlugs } from '@/lib/get_tags';
+import { getTags } from '@/lib/get_tags';
 import { createMetadata } from '@/lib/metadata';
 import { splitArray } from '@/lib/split_array';
 
@@ -17,7 +17,16 @@ type PageProperties = {
 export async function generateStaticParams(): Promise<
     PageProperties['params'][]
 > {
-    return getTagSlugs(MAX_PER_PAGE);
+    const tags = await getTags();
+
+    return Object.entries(tags).flatMap(([tag, posts]) => {
+        const pages = splitArray(posts, MAX_PER_PAGE);
+
+        return pages.map((_, index) => ({
+            tag,
+            page: [(index + 1).toString()],
+        }));
+    });
 }
 
 export const generateMetadata = async (
