@@ -2,29 +2,22 @@ import { ResolvingMetadata } from 'next';
 
 import { PageButtons } from '@/components/PageButtons';
 import { BlogPostPreview } from '@/components/PostPreview';
-import { getPostsMetadata } from '@/lib/get_posts';
-import { getTags } from '@/lib/get_tags';
+import { parseTag } from '@/components/tags/tagutils';
+import { getTags, getTagSlugs } from '@/lib/get_tags';
 import { createMetadata } from '@/lib/metadata';
 import { splitArray } from '@/lib/split_array';
 
 const MAX_PER_PAGE = 6;
 
 type PageProperties = {
-    params: { page: string[] };
+    params: { tag: string; page: string[] };
 };
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
-export async function generateStaticParams() {
-    const metas = await getPostsMetadata();
-    const pages = splitArray(metas, MAX_PER_PAGE);
-
-    const parameters: PageProperties['params'][] = pages.map((_, index) => ({
-        page: [(index + 1).toString()],
-    }));
-
-    parameters[0] = { page: [''] };
-
-    return parameters;
+export async function generateStaticParams(): Promise<
+    PageProperties['params'][]
+> {
+    return getTagSlugs(MAX_PER_PAGE);
 }
 
 export const generateMetadata = async (
@@ -57,7 +50,11 @@ export const generateMetadata = async (
 };
 
 const page = async ({ params }: PageProperties) => {
-    const postsUnlimited = await getPostsMetadata();
+    const tags = await getTags();
+
+    const postsUnlimited = tags[params.tag];
+
+    if (!postsUnlimited) throw new Error('Tag not found');
 
     const pages = splitArray(postsUnlimited, MAX_PER_PAGE);
 
@@ -71,7 +68,10 @@ const page = async ({ params }: PageProperties) => {
 
     return (
         <div className="mt-2">
-            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+            <h1 className="text-2xl font-extrabold">
+                View all ‘{parseTag(params.tag)}’
+            </h1>
+            <ul className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
                 {posts.map((post) => (
                     <li key={post.slug} className="w-full">
                         <BlogPostPreview post={post} />
