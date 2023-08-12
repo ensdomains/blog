@@ -97,6 +97,8 @@ const page = async ({ params }: PageProperties) => {
                 <PostCoverImage post={post} />
                 <div className="prose lg:prose-xl mx-auto block w-full max-w-3xl">
                     <PostContent />
+                    {/* Adding an element here seems to fix hydration errors??? */}
+                    <div />
                 </div>
             </article>
         </section>
