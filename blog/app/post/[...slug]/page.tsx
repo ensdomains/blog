@@ -6,7 +6,7 @@ import { Article, WithContext } from 'schema-dts';
 import { PostCoverImage } from '@/components/PostCoverImage';
 import { PostHeader } from '@/components/PostHeader';
 import { getPostBySlug } from '@/lib/get_post_by_slug';
-import { getPostsMetadata } from '@/lib/get_posts';
+import { getPostsSlugs } from '@/lib/get_posts';
 import { createMetadata } from '@/lib/metadata';
 
 type PageProperties = {
@@ -52,11 +52,7 @@ export const generateMetadata = async (
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export async function generateStaticParams() {
-    const pages = await getPostsMetadata();
-
-    return pages.map((post) => ({
-        slug: post.slug.split('/'),
-    }));
+    return getPostsSlugs();
 }
 
 const page = async ({ params }: PageProperties) => {
@@ -66,7 +62,7 @@ const page = async ({ params }: PageProperties) => {
     const post = await getPostBySlug(params.slug[0]);
 
     const { default: PostContent, readingTime } = (await import(
-        `../../../content/${post.file}/readme.mdx`
+        `../../../../content/${post.file}/readme.mdx`
     )) as {
         default: (properties: MDXProps) => JSX.Element;
         readingTime: string;
