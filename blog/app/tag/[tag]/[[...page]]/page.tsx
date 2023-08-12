@@ -24,7 +24,7 @@ export async function generateStaticParams(): Promise<
 
         return pages.map((_, index) => ({
             tag,
-            page: [(index + 1).toString()],
+            page: [index === 0 ? '' : (index + 1).toString()],
         }));
     });
 }

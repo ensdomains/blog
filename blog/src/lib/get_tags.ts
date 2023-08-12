@@ -1,5 +1,4 @@
 import { BlogPostMetadataPlus, getPostsMetadata } from './get_posts';
-import { splitArray } from './split_array';
 
 export const getTags = async () => {
     const pages = await getPostsMetadata();
@@ -20,24 +19,4 @@ export const getTags = async () => {
     }
 
     return tags;
-};
-
-export const getTagSlugs = async (
-    maxPerPage: number
-): Promise<
-    {
-        tag: string;
-        page: string[];
-    }[]
-> => {
-    const tags = await getTags();
-
-    return Object.entries(tags).flatMap(([tag, posts]) => {
-        const pages = splitArray(posts, maxPerPage);
-
-        return pages.map((_, index) => ({
-            tag,
-            page: [(index + 1).toString()],
-        }));
-    });
 };
