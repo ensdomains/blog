@@ -1,6 +1,6 @@
 import { MDXProps } from 'mdx/types';
 import { ResolvingMetadata } from 'next';
-import { JSX } from 'react';
+import { Fragment, JSX } from 'react';
 import { Article, WithContext } from 'schema-dts';
 
 import { PostCoverImage } from '@/components/PostCoverImage';
@@ -97,6 +97,8 @@ const page = async ({ params }: PageProperties) => {
                 <PostCoverImage post={post} />
                 <div className="prose lg:prose-xl mx-auto block w-full max-w-3xl">
                     <PostContent />
+                    {/* Hydration errors occur when PostContent is the only child in the parent div. */}
+                    <Fragment />
                 </div>
             </article>
         </section>
