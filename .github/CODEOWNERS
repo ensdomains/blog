@@ -1,0 +1,11 @@
+# CI/CD & Pipelines
+*.yaml @lucemans
+*.yml @lucemans
+/.github/* @lucemans
+README.md @v3xlabs
+
+## Frontend
+/blog/* @svemat01
+
+## Blog Content
+/content/* @zadok7

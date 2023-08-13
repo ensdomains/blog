@@ -1,0 +1,5 @@
+development:
+- blog/**
+
+content:
+- content/**
