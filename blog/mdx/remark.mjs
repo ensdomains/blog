@@ -1,6 +1,7 @@
 /* eslint-disable no-extra-boolean-cast */
 /* eslint-disable unicorn/no-null */
 import * as acorn from 'acorn';
+import jsx from 'acorn-jsx';
 import { toString } from 'mdast-util-to-string';
 import { mdxAnnotations } from 'mdx-annotations';
 import getReadingTime from 'reading-time';
@@ -124,114 +125,139 @@ export const remarkImportAsNextImages = () => {
                     });
                 }
 
+                const code = `(async (x) => {return <Image {...(await x)?.default}/>})(import("${imageNode.url}"))`;
+
                 const newImageNode = {
                     type: 'mdxFlowExpression',
                     data: {
-                        estree: {
-                            type: 'Program',
-                            body: [
-                                {
-                                    type: 'ExpressionStatement',
-                                    expression: {
-                                        type: 'CallExpression',
-                                        callee: {
-                                            type: 'ArrowFunctionExpression',
-                                            id: null,
-                                            expression: false,
-                                            generator: false,
-                                            async: true,
-                                            params: [
-                                                {
-                                                    type: 'Identifier',
-                                                    name: 'x',
-                                                },
-                                            ],
-                                            body: {
-                                                type: 'BlockStatement',
-                                                body: [
-                                                    {
-                                                        type: 'ReturnStatement',
-                                                        argument: {
-                                                            type: 'JSXElement',
-                                                            openingElement: {
-                                                                type: 'JSXOpeningElement',
-                                                                attributes: [
-                                                                    ...attributes,
-                                                                    {
-                                                                        type: 'JSXAttribute',
-                                                                        name: {
-                                                                            type: 'JSXIdentifier',
-                                                                            name: 'src',
-                                                                        },
-                                                                        value: {
-                                                                            type: 'JSXExpressionContainer',
-                                                                            expression:
-                                                                                {
-                                                                                    type: 'ChainExpression',
-                                                                                    expression:
-                                                                                        {
-                                                                                            type: 'MemberExpression',
-                                                                                            object: {
-                                                                                                type: 'MemberExpression',
-                                                                                                object: {
-                                                                                                    type: 'AwaitExpression',
-                                                                                                    argument:
-                                                                                                        {
-                                                                                                            type: 'Identifier',
-                                                                                                            name: 'x',
-                                                                                                        },
-                                                                                                },
-                                                                                                property:
-                                                                                                    {
-                                                                                                        type: 'Identifier',
-                                                                                                        name: 'default',
-                                                                                                    },
-                                                                                                computed: false,
-                                                                                                optional: true,
-                                                                                            },
-                                                                                            property:
-                                                                                                {
-                                                                                                    type: 'Identifier',
-                                                                                                    name: 'src',
-                                                                                                },
-                                                                                            computed: false,
-                                                                                            optional: true,
-                                                                                        },
-                                                                                },
-                                                                        },
-                                                                    },
-                                                                ],
-                                                                name: {
-                                                                    type: 'JSXIdentifier',
-                                                                    name: 'img',
-                                                                },
-                                                                selfClosing: true,
-                                                            },
-                                                            closingElement:
-                                                                null,
-                                                            children: [],
-                                                        },
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                        arguments: [
-                                            {
-                                                type: 'ImportExpression',
-                                                source: {
-                                                    type: 'Literal',
-                                                    value: imageNode.url,
-                                                },
-                                            },
-                                        ],
-                                        optional: false,
-                                    },
-                                },
-                            ],
+                        estree: acorn.Parser.extend(jsx()).parse(code, {
                             sourceType: 'module',
-                        },
+                            ecmaVersion: 'latest',
+                        }),
+
+                        // estree: {
+                        //     type: 'Program',
+                        //     body: [
+                        //         {
+                        //             type: 'ExpressionStatement',
+                        //             expression: {
+                        //                 type: 'CallExpression',
+                        //                 callee: {
+                        //                     type: 'ArrowFunctionExpression',
+                        //                     id: null,
+                        //                     expression: false,
+                        //                     generator: false,
+                        //                     async: true,
+                        //                     params: [
+                        //                         {
+                        //                             type: 'Identifier',
+                        //                             name: 'x',
+                        //                         },
+                        //                     ],
+                        //                     body: {
+                        //                         type: 'BlockStatement',
+                        //                         body: [
+                        //                             {
+                        //                                 type: 'VariableDeclaration',
+                        //                                 declarations: [
+                        //                                     {
+                        //                                         type: 'VariableDeclarator',
+                        //                                         id: {
+                        //                                             type: 'Identifier',
+                        //                                             name: 'y',
+                        //                                         },
+                        //                                         init: {
+                        //                                             type: 'AwaitExpression',
+                        //                                             argument: {
+                        //                                                 type: 'Identifier',
+                        //                                                 name: 'x',
+                        //                                             },
+                        //                                         },
+                        //                                     },
+                        //                                 ],
+                        //                                 kind: 'const',
+                        //                             },
+                        //                             {
+                        //                                 type: 'ReturnStatement',
+                        //                                 argument: {
+                        //                                     type: 'JSXElement',
+                        //                                     openingElement: {
+                        //                                         type: 'JSXOpeningElement',
+                        //                                         attributes: [
+                        //                                             ...attributes,
+                        //                                             {
+                        //                                                 type: 'JSXAttribute',
+                        //                                                 name: {
+                        //                                                     type: 'JSXIdentifier',
+                        //                                                     name: 'src',
+                        //                                                 },
+                        //                                                 value: {
+                        //                                                     type: 'JSXExpressionContainer',
+                        //                                                     expression:
+                        //                                                         {
+                        //                                                             type: 'ChainExpression',
+                        //                                                             expression:
+                        //                                                                 {
+                        //                                                                     type: 'MemberExpression',
+                        //                                                                     object: {
+                        //                                                                         type: 'MemberExpression',
+                        //                                                                         object: {
+                        //                                                                             type: 'Identifier',
+                        //                                                                             name: 'y',
+                        //                                                                         },
+                        //                                                                         property:
+                        //                                                                             {
+                        //                                                                                 type: 'Identifier',
+                        //                                                                                 name: 'default',
+                        //                                                                             },
+                        //                                                                         computed: false,
+                        //                                                                         optional: true,
+                        //                                                                     },
+                        //                                                                     property:
+                        //                                                                         {
+                        //                                                                             type: 'Identifier',
+                        //                                                                             name: 'src',
+                        //                                                                         },
+                        //                                                                     computed: false,
+                        //                                                                     optional: true,
+                        //                                                                 },
+                        //                                                         },
+                        //                                                 },
+                        //                                             },
+                        //                                         ],
+                        //                                         name: {
+                        //                                             type: 'JSXIdentifier',
+                        //                                             name: 'img',
+                        //                                         },
+                        //                                         selfClosing: true,
+                        //                                     },
+                        //                                     closingElement:
+                        //                                         null,
+                        //                                     children: [],
+                        //                                 },
+                        //                             },
+                        //                         ],
+                        //                     },
+                        //                 },
+                        //                 arguments: [
+                        //                     {
+                        //                         type: 'ImportExpression',
+                        //                         source: {
+                        //                             type: 'Literal',
+                        //                             value: imageNode.url,
+                        //                         },
+                        //                     },
+                        //                 ],
+                        //                 optional: false,
+                        //             },
+                        //         },
+                        //     ],
+                        //     sourceType: 'module',
+                        // },
                     },
                 };
+
+                // console.log(JSON.stringify(newImageNode));
 
                 if (keyValuePairs) {
                     nextNode.value = nextNode.value.replace(/^\[(.*)]\s?/, '');
