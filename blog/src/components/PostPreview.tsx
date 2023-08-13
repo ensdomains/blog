@@ -12,7 +12,7 @@ type Properties = {
 export const BlogPostPreview = ({ post }: Properties) => {
     return (
         <Link
-            href={post.slug}
+            href={'/post/' + post.slug}
             className="outline-ens-blue flex h-full w-full flex-col overflow-hidden rounded-lg border bg-white outline-2 transition-all hover:bg-gray-50 hover:outline"
         >
             <span className="bg-ens-grey1 aspect-video w-full">

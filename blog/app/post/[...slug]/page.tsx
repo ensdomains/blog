@@ -66,7 +66,7 @@ const page = async ({ params }: PageProperties) => {
     const post = await getPostBySlug(params.slug[0]);
 
     const { default: PostContent, readingTime } = (await import(
-        `../../../content/${post.file}/readme.mdx`
+        `../../../../content/${post.file}/readme.mdx`
     )) as {
         default: (properties: MDXProps) => JSX.Element;
         readingTime: string;

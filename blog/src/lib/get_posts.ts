@@ -1,6 +1,6 @@
-import { readdir, readFile } from 'node:fs/promises';
-import { cache } from 'react';
+import { readdir } from 'node:fs/promises';
 
+// import { cache } from 'react';
 import {
     BlogPostMetadata,
     BlogPostMetadataSchema,
@@ -10,7 +10,11 @@ export type BlogPostMetadataPlus = BlogPostMetadata & {
     file: string;
 };
 
-export const getPostsMetadata = cache(async () => {
+let cache: BlogPostMetadataPlus[] | null;
+
+export const getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
+    if (cache) return cache;
+
     const posts: BlogPostMetadataPlus[] = [];
 
     // Load all posts from the content directory
@@ -18,11 +22,9 @@ export const getPostsMetadata = cache(async () => {
 
     // For each file, get the slug and file name
     for (const file of files) {
-        const meta = await readFile(`../content/${file}/meta.json`);
+        const meta = await import(`../../../content/${file}/meta.json`);
 
-        const meta_json = JSON.parse(meta.toString());
-
-        const pageMetadata = await BlogPostMetadataSchema.parseAsync(meta_json);
+        const pageMetadata = await BlogPostMetadataSchema.parseAsync(meta);
 
         // TODO: Load metadata or extra info for a file.
         // NOTE: keep this lightweight as it runs during dev for every page
@@ -30,7 +32,11 @@ export const getPostsMetadata = cache(async () => {
         posts.push({ ...pageMetadata, file });
     }
 
-    return posts.sort((a, b) => {
+    const result = posts.sort((a, b) => {
         return new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1;
     });
-});
+
+    cache = result;
+
+    return result;
+};
