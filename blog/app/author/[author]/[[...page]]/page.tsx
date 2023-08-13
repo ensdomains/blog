@@ -91,6 +91,7 @@ const page = async ({ params }: PageProperties) => {
                     alwaysShowFirst
                     current={currentPage}
                     total={pages.length}
+                    hrefPrefix={`/author/${params.author}`}
                 />
             </div>
         </div>

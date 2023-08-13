@@ -15,6 +15,7 @@ type Properties = {
     alwaysShowFirst?: boolean;
     alwaysShowLast?: boolean;
     showEllipsis?: boolean;
+    hrefPrefix?: string;
 } & Omit<NativeDivProperties, 'children' | 'onChange'>;
 
 enum Marker {
@@ -32,6 +33,7 @@ export const PageButtons = ({
     alwaysShowFirst,
     alwaysShowLast,
     showEllipsis = true,
+    hrefPrefix = '',
     ...properties
 }: Properties) => {
     const maxPerSide = Math.floor(max / 2);
@@ -98,7 +100,9 @@ export const PageButtons = ({
                         data-testid="pagebutton"
                         key={value}
                         type="button"
-                        href={`${value}`}
+                        href={`${hrefPrefix}${
+                            value === 1 ? (hrefPrefix ? '' : '/') : '/' + value
+                        }`}
                     >
                         {value}
                     </Link>
