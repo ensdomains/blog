@@ -15,9 +15,11 @@ export const PostCoverImage: FC<{ post: BlogPostMetadataPlus }> = async ({
     const isYoutube = post.youtube !== undefined;
 
     const cover = Object.keys(covers).includes(post.file)
-        ? await covers[post.file as keyof typeof covers]['cover'].catch(() => {
-              console.error('Failed to load cover for post', post.file);
-          })
+        ? await covers[post.file as keyof typeof covers]['cover']
+              .then((image) => image.default)
+              .catch(() => {
+                  console.error('Failed to load cover for post', post.file);
+              })
         : undefined;
 
     return (

@@ -16,11 +16,11 @@ type Properties = {
 
 export const BlogPostPreview = async ({ post }: Properties) => {
     const cover = Object.keys(covers).includes(post.file)
-        ? await covers[post.file as keyof typeof covers]['cover-thumb'].catch(
-              () => {
+        ? await covers[post.file as keyof typeof covers]['cover-thumb']
+              .then((image) => image.default)
+              .catch(() => {
                   console.error('Failed to load cover for post', post.file);
-              }
-          )
+              })
         : undefined;
 
     return (
