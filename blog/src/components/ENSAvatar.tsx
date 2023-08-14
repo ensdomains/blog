@@ -8,6 +8,8 @@ type ENStateResponse = {
     display: string;
 };
 
+const ensHasAvatar = async (url) => (await fetch(url, { method: "HEAD" })).status === 200;
+
 export const ENSAvatar: FC<{ name: string }> = async ({ name }) => {
     const response = await fetch('https://enstate.rs/n/' + name);
     const data: ENStateResponse | undefined = await response
@@ -17,18 +19,9 @@ export const ENSAvatar: FC<{ name: string }> = async ({ name }) => {
             console.error(error);
         });
 
-    if (!data?.avatar) {
-        const ensUrl = `https://metadata.ens.domains/mainnet/avatar/${name}`
-        const metadataResponse = await fetch(ensUrl, { method: "HEAD" });
-        if (metadataResponse.status === 200) {
-            return (
-                <img
-                    src={ensUrl}
-                    alt={name}
-                    className="aspect-square h-8 w-8 rounded-full bg-white" />
-            );
-        }
+    const ensUrl = `https://metadata.ens.domains/mainnet/avatar/${name}`;
 
+    if (!data?.avatar && !(await ensHasAvatar(ensUrl))) {
         return (
             <div
                 className="flex aspect-square h-8 w-8 items-center justify-center rounded-full text-white"
@@ -44,7 +37,7 @@ export const ENSAvatar: FC<{ name: string }> = async ({ name }) => {
 
     return (
         <img
-            src={data.avatar}
+            src={data?.avatar ? data.avatar : ensUrl}
             alt={name}
             className="aspect-square h-8 w-8 rounded-full bg-white"
         />
