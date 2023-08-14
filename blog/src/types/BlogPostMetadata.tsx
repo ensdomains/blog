@@ -4,7 +4,7 @@ export const BlogPostMetadataSchema = z.object({
     // Slug of the post
     slug: z.string(),
     // Cover Image of the post
-    cover: z.string(),
+    cover: z.string().optional(),
     // Title of the post
     title: z.string(),
     // Description of the post
