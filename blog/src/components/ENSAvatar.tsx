@@ -17,7 +17,18 @@ export const ENSAvatar: FC<{ name: string }> = async ({ name }) => {
             console.error(error);
         });
 
-    if (!data?.avatar)
+    if (!data?.avatar) {
+        const ensUrl = `https://metadata.ens.domains/mainnet/avatar/${name}`
+        const metadataResponse = await fetch(ensUrl, { method: "HEAD" });
+        if (metadataResponse.status === 200) {
+            return (
+                <img
+                    src={ensUrl}
+                    alt={name}
+                    className="aspect-square h-8 w-8 rounded-full bg-white" />
+            );
+        }
+
         return (
             <div
                 className="flex aspect-square h-8 w-8 items-center justify-center rounded-full text-white"
@@ -29,6 +40,7 @@ export const ENSAvatar: FC<{ name: string }> = async ({ name }) => {
                 <FiUser />
             </div>
         );
+    }
 
     return (
         <img
