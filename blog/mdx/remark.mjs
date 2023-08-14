@@ -71,33 +71,13 @@ export const remarkImportAsNextImages = () => {
                 // Only process local images
                 if (!imageNode.url.startsWith('./')) return;
 
+                /** @type string[] */
                 const attributes = [];
 
-                if (!!imageNode.alt)
-                    attributes.push({
-                        type: 'JSXAttribute',
-                        name: {
-                            type: 'JSXIdentifier',
-                            name: 'alt',
-                        },
-                        value: {
-                            type: 'Literal',
-                            value: imageNode.alt,
-                        },
-                    });
+                if (!!imageNode.alt) attributes.push(`alt="${imageNode.alt}"`);
 
                 if (!!imageNode.title)
-                    attributes.push({
-                        type: 'JSXAttribute',
-                        name: {
-                            type: 'JSXIdentifier',
-                            name: 'title',
-                        },
-                        value: {
-                            type: 'Literal',
-                            value: imageNode.title,
-                        },
-                    });
+                    attributes.push(`title="${imageNode.title}"`);
 
                 /**
                  * @type {import('unist').Node | undefined}
@@ -112,148 +92,40 @@ export const remarkImportAsNextImages = () => {
                 for (const [key, value] of Object.entries(
                     keyValuePairs || {}
                 )) {
-                    attributes.push({
-                        type: 'JSXAttribute',
-                        name: {
-                            type: 'JSXIdentifier',
-                            name: key,
-                        },
-                        value: {
-                            type: 'Literal',
-                            value,
-                        },
-                    });
+                    attributes.push(`${key}="${value}"`);
                 }
 
-                const code = `(async (x) => {return <Image {...(await x)?.default}/>})(import("${imageNode.url}"))`;
+                const code = `(async (x) => {return <Image {...(await x)?.default} ${
+                    attributes.length > 0 ? attributes.join(' ') + ' ' : ''
+                }/>})(import("${imageNode.url}"))`;
+
+                let estree;
+
+                try {
+                    estree = acorn.Parser.extend(jsx()).parse(code, {
+                        sourceType: 'module',
+                        ecmaVersion: 'latest',
+                    });
+                } catch {
+                    estree = {
+                        type: 'Program',
+                        body: [
+                            {
+                                type: 'ExpressionStatement',
+                                expression: {
+                                    type: 'Literal',
+                                    value: '[[ERROR PARSING IMAGE SYNTAX!!!]]',
+                                },
+                            },
+                        ],
+                        sourceType: 'module',
+                    };
+                }
 
                 const newImageNode = {
                     type: 'mdxFlowExpression',
                     data: {
-                        estree: acorn.Parser.extend(jsx()).parse(code, {
-                            sourceType: 'module',
-                            ecmaVersion: 'latest',
-                        }),
-
-                        // estree: {
-                        //     type: 'Program',
-                        //     body: [
-                        //         {
-                        //             type: 'ExpressionStatement',
-                        //             expression: {
-                        //                 type: 'CallExpression',
-                        //                 callee: {
-                        //                     type: 'ArrowFunctionExpression',
-                        //                     id: null,
-                        //                     expression: false,
-                        //                     generator: false,
-                        //                     async: true,
-                        //                     params: [
-                        //                         {
-                        //                             type: 'Identifier',
-                        //                             name: 'x',
-                        //                         },
-                        //                     ],
-                        //                     body: {
-                        //                         type: 'BlockStatement',
-                        //                         body: [
-                        //                             {
-                        //                                 type: 'VariableDeclaration',
-                        //                                 declarations: [
-                        //                                     {
-                        //                                         type: 'VariableDeclarator',
-                        //                                         id: {
-                        //                                             type: 'Identifier',
-                        //                                             name: 'y',
-                        //                                         },
-                        //                                         init: {
-                        //                                             type: 'AwaitExpression',
-                        //                                             argument: {
-                        //                                                 type: 'Identifier',
-                        //                                                 name: 'x',
-                        //                                             },
-                        //                                         },
-                        //                                     },
-                        //                                 ],
-                        //                                 kind: 'const',
-                        //                             },
-                        //                             {
-                        //                                 type: 'ReturnStatement',
-                        //                                 argument: {
-                        //                                     type: 'JSXElement',
-                        //                                     openingElement: {
-                        //                                         type: 'JSXOpeningElement',
-                        //                                         attributes: [
-                        //                                             ...attributes,
-                        //                                             {
-                        //                                                 type: 'JSXAttribute',
-                        //                                                 name: {
-                        //                                                     type: 'JSXIdentifier',
-                        //                                                     name: 'src',
-                        //                                                 },
-                        //                                                 value: {
-                        //                                                     type: 'JSXExpressionContainer',
-                        //                                                     expression:
-                        //                                                         {
-                        //                                                             type: 'ChainExpression',
-                        //                                                             expression:
-                        //                                                                 {
-                        //                                                                     type: 'MemberExpression',
-                        //                                                                     object: {
-                        //                                                                         type: 'MemberExpression',
-                        //                                                                         object: {
-                        //                                                                             type: 'Identifier',
-                        //                                                                             name: 'y',
-                        //                                                                         },
-                        //                                                                         property:
-                        //                                                                             {
-                        //                                                                                 type: 'Identifier',
-                        //                                                                                 name: 'default',
-                        //                                                                             },
-                        //                                                                         computed: false,
-                        //                                                                         optional: true,
-                        //                                                                     },
-                        //                                                                     property:
-                        //                                                                         {
-                        //                                                                             type: 'Identifier',
-                        //                                                                             name: 'src',
-                        //                                                                         },
-                        //                                                                     computed: false,
-                        //                                                                     optional: true,
-                        //                                                                 },
-                        //                                                         },
-                        //                                                 },
-                        //                                             },
-                        //                                         ],
-                        //                                         name: {
-                        //                                             type: 'JSXIdentifier',
-                        //                                             name: 'img',
-                        //                                         },
-                        //                                         selfClosing: true,
-                        //                                     },
-                        //                                     closingElement:
-                        //                                         null,
-                        //                                     children: [],
-                        //                                 },
-                        //                             },
-                        //                         ],
-                        //                     },
-                        //                 },
-                        //                 arguments: [
-                        //                     {
-                        //                         type: 'ImportExpression',
-                        //                         source: {
-                        //                             type: 'Literal',
-                        //                             value: imageNode.url,
-                        //                         },
-                        //                     },
-                        //                 ],
-                        //                 optional: false,
-                        //             },
-                        //         },
-                        //     ],
-                        //     sourceType: 'module',
-                        // },
+                        estree,
                     },
                 };
 
