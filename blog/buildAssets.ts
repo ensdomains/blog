@@ -61,8 +61,8 @@ const COVER_IMG_SETTINGS: ImageSettings[] = [
     },
     {
         suffix: 'thumb',
-        width: 426 * 2,
-        height: 240 * 2,
+        width: 426 * 1.5,
+        height: 240 * 1.5,
     },
 ];
 

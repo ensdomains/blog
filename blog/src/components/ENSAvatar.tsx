@@ -1,4 +1,4 @@
-'server-only';
+import 'server-only';
 
 import { FC } from 'react';
 import { FiUser } from 'react-icons/fi';
