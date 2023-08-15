@@ -25,18 +25,26 @@ export const PostCoverImage: FC<{ post: BlogPostMetadataPlus }> = async ({
     return (
         <div className="not-prose relative mx-auto my-6 w-full max-w-2xl lg:mb-8 lg:max-w-3xl">
             <div className="lg:-mx-10">
-                {isYoutube ? (
-                    <Youtube src={post.youtube} />
-                ) : (
-                    <Image
-                        alt={post.title}
-                        width="900"
-                        height={(1080 / 1920) * 900}
-                        className="w-full rounded-lg"
-                        priority
-                        src={cover || post.cover}
-                    />
-                )}
+                {isYoutube && <Youtube src={post.youtube} />}
+                {!isYoutube &&
+                    (cover || post.cover ? (
+                        <Image
+                            alt={post.title}
+                            width="900"
+                            height={(1080 / 1920) * 900}
+                            className="w-full rounded-lg"
+                            priority
+                            src={cover || post.cover}
+                        />
+                    ) : (
+                        <div
+                            className="aspect-video w-full rounded-lg"
+                            style={{
+                                background:
+                                    'linear-gradient(330.4deg, #44BCF0 4.54%, #7298F8 59.2%, #A099FF 148.85%)',
+                            }}
+                        ></div>
+                    ))}
             </div>
         </div>
     );

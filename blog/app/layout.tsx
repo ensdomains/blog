@@ -15,9 +15,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <html lang="en">
             <body>
                 <Providers>
-                    <div className="mx-auto mb-36 w-full max-w-4xl px-4">
+                    <div className="">
                         <Navbar />
-                        {children}
+                        <div className="mx-auto mb-36 w-full max-w-4xl px-4">
+                            {children}
+                        </div>
                     </div>
                 </Providers>
             </body>

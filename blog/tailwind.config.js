@@ -17,6 +17,9 @@ module.exports = {
     theme: {
         typography: require('./src/typography'),
         extend: {
+            aspectRatio: {
+                cover: '1920 / 1080',
+            },
             colors: {
                 ens: {
                     blue: '#5298FF',

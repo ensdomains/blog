@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { BlogPostMetadataPlus } from '@/lib/get_posts';
 
 import { ENSAvatar } from './ENSAvatar';
-import { SmallTag } from './tags/SmallTag';
 
 type Properties = {
     post: BlogPostMetadataPlus;
@@ -28,39 +27,50 @@ export const BlogPostPreview = async ({ post }: Properties) => {
             href={'/post/' + post.slug}
             className="outline-ens-blue flex h-full w-full flex-col overflow-hidden rounded-lg border bg-white outline-2 transition-all hover:bg-gray-50 hover:outline"
         >
-            <span className="bg-ens-grey1 aspect-video w-full">
+            <span className="bg-ens-grey1 aspect-cover w-full">
                 {cover ? (
                     <Image
                         src={cover}
-                        className="aspect-video h-full w-full object-cover"
+                        className="aspect-cover h-full w-full object-cover"
                         alt={post.title}
                     />
                 ) : (
                     <img
                         src={post.cover}
-                        className="aspect-video h-full w-full object-cover"
+                        className="aspect-cover h-full w-full object-cover"
                         alt={post.title}
                     />
                 )}
             </span>
-            <span className="flex grow flex-col p-2">
-                <span className="text-ens-grey2 text-xs">{post.date}</span>
-                <span className="text-lg">{post.title}</span>
-            </span>
-            {post.tags && (
-                <span className="flex flex-wrap gap-1 px-2 pb-2">
-                    {post.tags.map((tag) => (
-                        <SmallTag tag={tag} />
-                    ))}
+            <span className="flex flex-col gap-2 border-t p-5">
+                <span className="flex w-full justify-between">
+                    <span className="text-ens-blue block truncate text-lg font-bold">
+                        {post.title}
+                    </span>
+                    <span>{/* TODO: Badges here */}</span>
                 </span>
-            )}
-            <span className="border-ens-grey1 flex items-center gap-2 border-t p-2">
-                <span className="flex -space-x-2">
-                    {post.authors.map((author) => (
-                        <ENSAvatar name={author} />
-                    ))}
+                <span className="pb-2 text-base">{post.description}</span>
+                {/* <span className="flex grow flex-col p-2">
+                    <span className="text-ens-grey2 text-xs">{post.date}</span>
+                </span> */}
+                {/* {post.tags && (
+                    <span className="flex flex-wrap gap-1 px-2 pb-2">
+                        {post.tags.map((tag) => (
+                            <SmallTag tag={tag} />
+                        ))}
+                    </span>
+                )} */}
+                <span className="flex w-full items-end justify-between">
+                    <span className="flex items-center gap-2">
+                        <span className="flex -space-x-2">
+                            {post.authors.map((author) => (
+                                <ENSAvatar name={author} size="small" />
+                            ))}
+                        </span>
+                        <span>{post.authors.join(', ')}</span>
+                    </span>
+                    <span className="text-gray-400">2 min read</span>
                 </span>
-                <span>{post.authors.join(', ')}</span>
             </span>
         </Link>
     );

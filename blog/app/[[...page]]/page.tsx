@@ -70,7 +70,7 @@ const page = async ({ params }: PageProperties) => {
 
     return (
         <div className="mt-2">
-            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-2">
                 {posts.map((post) => (
                     <li key={post.slug} className="w-full">
                         <BlogPostPreview post={post} />
