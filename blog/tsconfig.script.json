@@ -27,8 +27,6 @@
         "name": "next"
       }
     ],
-    "module": "esnext",
-    "moduleResolution": "node"
   },
   "include": [
     "src/next-env.d.ts",

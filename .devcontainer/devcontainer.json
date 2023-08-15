@@ -1,0 +1,11 @@
+{
+    "name": "Node.js",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+    "portsAttributes": {
+        "3000": {
+            "label": "This is the blog",
+            "onAutoForward": "notify"
+        }
+    },
+    "postCreateCommand": "cd blog && pnpm install"
+}

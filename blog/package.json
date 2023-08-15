@@ -4,7 +4,9 @@
     "description": "",
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build:assets": "ts-node -P tsconfig.script.json buildAssets.ts",
+        "build:next": "next build",
+        "build": "npm run build:assets && npm run build:next",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint -c .eslintrc.json --ext .ts ./src"
     },
@@ -19,8 +21,10 @@
         "@sindresorhus/slugify": "^2.2.1",
         "@tailwindcss/typography": "^0.5.9",
         "acorn": "^8.10.0",
+        "acorn-jsx": "^5.3.2",
         "astring": "^1.8.6",
         "autoprefixer": "^10.4.14",
+        "axios": "^1.4.0",
         "clsx": "^2.0.0",
         "deepmerge-ts": "^5.1.0",
         "eslint-plugin-tailwindcss": "^3.13.0",
@@ -38,6 +42,7 @@
         "reading-time": "^1.5.0",
         "remark-gfm": "^3.0.1",
         "schema-dts": "^1.1.2",
+        "sharp": "^0.32.4",
         "shiki": "^0.14.3",
         "styled-components": "^5.3.11",
         "tailwindcss": "^3.3.3",
@@ -53,6 +58,7 @@
         "@typescript-eslint/parser": "^6.2.0",
         "eslint": "^8.46.0",
         "eslint-plugin-v3xlabs": "^1.6.1",
+        "ts-node": "^10.9.1",
         "typescript": "5.1.6"
     }
 }
