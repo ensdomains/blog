@@ -77,7 +77,7 @@ const page = async ({ params }: PageProperties) => {
                     </li>
                 ))}
             </ul>
-            <div className="mt-2">
+            <div className="mt-4">
                 <PageButtons
                     alwaysShowFirst
                     current={currentPage}
