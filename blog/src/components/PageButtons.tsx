@@ -87,10 +87,10 @@ export const PageButtons = ({
                 ) : (
                     <Link
                         className={`
-                        min-w-10 h-10 cursor-pointer rounded-full border border-gray-300 p-2 font-bold transition-all duration-150
+                        min-w-10 flex aspect-square h-10 cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white p-2 text-center font-bold transition-all duration-150
                         ${
                             value === current
-                                ? 'text-accent pointer-events-none cursor-default'
+                                ? 'text-ens-blue pointer-events-none cursor-default'
                                 : 'cursor-pointer text-gray-400 hover:bg-gray-200'
                         } ${
                             size === 'small'
