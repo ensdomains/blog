@@ -42,14 +42,14 @@ export const BlogPostPreview = async ({ post }: Properties) => {
                     />
                 )}
             </span>
-            <span className="flex flex-col gap-2 border-t p-5">
+            <span className="flex h-full flex-col gap-2 border-t p-5">
                 <span className="flex w-full justify-between">
                     <span className="text-ens-blue block truncate text-lg font-bold">
                         {post.title}
                     </span>
                     <span>{/* TODO: Badges here */}</span>
                 </span>
-                <span className="pb-2 text-base">{post.description}</span>
+                <span className="grow pb-2 text-base">{post.description}</span>
                 {/* <span className="flex grow flex-col p-2">
                     <span className="text-ens-grey2 text-xs">{post.date}</span>
                 </span> */}
