@@ -18,14 +18,16 @@ export const ENSAvatar: FC<{ name: string }> = async ({ name }) => {
         });
 
     if (!data?.avatar) {
-        const ensUrl = `https://metadata.ens.domains/mainnet/avatar/${name}`
-        const metadataResponse = await fetch(ensUrl, { method: "HEAD" });
+        const ensUrl = `https://metadata.ens.domains/mainnet/avatar/${name}`;
+        const metadataResponse = await fetch(ensUrl, { method: 'HEAD' });
+
         if (metadataResponse.status === 200) {
             return (
                 <img
                     src={ensUrl}
                     alt={name}
-                    className="aspect-square h-8 w-8 rounded-full bg-white" />
+                    className="aspect-square h-8 w-8 rounded-full bg-white"
+                />
             );
         }
 
