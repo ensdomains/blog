@@ -1,0 +1,9 @@
+name: Perform Document Sanity Checks
+description: Checks for common errors in documents.
+
+runs:
+  using: composite
+  steps:
+    - name: Checking for Gremlins
+      run: .github/actions/sanity/gremlins.sh
+      shell: bash

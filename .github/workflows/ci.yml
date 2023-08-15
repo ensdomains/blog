@@ -56,6 +56,16 @@ jobs:
       - name: Run eslint
         working-directory: ./blog
         run: pnpm run lint
+  sanity:
+    name: 🧠 Sanity
+    runs-on: ubuntu-20.04
+    env:
+      FORCE_COLOR: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: ./.github/actions/sanity
   build:
     name: 🛠️ Build
     runs-on: ubuntu-20.04
