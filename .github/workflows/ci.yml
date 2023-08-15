@@ -30,6 +30,10 @@ jobs:
       - name: Install Tools & Dependencies
         uses: ./.github/actions/install
 
+      - name: Run Asset Builder
+        working-directory: ./blog
+        run: pnpm run build:assets
+
       - name: Run typecheck
         working-directory: ./blog
         run: pnpm run typecheck
@@ -44,6 +48,10 @@ jobs:
 
       - name: Install Tools & Dependencies
         uses: ./.github/actions/install
+
+      - name: Run Asset Builder
+        working-directory: ./blog
+        run: pnpm run build:assets
 
       - name: Run eslint
         working-directory: ./blog
