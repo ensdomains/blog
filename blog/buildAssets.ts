@@ -56,13 +56,13 @@ const writeOutput = async (items: string[]) => {
 
 const COVER_IMG_SETTINGS: ImageSettings[] = [
     {
-        width: 848,
-        height: 424,
+        width: 1920,
+        height: 1080,
     },
     {
         suffix: 'thumb',
-        width: 281,
-        height: 158,
+        width: 426 * 2,
+        height: 240 * 2,
     },
 ];
 
