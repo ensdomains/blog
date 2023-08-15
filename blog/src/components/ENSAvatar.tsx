@@ -37,7 +37,7 @@ export const ENSAvatar: FC<{ name: string; size?: Size }> = async ({
                     className={cx(
                         'flex aspect-square items-center justify-center rounded-full text-white',
                         size === 'small'
-                            ? 'h-3 w-3'
+                            ? 'h-6 w-6'
                             : // eslint-disable-next-line unicorn/no-nested-ternary
                             size === 'medium'
                             ? 'h-8 w-6'
@@ -58,7 +58,15 @@ export const ENSAvatar: FC<{ name: string; size?: Size }> = async ({
         <img
             src={ensUrl}
             alt={name}
-            className="aspect-square h-8 w-8 rounded-full bg-white"
+            className={cx(
+                'aspect-square rounded-full bg-white',
+                size === 'small'
+                    ? 'h-6 w-6'
+                    : // eslint-disable-next-line unicorn/no-nested-ternary
+                    size === 'medium'
+                    ? 'h-8 w-8'
+                    : 'h-12 w-12'
+            )}
         />
     );
 };

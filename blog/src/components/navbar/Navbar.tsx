@@ -13,7 +13,7 @@ export const Navbar: FC = () => {
                     <img
                         src="/icons/ens_logo_primary.svg"
                         alt="ENS Logo"
-                        className="w-[104px]"
+                        className="w-[104px] min-w-[104px]"
                     />
                 </Link>
                 <HamburgerMenu />
