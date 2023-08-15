@@ -8,7 +8,8 @@
         "build:next": "next build",
         "build": "npm run build:assets && npm run build:next",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint -c .eslintrc.json --ext .ts ./src"
+        "lint": "eslint -c .eslintrc.json --ext .jsx,.mdx,.tsx ./src ./app",
+        "typecheck": "tsc --noEmit"
     },
     "keywords": [],
     "author": "Lucemans",
