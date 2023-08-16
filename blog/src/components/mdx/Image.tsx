@@ -26,6 +26,10 @@ export const Image = (properties: ImageProperties) => {
         };
     }, [expanded]);
 
+    useEffect(() => {
+        document.body.style.overflow = expanded ? 'hidden' : 'auto';
+    }, [expanded]);
+
     // eslint-disable-next-line unicorn/explicit-length-check
     const size = properties.size || 'full';
 
