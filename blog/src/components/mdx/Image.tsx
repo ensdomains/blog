@@ -37,7 +37,7 @@ export const Image = (properties: ImageProperties) => {
         <button
             className="not-prose mx-auto flex rounded-2xl"
             onClick={() => setExpanded(!expanded)}
-            // onBlur={() => setExpanded(false)}
+            onBlur={() => setExpanded(false)}
         >
             <motion.div
                 layoutId={`${properties.src}-image`}
@@ -54,7 +54,8 @@ export const Image = (properties: ImageProperties) => {
             <AnimatePresence>
                 {expanded && (
                     <motion.div
-                        className="fixed inset-0 bg-black bg-opacity-50"
+                        // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
+                        className="fixed inset-0 cursor-default bg-black  bg-opacity-50"
                         key={`${properties.src}-image-backdrop`}
                         onClick={() => setExpanded(false)}
                         initial={{ opacity: 0 }}
@@ -65,13 +66,13 @@ export const Image = (properties: ImageProperties) => {
             </AnimatePresence>
             {expanded && (
                 <motion.div
-                    className="fixed inset-0 p-48"
+                    className="pointer-events-none fixed inset-0 flex cursor-default items-center justify-center"
                     key={`${properties.src}-image-container`}
                     onClick={() => setExpanded(false)}
                 >
                     <motion.div
                         layoutId={`${properties.src}-image`}
-                        className={'w-full'}
+                        className={'block max-h-[90vh] w-screen max-w-[90vw]'}
                         style={{
                             aspectRatio:
                                 Number(properties.width) /
@@ -81,7 +82,7 @@ export const Image = (properties: ImageProperties) => {
                         <NextImage
                             {...properties}
                             quality={1}
-                            className="z-10 w-full rounded-2xl"
+                            className="pointer-events-auto z-10 w-full cursor-pointer rounded-2xl"
                             key={`${properties.src}-image`}
                             draggable={false}
                         />
