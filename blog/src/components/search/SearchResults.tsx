@@ -3,12 +3,15 @@
 import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
 
+import { ENSAvatarClient } from '../ENSAvatarClient';
+
 type MatchesPosition = { start: number; length: number }[];
 
 type SearchEntry = {
     slug: string;
     title: string;
     description: string;
+    authors: string[];
     _formatted: {
         content: string;
         slug: string;
@@ -63,6 +66,41 @@ const doSearch = async (search: string): Promise<SearchResult> => {
     return result.json();
 };
 
+export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
+    return (
+        <div key={hit.slug}>
+            <Link
+                href={`/${hit.slug}`}
+                className="search-highlight flex flex-col p-2 hover:bg-neutral-100"
+            >
+                <img src="" alt="" />
+
+                <span
+                    className="text-lg text-neutral-700"
+                    dangerouslySetInnerHTML={{
+                        __html: hit._formatted.title,
+                    }}
+                />
+                <span
+                    dangerouslySetInnerHTML={{
+                        __html: hit._formatted.description,
+                    }}
+                ></span>
+                <span className="flex w-full items-end justify-between">
+                    <span className="flex items-center gap-2">
+                        <span className="flex -space-x-2">
+                            {hit.authors.map((author) => (
+                                <ENSAvatarClient name={author} size="small" />
+                            ))}
+                        </span>
+                        <span>{hit.authors.join(', ')}</span>
+                    </span>
+                </span>
+            </Link>
+        </div>
+    );
+};
+
 export const SearchResults: FC<{ query: string }> = ({ query }) => {
     const [searchResults, setSearchResults] = useState<SearchResult>();
     const [loading, setLoading] = useState(false);
@@ -88,7 +126,8 @@ export const SearchResults: FC<{ query: string }> = ({ query }) => {
     const hasResults = searchResults?.hits?.length > 0;
 
     return (
-        <div className="absolute inset-x-0 top-full z-10 hidden pt-2 group-focus-within:block">
+        <div className="absolute inset-x-0 top-full z-10 block pt-2 ">
+            {/* group-focus-within:block */}
             <div className="rounded-lg border bg-white p-4">
                 {loading && <div>Loading...</div>}
                 {!loading && !validQuery && (
@@ -100,34 +139,7 @@ export const SearchResults: FC<{ query: string }> = ({ query }) => {
                 {!loading && validQuery && hasResults && (
                     <div className="text-ens-grey2 flex flex-col gap-1">
                         {searchResults?.hits?.map((hit) => (
-                            <div key={hit.slug}>
-                                <Link
-                                    href={`/${hit.slug}`}
-                                    className="search-highlight flex flex-col p-2 hover:bg-neutral-100"
-                                >
-                                    <img src="" alt="" />
-                                    <span
-                                        className="text-lg text-neutral-700"
-                                        dangerouslySetInnerHTML={{
-                                            __html: hit._formatted.title,
-                                        }}
-                                    />
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: hit._formatted.description,
-                                        }}
-                                    ></span>
-                                    <div className="mt-3">
-                                        {
-                                            <img
-                                                src="https://metadata.ens.domains/mainnet/avatar/luc.eth"
-                                                alt=""
-                                                className="h-4 w-4 rounded-full"
-                                            />
-                                        }
-                                    </div>
-                                </Link>
-                            </div>
+                            <SearchHit hit={hit} />
                         ))}
                     </div>
                 )}
