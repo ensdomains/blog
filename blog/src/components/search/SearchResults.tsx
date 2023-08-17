@@ -70,7 +70,7 @@ export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
     return (
         <div key={hit.slug}>
             <Link
-                href={`/${hit.slug}`}
+                href={`/post/${hit.slug}`}
                 className="search-highlight flex flex-col p-2 hover:bg-neutral-100"
             >
                 <img src="" alt="" />
