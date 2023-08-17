@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import NextImage, { ImageProps as NextImageProperties } from 'next/image';
 import { useEffect, useState } from 'react';
 
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
+
 type ImageVariant = 'full' | 'wide' | 'normal' | 'small';
 
 type ImageProperties = NextImageProperties & {
@@ -10,7 +12,16 @@ type ImageProperties = NextImageProperties & {
 };
 
 export const Image = (properties: ImageProperties) => {
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpandedRaw] = useState(false);
+    const expandCapable = useMediaQuery('(min-width: 768px)');
+
+    const setExpanded = (value: boolean) => {
+        if (expandCapable) {
+            setExpandedRaw(value);
+        } else {
+            setExpandedRaw(false);
+        }
+    };
 
     useEffect(() => {
         const closeFullscreen = (event) => {
@@ -35,7 +46,9 @@ export const Image = (properties: ImageProperties) => {
 
     return (
         <button
-            className="not-prose mx-auto flex rounded-2xl"
+            className={`not-prose mx-auto flex rounded-2xl ${
+                expandCapable ? '' : 'cursor-default'
+            }`}
             onClick={() => setExpanded(!expanded)}
             onBlur={() => setExpanded(false)}
         >
