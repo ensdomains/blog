@@ -85,7 +85,7 @@ export const Image = (properties: ImageProperties) => {
                 >
                     <motion.div
                         layoutId={`${properties.src}-image`}
-                        className={'block max-h-[90vh] w-screen max-w-[90vw]'}
+                        className={'flex max-h-[90vh] h-full max-w-[90vw]'}
                         style={{
                             aspectRatio:
                                 Number(properties.width) /
@@ -95,7 +95,7 @@ export const Image = (properties: ImageProperties) => {
                         <NextImage
                             {...properties}
                             quality={1}
-                            className="pointer-events-auto z-10 w-full cursor-pointer rounded-2xl"
+                            className="pointer-events-auto z-10 w-full cursor-pointer rounded-2xl my-auto"
                             key={`${properties.src}-image`}
                             draggable={false}
                         />
