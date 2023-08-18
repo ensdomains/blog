@@ -17,11 +17,11 @@ export const Navbar: FC = () => {
                     />
                 </Link>
                 <HamburgerMenu />
-                <div className="hidden sm:block">
+                <div className="hidden w-full sm:block">
                     <SearchBar />
                 </div>
             </div>
-            <div className="text-ens-grey2 flex flex-1 items-center justify-end gap-2">
+            <div className="text-ens-grey2 flex items-center justify-end gap-2">
                 <MobileSearchMenu />
             </div>
         </div>

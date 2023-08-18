@@ -55,10 +55,10 @@ export const ENSAvatarClient: FC<{ name: string; size?: Size }> = ({
                 className={cx(
                     'flex aspect-square items-center justify-center rounded-full text-white',
                     size === 'small'
-                        ? 'h-6 w-6'
+                        ? 'h-5 w-5'
                         : // eslint-disable-next-line unicorn/no-nested-ternary
                         size === 'medium'
-                        ? 'h-8 w-6'
+                        ? 'h-8 w-8'
                         : 'h-12 w-12'
                 )}
                 style={{
@@ -78,7 +78,7 @@ export const ENSAvatarClient: FC<{ name: string; size?: Size }> = ({
             className={cx(
                 'aspect-square rounded-full bg-white',
                 size === 'small'
-                    ? 'h-6 w-6'
+                    ? 'h-5 w-5'
                     : // eslint-disable-next-line unicorn/no-nested-ternary
                     size === 'medium'
                     ? 'h-8 w-8'
