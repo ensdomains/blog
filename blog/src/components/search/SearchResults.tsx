@@ -66,26 +66,38 @@ const doSearch = async (search: string): Promise<SearchResult> => {
     return result.json();
 };
 
-export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
+export const SearchHit: FC<{ hit: SearchEntry; onDown: () => void }> = ({
+    hit,
+}) => {
     return (
         <div key={hit.slug}>
             <Link
                 href={`/post/${hit.slug}`}
                 className="search-highlight flex flex-col p-2 hover:bg-neutral-100"
+                onKeyDown={(event) => {
+                    // if (event.key == 'ArrowDown') {
+                    //     const newIndex = currentPageIndex + 1;
+                    //     const link = links[newIndex];
+                    //     if (link == undefined) return;
+                    //     setCurrentPageIndex(newIndex);
+                    //     Router.push(link.path);
+                    // } else if (event.key == 'ArrowUp') {
+                    //     const newIndex = currentPageIndex - 1;
+                    //     const link = links[newIndex];
+                    //     if (link == undefined) return;
+                    //     setCurrentPageIndex(newIndex);
+                    //     Router.push(link.path);
+                    // }
+                }}
             >
                 <img src="" alt="" />
 
                 <span
-                    className="text-lg text-neutral-700"
+                    className="mb-3 text-lg text-neutral-700"
                     dangerouslySetInnerHTML={{
                         __html: hit._formatted.title,
                     }}
                 />
-                <span
-                    dangerouslySetInnerHTML={{
-                        __html: hit._formatted.description,
-                    }}
-                ></span>
                 <span className="flex w-full items-end justify-between">
                     <span className="flex items-center gap-2">
                         <span className="flex -space-x-2">
@@ -139,7 +151,7 @@ export const SearchResults: FC<{ query: string }> = ({ query }) => {
                 {!loading && validQuery && hasResults && (
                     <div className="text-ens-grey2 flex flex-col gap-1">
                         {searchResults?.hits?.map((hit) => (
-                            <SearchHit hit={hit} />
+                            <SearchHit hit={hit} onDown={() => {}} />
                         ))}
                     </div>
                 )}
