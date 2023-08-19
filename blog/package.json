@@ -29,6 +29,7 @@
         "clsx": "^2.0.0",
         "deepmerge-ts": "^5.1.0",
         "eslint-plugin-tailwindcss": "^3.13.0",
+        "framer-motion": "^10.16.0",
         "mdast-util-to-markdown": "^2.1.0",
         "mdast-util-to-string": "^4.0.0",
         "mdx": "^0.3.1",
