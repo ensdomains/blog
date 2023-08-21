@@ -1,6 +1,6 @@
+import { unstable_cache } from 'next/cache';
 import { readdir } from 'node:fs/promises';
 
-// import { cache } from 'react';
 import {
     BlogPostMetadata,
     BlogPostMetadataSchema,
@@ -10,10 +10,14 @@ export type BlogPostMetadataPlus = BlogPostMetadata & {
     file: string;
 };
 
-let cache: BlogPostMetadataPlus[] | null;
+export const getPostsMetadata = async () => {
+    const folderNames = await readdir('../content');
 
-export const getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
-    if (cache) return cache;
+    return unstable_cache(_getPostsMetadata, [folderNames.join(',')], {})();
+};
+
+export const _getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
+    console.log('Loading posts metadata...');
 
     const posts: BlogPostMetadataPlus[] = [];
 
@@ -32,11 +36,7 @@ export const getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
         posts.push({ ...pageMetadata, file });
     }
 
-    const result = posts.sort((a, b) => {
+    return posts.sort((a, b) => {
         return new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1;
     });
-
-    cache = result;
-
-    return result;
 };
