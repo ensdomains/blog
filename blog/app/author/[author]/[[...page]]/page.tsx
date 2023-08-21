@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable sonarjs/no-nested-template-literals */
 import { ResolvingMetadata } from 'next';
 
 import { PageButtons } from '@/components/PageButtons';
@@ -36,21 +38,28 @@ export const generateMetadata = async (
 
     return createMetadata(
         {
-            title: 'ENS Blog',
+            title: `${params.author}'s articles | ENS Blog`,
             description: 'The official blog of the Ethereum Name Service',
-            path: '/',
+            path: `/author/${params.author}${
+                params.page ? `/${params.page.join('/')}` : ''
+            }`,
         },
         parentMetadata,
         {
             openGraph: {
-                type: 'website',
-                // title: post.title,
-                // authors: post.authors?.map((author) => author),
+                type: 'profile',
                 images: '/opengraph.jpg',
-                // description: post.description,
-                // tags: post.tags,
+                title: `${params.author}'s articles | ENS Blog`,
+                description: 'The official blog of the Ethereum Name Service',
+                url: `/author/${params.author}${
+                    params.page ? `/${params.page.join('/')}` : ''
+                }`,
+                siteName: 'ENS Blog',
+                username: params.author,
             },
             twitter: {
+                title: `${params.author}'s articles | ENS Blog`,
+                description: 'The official blog of the Ethereum Name Service',
                 card: 'summary_large_image',
             },
         }
