@@ -38,7 +38,7 @@ export const generateMetadata = async (
 
     return createMetadata(
         {
-            title: `${params.tag} articles | ENS Blog`,
+            title: `${parseTag(params.tag)} articles | ENS Blog`,
             description: 'The official blog of the Ethereum Name Service',
             path: `/tag/${params.tag}${
                 // eslint-disable-next-line sonarjs/no-nested-template-literals
@@ -50,13 +50,13 @@ export const generateMetadata = async (
             openGraph: {
                 type: 'website',
                 images: '/opengraph.jpg',
-                title: `${params.tag} articles | ENS Blog`,
+                title: `${parseTag(params.tag)} articles | ENS Blog`,
                 description: 'The official blog of the Ethereum Name Service',
                 url: 'https://blog.ens.domains',
                 siteName: 'ENS Blog',
             },
             twitter: {
-                title: `${params.tag} articles | ENS Blog`,
+                title: `${parseTag(params.tag)} articles | ENS Blog`,
                 description: 'The official blog of the Ethereum Name Service',
                 card: 'summary_large_image',
             },
