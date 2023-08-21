@@ -19,12 +19,14 @@ export const ENSAvatar: FC<{ name: string; size?: Size }> = async ({
     size = 'medium',
 }) => {
     const response = await fetch('https://enstate.rs/n/' + name);
-    const data: ENStateResponse | undefined = await response
-        .json()
-        .then((data) => data)
-        .catch((error) => {
-            console.error(error);
-        });
+
+    const data: ENStateResponse | undefined =
+        response.status === 200 ? await response.json() : undefined;
+
+    if (response.status != 200) {
+        console.error('Enstate silently errored', response.body);
+    }
+
     const ensUrl =
         data?.avatar || `https://metadata.ens.domains/mainnet/avatar/${name}`;
 
