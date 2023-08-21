@@ -1,6 +1,8 @@
+/* eslint-disable unicorn/no-nested-ternary */
 'use client';
 
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
+import { FiLoader } from 'react-icons/fi';
 import useSWR from 'swr';
 
 import { SearchEntry } from './SearchEntry';
@@ -36,16 +38,18 @@ const doSearch = async ([_, search]: [
                 q: search,
                 limit: 5,
                 showMatchesPosition: true,
-                attributesToCrop: ['content'],
+                attributesToCrop: [],
+                // attributesToCrop: ['content'],
                 attributesToRetrieve: [
                     'title',
                     'slug',
-                    'description',
+                    // 'description',
                     'authors',
                     'tags',
                 ],
                 cropLength: 10,
-                attributesToHighlight: ['content', 'title'],
+                attributesToHighlight: [],
+                // attributesToHighlight: ['content', 'title'],
             }) as any,
         }
     );
@@ -65,39 +69,26 @@ export const SearchResults: FC<{ query: string }> = ({ query }) => {
     const validQuery = query.length > 2;
     const hasResults = data?.hits?.length > 0;
 
-    let state: ReactElement<any, any>;
-
-    const results = (
-        <div className="text-ens-grey2 flex flex-col">
-            {data?.hits?.map((hit) => (
-                <SearchHit key={hit.slug} hit={hit} />
-            ))}
-        </div>
-    );
-
-    if (validQuery) {
-        if (isLoading) {
-            if (!hasResults) {
-                state = <div className="p-4">Loading...</div>;
-            }
-        } else {
-            state = hasResults ? (
-                results
-            ) : (
-                <div className="text-ens-grey2 p-4">No results</div>
-            );
-        }
-    } else {
-        state = hasResults ? (
-            results
-        ) : (
-            <div className="text-ens-grey2 p-4">Type to search</div>
-        );
-    }
-
     return (
         <div className="absolute inset-x-0 top-full z-10 hidden pt-2 group-focus-within:block">
-            <div className="rounded-lg border bg-white">{state}</div>
+            <div className="relative rounded-lg border bg-white">
+                {isLoading && (
+                    <FiLoader className="absolute right-0 top-0 m-4 animate-spin" />
+                )}
+                {validQuery ? (
+                    hasResults ? (
+                        <div className="text-ens-grey2 flex flex-col">
+                            {data?.hits?.map((hit) => (
+                                <SearchHit key={hit.slug} hit={hit} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-ens-grey2 p-4">No results</div>
+                    )
+                ) : (
+                    <div className="text-ens-grey2 p-4">Type to search</div>
+                )}
+            </div>
         </div>
     );
 };
