@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { ResolvingMetadata } from 'next';
 
 import { PageButtons } from '@/components/PageButtons';
@@ -37,21 +38,26 @@ export const generateMetadata = async (
 
     return createMetadata(
         {
-            title: 'ENS Blog',
+            title: `${params.tag} articles | ENS Blog`,
             description: 'The official blog of the Ethereum Name Service',
-            path: '/',
+            path: `/tag/${params.tag}${
+                // eslint-disable-next-line sonarjs/no-nested-template-literals
+                params.page ? `/${params.page.join('/')}` : ''
+            }`,
         },
         parentMetadata,
         {
             openGraph: {
                 type: 'website',
-                // title: post.title,
-                // authors: post.authors?.map((author) => author),
                 images: '/opengraph.jpg',
-                // description: post.description,
-                // tags: post.tags,
+                title: `${params.tag} articles | ENS Blog`,
+                description: 'The official blog of the Ethereum Name Service',
+                url: 'https://blog.ens.domains',
+                siteName: 'ENS Blog',
             },
             twitter: {
+                title: `${params.tag} articles | ENS Blog`,
+                description: 'The official blog of the Ethereum Name Service',
                 card: 'summary_large_image',
             },
         }
@@ -78,7 +84,7 @@ const page = async ({ params }: PageProperties) => {
     return (
         <div className="mt-2">
             <h1 className="text-2xl font-extrabold">
-                View all ‘{parseTag(params.tag)}’
+                View all '{parseTag(params.tag)}'
             </h1>
             <ul className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
                 {posts.map((post) => (

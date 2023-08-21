@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { ResolvingMetadata } from 'next';
 
 import { PageButtons } from '@/components/PageButtons';
@@ -42,13 +43,14 @@ export const generateMetadata = async (
         {
             openGraph: {
                 type: 'website',
-                // title: post.title,
-                // authors: post.authors?.map((author) => author),
+                title: 'ENS Blog',
+                description: 'The official blog of the Ethereum Name Service',
+                url: 'https://blog.ens.domains',
                 images: '/opengraph.jpg',
-                // description: post.description,
-                // tags: post.tags,
             },
             twitter: {
+                title: 'ENS Blog',
+                description: 'The official blog of the Ethereum Name Service',
                 card: 'summary_large_image',
             },
         }
