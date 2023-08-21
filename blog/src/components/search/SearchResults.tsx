@@ -1,6 +1,7 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactElement } from 'react';
+import useSWR from 'swr';
 
 import { SearchEntry } from './SearchEntry';
 import { SearchHit } from './SearchHit';
@@ -13,7 +14,14 @@ type SearchResult = {
     processingTimeMs: number;
 };
 
-const doSearch = async (search: string): Promise<SearchResult> => {
+const doSearch = async ([_, search]: [
+    'search',
+    string
+]): Promise<SearchResult> => {
+    if (search.length < 3) {
+        throw new Error('Search query too short');
+    }
+
     // @ts-ignore
     const result = await fetch(
         'https://search.v3x.systems/indexes/ens-blog/search',
@@ -46,47 +54,50 @@ const doSearch = async (search: string): Promise<SearchResult> => {
 };
 
 export const SearchResults: FC<{ query: string }> = ({ query }) => {
-    const [searchResults, setSearchResults] = useState<SearchResult>();
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const validQuery = query.length > 2;
-
-        if (!validQuery) {
-            setLoading(false);
-
-            return;
+    const { data, isLoading } = useSWR<SearchResult>(
+        ['search', query],
+        doSearch,
+        {
+            keepPreviousData: true,
         }
-
-        setLoading(true);
-
-        doSearch(query).then((results) => {
-            setLoading(false);
-            setSearchResults(results);
-        });
-    }, [query]);
+    );
 
     const validQuery = query.length > 2;
-    const hasResults = searchResults?.hits?.length > 0;
+    const hasResults = data?.hits?.length > 0;
+
+    let state: ReactElement<any, any>;
+
+    const results = (
+        <div className="text-ens-grey2 flex flex-col">
+            {data?.hits?.map((hit) => (
+                <SearchHit key={hit.slug} hit={hit} />
+            ))}
+        </div>
+    );
+
+    if (validQuery) {
+        if (isLoading) {
+            if (!hasResults) {
+                state = <div className="p-4">Loading...</div>;
+            }
+        } else {
+            state = hasResults ? (
+                results
+            ) : (
+                <div className="text-ens-grey2 p-4">No results</div>
+            );
+        }
+    } else {
+        state = hasResults ? (
+            results
+        ) : (
+            <div className="text-ens-grey2 p-4">Type to search</div>
+        );
+    }
 
     return (
         <div className="absolute inset-x-0 top-full z-10 hidden pt-2 group-focus-within:block">
-            <div className="rounded-lg border bg-white">
-                {loading && <div className="p-4">Loading...</div>}
-                {!loading && !validQuery && (
-                    <div className="text-ens-grey2 p-4">Type to search</div>
-                )}
-                {!loading && validQuery && !hasResults && (
-                    <div className="text-ens-grey2 p-4">No results</div>
-                )}
-                {!loading && validQuery && hasResults && (
-                    <div className="text-ens-grey2 flex flex-col">
-                        {searchResults?.hits?.map((hit) => (
-                            <SearchHit key={hit.slug} hit={hit} />
-                        ))}
-                    </div>
-                )}
-            </div>
+            <div className="rounded-lg border bg-white">{state}</div>
         </div>
     );
 };

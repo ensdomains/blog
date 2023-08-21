@@ -19,7 +19,7 @@ export const MobileSearchMenu = () => {
                 </button>
             </div>
             {isOpen && (
-                <div className="absolute left-0 top-24 block w-full  md:hidden">
+                <div className="absolute left-0 top-20 block w-full  md:hidden">
                     <Card className="w-full !gap-0 !rounded-none !px-2">
                         <SearchBar />
                     </Card>
