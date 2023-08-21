@@ -9,7 +9,7 @@ export const MobileSearchMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="md:hidden">
+        <div className="sm:hidden">
             <div className="text-ens-grey2 fill-ens-grey2">
                 <button
                     className="hover:bg-ens-grey2/20 flex items-center rounded-full p-2"

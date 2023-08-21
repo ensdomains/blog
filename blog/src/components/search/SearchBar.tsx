@@ -17,7 +17,7 @@ export const SearchBar = () => {
                 </div>
                 <input
                     type="search"
-                    className="focus:border-ens-blue focus:outline-ens-blue h-full w-full rounded-full border bg-white py-1 pl-12 pr-10 md:w-80"
+                    className="focus:border-ens-blue focus:outline-ens-blue h-full w-full rounded-full border bg-white py-1 pl-12 pr-10 sm:w-80 md:w-screen md:max-w-sm lg:max-w-2xl"
                     placeholder="Search for a post"
                     id="search"
                     autoComplete="off"
