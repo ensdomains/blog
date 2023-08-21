@@ -51,7 +51,9 @@ export const generateMetadata = async (
                 images: '/opengraph.jpg',
                 title: `${params.author}'s articles | ENS Blog`,
                 description: 'The official blog of the Ethereum Name Service',
-                url: 'https://blog.ens.domains',
+                url: `/author/${params.author}${
+                    params.page ? `/${params.page.join('/')}` : ''
+                }`,
                 siteName: 'ENS Blog',
                 username: params.author,
             },

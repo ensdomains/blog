@@ -57,6 +57,7 @@ export const generateMetadata = async (
                 ],
                 description: post.description,
                 tags: post.tags,
+                url: '/post/' + params.slug.join('/'),
             },
             twitter: {
                 title: `${post.title} | ENS Blog`,

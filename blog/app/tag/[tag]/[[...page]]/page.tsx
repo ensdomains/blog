@@ -52,7 +52,10 @@ export const generateMetadata = async (
                 images: '/opengraph.jpg',
                 title: `${parseTag(params.tag)} articles | ENS Blog`,
                 description: 'The official blog of the Ethereum Name Service',
-                url: 'https://blog.ens.domains',
+                url: `/tag/${params.tag}${
+                    // eslint-disable-next-line sonarjs/no-nested-template-literals
+                    params.page ? `/${params.page.join('/')}` : ''
+                }`,
                 siteName: 'ENS Blog',
             },
             twitter: {
