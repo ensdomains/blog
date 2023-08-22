@@ -1,9 +1,15 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable sonarjs/no-nested-template-literals */
+import { formatRecord } from 'ens-tools/dist/format';
 import { ResolvingMetadata } from 'next';
+import Link from 'next/link';
+import { ReactElement } from 'react';
+import { FaDiscord, FaTelegram } from 'react-icons/fa';
+import { FiGithub, FiGlobe, FiMail } from 'react-icons/fi';
 
 import { PageButtons } from '@/components/PageButtons';
 import { BlogPostPreview } from '@/components/PostPreview';
+import { getAuthorMetadata } from '@/lib/get_author_metadata';
 import { getAuthors } from '@/lib/get_authors';
 import { createMetadata } from '@/lib/metadata';
 import { splitArray } from '@/lib/split_array';
@@ -73,6 +79,8 @@ const page = async ({ params }: PageProperties) => {
 
     if (!postsUnlimited) throw new Error('Author not found');
 
+    const author_metadata = await getAuthorMetadata(params.author);
+
     const pages = splitArray(postsUnlimited, MAX_PER_PAGE);
 
     const currentPage = params.page ? Number.parseInt(params.page[0], 10) : 1;
@@ -85,10 +93,121 @@ const page = async ({ params }: PageProperties) => {
 
     return (
         <div className="mt-2">
-            <h1 className="text-2xl font-extrabold">
+            <h1 className="mb-4 text-3xl font-extrabold">
                 {params.author}’s articles
             </h1>
-            <ul className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+            <div className="flex rounded-lg bg-white p-2">
+                <div className="aspect-square h-full w-32 sm:w-48">
+                    <img
+                        src={
+                            'https://metadata.ens.domains/mainnet/avatar/' +
+                            params.author
+                        }
+                        alt={params.author}
+                        className="rounded-lg"
+                    />
+                </div>
+                <div className="flex flex-1 flex-col justify-between p-4 sm:flex-row">
+                    <div className="flex flex-col justify-center gap-1">
+                        <div className="text-2xl font-bold">
+                            {params.author}
+                        </div>
+
+                        {author_metadata?.records.description && (
+                            <div>{author_metadata.records.description}</div>
+                        )}
+
+                        {params.author.endsWith('.eth') && (
+                            <Link
+                                href={'https://' + params.author + '.link'}
+                                className="text-ens-blue"
+                                target="_blank"
+                            >
+                                {params.author + '.link'}
+                            </Link>
+                        )}
+                    </div>
+                    <div className="flex h-fit gap-2 text-xl">
+                        {(
+                            [
+                                [
+                                    'com.twitter',
+                                    'https://x.com/' +
+                                        formatRecord(
+                                            'com.twitter',
+                                            author_metadata.records[
+                                                'com.twitter'
+                                            ]
+                                        ),
+                                    <span className="-mr-1 flex aspect-square w-5 items-center justify-center leading-3">
+                                        {'𝕏'}
+                                    </span>,
+                                ],
+                                [
+                                    'email',
+                                    'mailto:' +
+                                        author_metadata.records['email'],
+                                    <FiMail />,
+                                ],
+                                [
+                                    'org.telegram',
+                                    'https://t.me/' +
+                                        formatRecord(
+                                            'org.telegram',
+                                            author_metadata.records[
+                                                'org.telegram'
+                                            ]
+                                        ),
+                                    <FaTelegram />,
+                                ],
+                                [
+                                    'url',
+                                    author_metadata.records.url,
+                                    <FiGlobe />,
+                                ],
+                                [
+                                    'com.github',
+                                    'https://github.com/' +
+                                        formatRecord(
+                                            'com.github',
+                                            author_metadata.records[
+                                                'com.github'
+                                            ]
+                                        ),
+                                    <FiGithub />,
+                                ],
+                                [
+                                    'com.discord',
+                                    formatRecord(
+                                        'com.discord',
+                                        author_metadata.records['com.discord']
+                                    ),
+                                    <FaDiscord />,
+                                ],
+                            ] as [
+                                keyof typeof author_metadata.records,
+                                string,
+                                ReactElement
+                            ][]
+                        )
+                            .filter(
+                                ([record, url, _element]) =>
+                                    author_metadata.records[record] && !!url
+                            )
+                            .map(([record, url, element]) => (
+                                <Link
+                                    href={url}
+                                    key={record}
+                                    target="_blank"
+                                    className="hover:text-ens-blue"
+                                >
+                                    {element}
+                                </Link>
+                            ))}
+                    </div>
+                </div>
+            </div>
+            <ul className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {posts.map((post) => (
                     <li key={post.slug} className="w-full">
                         <BlogPostPreview post={post} />

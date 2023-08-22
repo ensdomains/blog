@@ -7,7 +7,7 @@ import { FC } from 'react';
 
 import { BlogPostMetadataPlus } from '@/lib/get_posts';
 
-import { Youtube } from './Youtube';
+import { Youtube } from '../Youtube';
 
 export const PostCoverImage: FC<{ post: BlogPostMetadataPlus }> = async ({
     post,

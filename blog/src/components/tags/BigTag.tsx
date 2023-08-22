@@ -9,7 +9,7 @@ export const BigTag = ({ tag }: { tag: string }) => {
 
     return (
         <a
-            href="/"
+            href={`/tag/${tag.toLowerCase().replace(' ', '-')}`}
             className="text-ens-blue flex items-center gap-1 rounded-full bg-white px-2 text-base font-bold transition hover:scale-105"
         >
             {isYoutube && <FiYoutube />}
