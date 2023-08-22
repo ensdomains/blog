@@ -2,6 +2,15 @@ import { NextResponse } from 'next/server';
 
 import { getPostsMetadata } from '@/lib/get_posts';
 
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export async function generateStaticParams() {
+    const posts = await getPostsMetadata();
+
+    return posts.map((post) => ({
+        slug: post.slug,
+    }));
+}
+
 export async function GET() {
     const postMetadata = await getPostsMetadata();
 

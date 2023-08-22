@@ -76,7 +76,7 @@ export const HamburgerMenu = () => {
                 </button>
             </div>
             {isOpen && (
-                <div className="absolute left-0 top-24 block w-full md:hidden">
+                <div className="absolute left-0 top-20 block w-full md:hidden">
                     <div className="card w-full !rounded-none">
                         <Content />
                     </div>
@@ -84,7 +84,7 @@ export const HamburgerMenu = () => {
             )}
             <div
                 className={cx(
-                    'w-80 absolute top-24',
+                    'w-80 absolute top-20',
                     isOpen ? 'hidden md:block' : 'hidden'
                 )}
             >

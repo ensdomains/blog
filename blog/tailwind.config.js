@@ -2,6 +2,8 @@
  * @see https://github.com/ensdomains/media-kit/blob/main/media/colors/tailwind.config.js
  */
 
+const plugin = require('tailwindcss/plugin');
+
 /* eslint-disable unicorn/no-empty-file */
 
 /**
@@ -13,7 +15,18 @@ module.exports = {
         '../content/**/*.{mdx}',
     ],
     darkMode: 'class',
-    plugins: [require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/typography'),
+        plugin(({ addVariant }) => {
+            // Tailwind variant to allow for `interest-within` class that applies when the #search_open checkbox is checked
+            addVariant('interest-within', [
+                '#search_open[checked=true] ~ &',
+                '#search_open[checked=true] ~ * > &',
+                '#search_open[checked=true] ~ * * > &',
+                ':merge(.group):focus-within &',
+            ]);
+        }),
+    ],
     theme: {
         typography: require('./src/typography'),
         extend: {
