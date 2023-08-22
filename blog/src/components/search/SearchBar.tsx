@@ -5,6 +5,7 @@ import { FiSearch } from 'react-icons/fi';
 
 import { AutoCloseSearch } from './AutoClose';
 import { SearchResults } from './SearchResults';
+import { KeyboardNavigation } from './KeyboardNavigation';
 
 export const SearchBar = () => {
     const [query, setQuery] = useState('');
@@ -29,6 +30,7 @@ export const SearchBar = () => {
             </div>
             <SearchResults query={query} />
             <AutoCloseSearch />
+            <KeyboardNavigation />
         </div>
     );
 };

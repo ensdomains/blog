@@ -17,7 +17,7 @@ export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
     return (
         <Link
             href={`/post/${hit.slug}`}
-            className="search-highlight hover:bg-ens-grey1 flex items-center gap-4 border-b p-4 first:rounded-t-lg last:rounded-b-lg last:border-b-0"
+            className="search-highlight hover:bg-ens-grey1 outline-ens-blue flex items-center gap-4 border-b p-4 first:rounded-t-lg last:rounded-b-lg last:border-b-0"
         >
             <div className="hidden aspect-video h-20 lg:block">
                 {data?.cover_thumb && (
