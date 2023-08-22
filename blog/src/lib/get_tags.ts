@@ -8,7 +8,7 @@ export const getTags = async () => {
     // Make the object tags with the tag as key and the value an array of the posts that have that tag
     for (const page of pages) {
         for (let tag of page.tags) {
-            tag = tag.toLowerCase().replaceAll(' ', '_');
+            tag = tag.toLowerCase().replaceAll(' ', '-');
 
             if (tags[tag]) {
                 tags[tag].push(page);
