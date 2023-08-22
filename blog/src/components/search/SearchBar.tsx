@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
 import { AutoCloseSearch } from './AutoClose';
-import { SearchResults } from './SearchResults';
 import { KeyboardNavigation } from './KeyboardNavigation';
+import { SearchResults } from './SearchResults';
 
 export const SearchBar = () => {
     const [query, setQuery] = useState('');

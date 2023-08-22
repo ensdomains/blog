@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import { HTMLAttributes } from 'react';
 
@@ -18,7 +19,9 @@ type Properties = {
     hrefPrefix?: string;
 } & Omit<NativeDivProperties, 'children' | 'onChange'>;
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 enum Marker {
+    // eslint-disable-next-line unused-imports/no-unused-vars
     ellipsis = -1,
 }
 
@@ -86,17 +89,15 @@ export const PageButtons = ({
                     </p>
                 ) : (
                     <Link
-                        className={`
-                        min-w-10 flex aspect-square h-10 cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white p-2 text-center font-bold transition-all duration-150
-                        ${
+                        className={clsx(
+                            'min-w-10 flex aspect-square h-10 cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white p-2 text-center font-bold transition-all duration-150',
                             value === current
                                 ? 'text-ens-blue pointer-events-none cursor-default'
-                                : 'cursor-pointer text-gray-400 hover:bg-gray-200'
-                        } ${
+                                : 'cursor-pointer text-gray-400 hover:bg-gray-200',
                             size === 'small'
                                 ? 'leading-sm min-w-9 h-9 rounded-sm text-sm'
                                 : 'leading-base rounded-extraLarge min-w-10 h-10 text-base'
-                        }`}
+                        )}
                         data-testid="pagebutton"
                         key={value}
                         type="button"

@@ -1,8 +1,7 @@
 /* eslint-disable unicorn/no-nested-ternary */
 'use client';
 
-import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { FiLoader } from 'react-icons/fi';
 import useSWR from 'swr';
 
