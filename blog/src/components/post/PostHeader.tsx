@@ -1,7 +1,10 @@
+import Link from 'next/link';
+
+import { joinArray } from '@/lib/join_array';
 import { BlogPostMetadata } from '@/types/BlogPostMetadata';
 
-import { ENSAvatar } from './ENSAvatar';
-import { BigTag } from './tags/BigTag';
+import { ENSAvatar } from '../ENSAvatar';
+import { BigTag } from '../tags/BigTag';
 
 export const PostHeader = ({
     post,
@@ -19,7 +22,19 @@ export const PostHeader = ({
                         <ENSAvatar name={author} />
                     ))}
                 </div>
-                <span>{post.authors.join(', ')}</span>
+                <span>
+                    {joinArray(
+                        post.authors.map((author) => (
+                            <Link
+                                href={'/author/' + author}
+                                className="hover:text-ens-blue"
+                            >
+                                {author}
+                            </Link>
+                        )),
+                        <span>, </span>
+                    )}
+                </span>
                 <span>{new Date(post.date).toLocaleDateString('en-US')}</span>
                 <span className="opacity-70">{readingTime}</span>
             </div>

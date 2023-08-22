@@ -4,8 +4,8 @@ import { ResolvingMetadata } from 'next';
 import { Fragment, JSX } from 'react';
 import { Article, WithContext } from 'schema-dts';
 
-import { PostCoverImage } from '@/components/PostCoverImage';
-import { PostHeader } from '@/components/PostHeader';
+import { PostCoverImage } from '@/components/post/PostCoverImage';
+import { PostHeader } from '@/components/post/PostHeader';
 import { getPostBySlug } from '@/lib/get_post_by_slug';
 import { getPostsMetadata } from '@/lib/get_posts';
 import { createMetadata } from '@/lib/metadata';
