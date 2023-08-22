@@ -1,10 +1,11 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable sonarjs/no-nested-template-literals */
+import { formatRecord } from 'ens-tools/dist/format';
 import { ResolvingMetadata } from 'next';
 import Link from 'next/link';
 import { ReactElement } from 'react';
 import { FaDiscord, FaTelegram } from 'react-icons/fa';
-import { FiGithub, FiGlobe, FiMail, FiTwitter } from 'react-icons/fi';
+import { FiGithub, FiGlobe, FiMail } from 'react-icons/fi';
 
 import { PageButtons } from '@/components/PageButtons';
 import { BlogPostPreview } from '@/components/PostPreview';
@@ -117,25 +118,46 @@ const page = async ({ params }: PageProperties) => {
                         )}
 
                         {params.author.endsWith('.eth') && (
-                            <div>{params.author + '.link'}</div>
+                            <Link
+                                href={'https://' + params.author + '.link'}
+                                className="text-ens-blue"
+                                target="_blank"
+                            >
+                                {params.author + '.link'}
+                            </Link>
                         )}
                     </div>
-                    <div className="flex gap-2 text-xl">
+                    <div className="flex h-fit gap-2 text-xl">
                         {(
                             [
                                 [
                                     'com.twitter',
-                                    author_metadata.records['com.twitter'],
-                                    <FiTwitter />,
+                                    'https://x.com/' +
+                                        formatRecord(
+                                            'com.twitter',
+                                            author_metadata.records[
+                                                'com.twitter'
+                                            ]
+                                        ),
+                                    <span className="-mr-1 flex aspect-square w-5 items-center justify-center leading-3">
+                                        {'𝕏'}
+                                    </span>,
                                 ],
                                 [
                                     'email',
-                                    `mailto:${author_metadata.records.email}`,
+                                    'mailto:' +
+                                        author_metadata.records['email'],
                                     <FiMail />,
                                 ],
                                 [
                                     'org.telegram',
-                                    author_metadata.records['org.telegram'],
+                                    'https://t.me/' +
+                                        formatRecord(
+                                            'org.telegram',
+                                            author_metadata.records[
+                                                'org.telegram'
+                                            ]
+                                        ),
                                     <FaTelegram />,
                                 ],
                                 [
@@ -145,12 +167,21 @@ const page = async ({ params }: PageProperties) => {
                                 ],
                                 [
                                     'com.github',
-                                    author_metadata.records['com.github'],
+                                    'https://github.com/' +
+                                        formatRecord(
+                                            'com.github',
+                                            author_metadata.records[
+                                                'com.github'
+                                            ]
+                                        ),
                                     <FiGithub />,
                                 ],
                                 [
                                     'com.discord',
-                                    author_metadata.records['com.discord'],
+                                    formatRecord(
+                                        'com.discord',
+                                        author_metadata.records['com.discord']
+                                    ),
                                     <FaDiscord />,
                                 ],
                             ] as [
@@ -167,6 +198,7 @@ const page = async ({ params }: PageProperties) => {
                                 <Link
                                     href={url}
                                     key={record}
+                                    target="_blank"
                                     className="hover:text-ens-blue"
                                 >
                                     {element}

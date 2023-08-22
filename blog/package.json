@@ -28,6 +28,7 @@
         "axios": "^1.4.0",
         "clsx": "^2.0.0",
         "deepmerge-ts": "^5.1.0",
+        "ens-tools": "0.0.15-1",
         "eslint-plugin-tailwindcss": "^3.13.0",
         "framer-motion": "^10.16.0",
         "mdast-util-to-markdown": "^2.1.0",
