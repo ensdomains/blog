@@ -10,7 +10,18 @@ export const SearchButton: FC<
     return (
         <label
             htmlFor="search_open"
-            onClick={() => {
+            onClick={(event) => {
+                event.preventDefault();
+                const input = document.querySelector(
+                    '#search_open'
+                ) as HTMLInputElement;
+
+                input.focus();
+                input.checked = variant === 'open';
+                input.setAttribute(
+                    'checked',
+                    variant === 'open' ? 'true' : 'false'
+                );
                 setTimeout(() => {
                     const input = document.querySelector(
                         '#search'
