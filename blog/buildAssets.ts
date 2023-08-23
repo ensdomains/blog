@@ -13,6 +13,8 @@ import {
 } from 'node:fs/promises';
 import sharp from 'sharp';
 
+import { BlogPostMetadata } from '@/types/BlogPostMetadata';
+
 const CONTENT_FOLDER = '../content';
 const ASSETS_FOLDER = 'assets';
 
@@ -25,6 +27,13 @@ type ImageSettings = {
     height: number;
     // quality?: number; // default 75
     format?: string; // default webp
+};
+
+type ENStateResponse = {
+    name: string;
+    address: string;
+    avatar: string;
+    display: string;
 };
 
 const makeDirecectoryIfNotExists = async (path: string) => {
@@ -191,6 +200,141 @@ const handleCoverImages = async () => {
 
     result += '};';
 
+    result +=
+        '\n\nexport type Cover = keyof typeof covers[keyof typeof covers];';
+
+    return result;
+};
+
+// =============================================================
+// Handle avatars
+// =============================================================
+
+const AVATAR_IMG_SETTINGS: ImageSettings[] = [
+    {
+        width: 512,
+        height: 512,
+    },
+];
+
+const getAvatarImages = async () => {
+    const posts = await readdir(CONTENT_FOLDER);
+
+    console.log('Posts', posts);
+
+    const avatars: Record<string, Buffer> = {};
+
+    for (const post of posts) {
+        // Read meta.json and check for cover
+        const meta: BlogPostMetadata = await import(
+            `../content/${post}/meta.json`
+        ).catch(() => {});
+
+        if (!meta) continue;
+
+        for (const author of meta.authors) {
+            if (avatars[author]) continue;
+
+            let avatar: Buffer | undefined | void;
+
+            const enstateData = await axios({
+                method: 'get',
+                url: `https://enstate.rs/n/${author}`,
+                // responseType: 'arraybuffer',
+            })
+                .then((response) => response.data as ENStateResponse)
+                .catch(() => {
+                    // console.log(
+                    //     'Failed to fetch avatar image via enstate',
+                    //     author
+                    // );
+                });
+
+            if (enstateData && enstateData.avatar) {
+                avatar = await axios({
+                    method: 'get',
+                    url: enstateData.avatar,
+                    responseType: 'arraybuffer',
+                })
+                    .then((response) => Buffer.from(response.data))
+                    .catch(() => {
+                        // console.log(
+                        //     'Failed to fetch avatar image via enstate',
+                        //     author
+                        // );
+                    });
+            }
+
+            if (!avatar) {
+                avatar = await axios({
+                    method: 'get',
+                    url: `https://metadata.ens.domains/mainnet/avatar/${author}`,
+                    responseType: 'arraybuffer',
+                })
+                    .then((response) => Buffer.from(response.data))
+                    .catch(() => {
+                        // console.log(
+                        //     'Failed to fetch avatar image via metadata',
+                        //     author
+                        // );
+                    });
+            }
+
+            if (!avatar) {
+                console.log('No avatar found for author', author);
+                continue;
+            }
+
+            avatars[author] = avatar;
+
+            console.log('Found avatar for author', author);
+        }
+    }
+
+    return avatars;
+};
+
+const handleAvatarImages = async () => {
+    const avatars = await getAvatarImages();
+
+    let result = 'export const avatars = {\n';
+
+    for (const [author, avatar] of Object.entries(avatars)) {
+        result += `    '${author}': {\n`;
+
+        for (const settings of AVATAR_IMG_SETTINGS) {
+            const { prefix, suffix, width, height, format } = settings;
+
+            // eslint-disable-next-line sonarjs/no-nested-template-literals
+            const key = `${prefix || ''}avatar${suffix ? `-${suffix}` : ''}`;
+            const output = `${ASSETS_FOLDER}/${author}/${key}.${
+                format || 'webp'
+            }`;
+
+            console.log(`Converting image to ${output}`);
+
+            await makeDirecectoryIfNotExists(`${ASSETS_FOLDER}/${author}`);
+
+            await sharp(avatar, {
+                pages: -1,
+                animated: true,
+            })
+                .resize(width, height)
+                .toFile(output);
+
+            result += `        '${key}': import('./${author}/${key}.${
+                format || 'webp'
+            }') as Promise<{default: StaticImageData}>,\n`;
+        }
+
+        result += '    },\n';
+    }
+
+    result += '};';
+
+    result +=
+        '\n\nexport type Avatar = keyof typeof avatars[keyof typeof avatars];';
+
     return result;
 };
 
@@ -204,7 +348,9 @@ const main = async () => {
 
     const coverOutput = await handleCoverImages();
 
-    await writeOutput([coverOutput]);
+    const avatarOutput = await handleAvatarImages();
+
+    await writeOutput([coverOutput, avatarOutput]);
 };
 
 main();
