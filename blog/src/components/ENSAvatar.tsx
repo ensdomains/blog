@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { avatars } from 'assets/assets';
 import { FC } from 'react';
 import { FiUser } from 'react-icons/fi';
 
@@ -18,20 +19,30 @@ export const ENSAvatar: FC<{ name: string; size?: Size }> = async ({
     name,
     size = 'medium',
 }) => {
-    const response = await fetch('https://enstate.rs/n/' + name);
+    let avatar = avatars[name as keyof typeof avatars]
+        ? await avatars[name as keyof typeof avatars].avatar.then(
+              (imported) => imported.default.src
+          )
+        : undefined;
 
-    const data: ENStateResponse | undefined =
-        response.status === 200 ? await response.json() : undefined;
+    if (!avatar) {
+        const response = await fetch('https://enstate.rs/n/' + name);
 
-    if (response.status != 200) {
-        console.error('Enstate silently errored', response.body);
+        const data: ENStateResponse | undefined =
+            response.status === 200 ? await response.json() : undefined;
+
+        if (response.status != 200) {
+            console.error('Enstate silently errored', response.body);
+        }
+
+        avatar = data?.avatar;
     }
 
-    const ensUrl =
-        data?.avatar || `https://metadata.ens.domains/mainnet/avatar/${name}`;
-
-    if (!data?.avatar) {
-        const metadataResponse = await fetch(ensUrl, { method: 'HEAD' });
+    if (!avatar) {
+        const metadataResponse = await fetch(
+            `https://metadata.ens.domains/mainnet/avatar/${name}`,
+            { method: 'HEAD' }
+        );
 
         if (metadataResponse.status !== 200) {
             return (
@@ -54,11 +65,13 @@ export const ENSAvatar: FC<{ name: string; size?: Size }> = async ({
                 </div>
             );
         }
+
+        avatar = `https://metadata.ens.domains/mainnet/avatar/${name}`;
     }
 
     return (
         <img
-            src={ensUrl}
+            src={avatar}
             alt={name}
             className={cx(
                 'aspect-square rounded-full bg-white',

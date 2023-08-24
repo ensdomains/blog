@@ -8,12 +8,11 @@ type PageProperties = {
     params: { slug: string };
 };
 
-type Metadata = BlogPostMetadataPlus & {
+export type Metadata = BlogPostMetadataPlus & {
     assets: {
         covers: Partial<Record<Cover, string>>;
-        avatars: Partial<Record<Avatar, string>>;
+        avatars: Record<string, Partial<Record<Avatar, string>>>;
     };
-    // Partial<Record<Cover, string> & Record<Avatar, string>>;
 };
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
@@ -52,8 +51,6 @@ export async function GET(_request: NextRequest, { params }: PageProperties) {
         const avatar_data: (typeof avatars)[keyof typeof avatars] | undefined =
             avatars[author];
 
-        console.log({ avatar_data, author, avatars });
-
         if (avatar_data) {
             for (const [key, avatar] of Object.entries(avatar_data)) {
                 if (!data.assets.avatars[author]) {
@@ -61,8 +58,6 @@ export async function GET(_request: NextRequest, { params }: PageProperties) {
                 }
 
                 const awaitedData = await avatar;
-
-                console.log({ awaitedData: awaitedData.default });
 
                 data.assets.avatars[author][key] =
                     awaitedData.default.src || data[key];

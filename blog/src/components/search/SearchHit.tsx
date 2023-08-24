@@ -1,15 +1,14 @@
+import { Metadata } from 'app/metadata/[slug]/route';
 import Link from 'next/link';
 import { FC } from 'react';
 import useSWR from 'swr';
-
-import { BlogPostMetadataPlus } from '@/lib/get_posts';
 
 import { SearchEntry } from './SearchEntry';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
-    const { data } = useSWR<BlogPostMetadataPlus>(
+    const { data } = useSWR<Metadata>(
         '/metadata/' + hit.slug + '.json',
         fetcher
     );
@@ -20,9 +19,9 @@ export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
             className="search-highlight hover:bg-ens-grey1 outline-ens-blue flex items-center gap-4 border-b p-4 first:rounded-t-lg last:rounded-b-lg last:border-b-0"
         >
             <div className="hidden aspect-video h-20 lg:block">
-                {data?.cover_thumb && (
+                {data?.assets.covers['cover-thumb'] && (
                     <img
-                        src={data.cover_thumb}
+                        src={data?.assets.covers['cover-thumb']}
                         alt=""
                         className="aspect-video h-full w-full rounded-md object-cover"
                     />
@@ -35,8 +34,8 @@ export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
                         {data?.authors?.map((author) => (
                             <img
                                 src={
-                                    'https://metadata.ens.domains/mainnet/avatar/' +
-                                    author
+                                    data?.assets.avatars[author]?.avatar ||
+                                    `https://metadata.ens.domains/mainnet/avatar/${author}`
                                 }
                                 alt={author}
                                 className="border-ens-grey1 h-8 w-8 rounded-full border-2"
