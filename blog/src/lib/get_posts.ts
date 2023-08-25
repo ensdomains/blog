@@ -8,7 +8,6 @@ import {
 
 export type BlogPostMetadataPlus = BlogPostMetadata & {
     file: string;
-    cover_thumb?: string;
 };
 
 export const getPostsMetadata = async () => {
