@@ -56,7 +56,7 @@ export const Author: FC<{
     }
 
     return (
-        <div className="relative flex rounded-lg bg-white p-2 items-center sm:items-stretch">
+        <div className="relative flex items-center rounded-lg bg-white p-2 sm:items-stretch">
             {link && (
                 <Link href={'/author/' + name} className="absolute inset-0" />
             )}
@@ -95,13 +95,15 @@ export const Author: FC<{
                     </div>
 
                     {author_metadata?.records.description && (
-                        <div>{author_metadata.records.description}</div>
+                        <div className="overflow-x-hidden text-ellipsis">
+                            {author_metadata.records.description}
+                        </div>
                     )}
 
                     {name.endsWith('.eth') && (
                         <Link
                             href={'https://' + name + '.link'}
-                            className="text-ens-blue z-10 w-fit hover:opacity-90"
+                            className="text-ens-blue z-10 overflow-x-hidden text-ellipsis hover:opacity-90"
                             target="_blank"
                         >
                             {name + '.link'}
