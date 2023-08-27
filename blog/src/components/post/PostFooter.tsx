@@ -1,10 +1,9 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import Image from 'next/image';
+import { FaFacebookF, FaLinkedin } from 'react-icons/fa';
 
 import { BlogPostMetadata } from '@/types/BlogPostMetadata';
 
-import facebookLogo from '../../../public/icons/facebook.png';
-import linkedinLogo from '../../../public/icons/linkedin.png';
 import xLogo from '../../../public/icons/x.svg';
 import { Author } from '../Author';
 import { BigTag } from '../tags/BigTag';
@@ -27,7 +26,7 @@ export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
                         <BigTag tag={tag} />
                     ))}
                 </div>
-                <div className="flex flex-1 items-center justify-end gap-4">
+                <div className="flex flex-1 items-center justify-end gap-4 pr-2 text-xl">
                     <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                             post.title + ' | ENS Blog'
@@ -36,7 +35,7 @@ export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex w-6 items-center"
+                        className="flex w-5 items-center"
                     >
                         <Image src={xLogo} alt="X logo" />
                     </a>
@@ -46,9 +45,9 @@ export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex w-8 items-center"
+                        className="flex items-center"
                     >
-                        <Image src={facebookLogo} alt="Facebook logo" />
+                        <FaFacebookF />
                     </a>
                     <a
                         href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
@@ -58,9 +57,9 @@ export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex w-8 items-center"
+                        className="mt-[1px] flex items-center text-[23px]"
                     >
-                        <Image src={linkedinLogo} alt="LinkedIn logo" />
+                        <FaLinkedin />
                     </a>
                 </div>
             </div>

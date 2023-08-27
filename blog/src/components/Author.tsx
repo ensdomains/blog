@@ -85,9 +85,10 @@ export const Author: FC<{
                 )}
             </div>
             <div
-                className={`flex flex-1 flex-col justify-between ${
+                className={cx(
+                    'flex flex-1 flex-col justify-between min-w-0 sm:flex-row',
                     size === 'normal' ? 'p-4' : 'p-2 pl-4'
-                } min-w-0 sm:flex-row`}
+                )}
             >
                 <div className="flex min-w-0 flex-col justify-center gap-1">
                     <div className="overflow-x-hidden text-ellipsis text-2xl font-bold">
