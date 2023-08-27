@@ -1,4 +1,5 @@
 import { CrossSVG, MagnifyingGlassSVG } from '../ClientIcons';
+import { Backdrop } from './Backdrop';
 import { SearchBar } from './SearchBar';
 import { SearchButton } from './SearchButton';
 
@@ -9,7 +10,7 @@ export const SearchAnchor = () => {
             id="search_system"
         >
             <input id="search_open" type="checkbox" className="opacity-0" />
-            <div className="interest-within:block sm:interest-within:hidden absolute inset-0 hidden h-screen bg-black/10 backdrop-blur-sm"></div>
+            <Backdrop />
             <div className="interest-within:block absolute inset-x-0 top-5 hidden w-full sm:static sm:block">
                 <div className="w-full px-4">
                     <SearchBar />

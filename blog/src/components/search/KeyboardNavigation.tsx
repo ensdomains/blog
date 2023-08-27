@@ -30,7 +30,10 @@ const globalSearch = (event: KeyboardEvent) => {
             event.key.toLowerCase() === 'k') ||
         (event.key === '/' && !event.metaKey && !event.ctrlKey && !event.altKey)
     ) {
-        if (event.key === '/' && event.target != document.body) {
+        if (
+            event.key === '/' &&
+            document.activeElement instanceof HTMLInputElement
+        ) {
             return;
         }
 
@@ -43,9 +46,16 @@ const globalSearch = (event: KeyboardEvent) => {
         input.checked = true;
         input.setAttribute('checked', 'true');
         setTimeout(() => {
-            const input = document.querySelector('#search') as HTMLInputElement;
+            const input2 = document.querySelector(
+                '#search'
+            ) as HTMLInputElement;
 
-            input.focus();
+            input2.focus();
+
+            setTimeout(() => {
+                input.checked = false;
+                input.setAttribute('checked', 'false');
+            }, 50);
         }, 50);
     }
 };
