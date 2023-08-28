@@ -29,16 +29,23 @@
 	"postCreateCommand": "cd blog && pnpm install && pnpm build:assets",
 
     // Use 'postAttachCommand' to run commands after the a tool has successfully attatched to the container.
-    "postAttachCommand": "cd blog && pnpm dev"
+    "postAttachCommand": "cd blog && pnpm dev",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
+
+    // Customizations
+    "customizations": {
+        "codespaces": {
+            // Automatically open the following files on first boot
+            "openFiles": [
+                "content/000_template_blog_post/readme.mdx",
+                "content/000_template_blog_post/meta.json",
+                "CONTRIBUTING.md"
+            ]
+        }
+    }
 }
-
-
-
-
-
