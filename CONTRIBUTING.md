@@ -114,4 +114,4 @@ This guide assumes you've got [Visual Studio Code](https://code.visualstudio.com
 - Open your browser and navigate to the GitHub repository.
 - You should see a pop-up about your recently pushed branch. Click Compare & pull request to initiate the pull request.
 
-And there you go! You've just written, committed, and submitted an article for ens.blog.domains without leaving the comfort of VS Code.
+And there you go! You've just written, committed, and submitted an article for blog.ens.domains without leaving the comfort of VS Code.
