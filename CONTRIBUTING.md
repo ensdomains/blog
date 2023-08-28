@@ -10,7 +10,7 @@ Use the table of contents icon on the top left corner of this document to get to
 
 ## Quick Start Guide for Writing Articles on ens.blog.domains with GitHub Codespaces (Recommended)
 
-This guide will walk you through setting up your writing environment for ens.blog.domains. It's super easy, even if you're not a developer!
+This guide will walk you through setting up your writing environment for blog.ens.domains. It's super easy, even if you're not a developer!
 
 ### Step 1: Open the GitHub Repository
 
