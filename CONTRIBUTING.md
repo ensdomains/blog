@@ -65,7 +65,7 @@ This guide assumes you've got [Visual Studio Code](https://code.visualstudio.com
 - Open VS Code.
 - Go to View > Command Palette or press Ctrl + Shift + P.
 - Type and select Git: Clone.
-- Paste in the URL of the ens.blog.domains GitHub repository and choose where you'd like to clone it.
+- Paste in the URL of the blog.ens.domains GitHub repository and choose where you'd like to clone it.
 
 ### Step 2: Open the Repository
 
