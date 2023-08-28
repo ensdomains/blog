@@ -51,7 +51,7 @@ If you add resources and see a terminal error, don't worry!
 
 ### Step 8: Commit and Publish Your Changes
 
-- Open the Source Control tab on the left or press Ctrl + Shift + G.
+- Open the Source Control tab on the left or press ``Ctrl + Shift + G``.
 - Commit your changes with a meaningful message.
 - Sync/Push your changes.
 - Finally, create a pull request on GitHub to get your article published.
