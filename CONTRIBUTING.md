@@ -56,7 +56,7 @@ If you add resources and see a terminal error, don't worry!
 - Sync/Push your changes.
 - Finally, create a pull request on GitHub to get your article published.
 
-## Quick Start Guide for Writing Articles on ens.blog.domains Locally
+## Quick Start Guide for Writing Articles on blog.ens.domains Locally
 
 This guide assumes you've got [Visual Studio Code](https://code.visualstudio.com/), [NodeJS](https://nodejs.org/en), and [pnpm](https://pnpm.io/) installed. If not, go ahead and install those first. We recommend to run this on Linux or WSL.
 
