@@ -1,11 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
-    "name": "Node.js",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+	"name": "Node.js & TypeScript",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+
+    "hostRequirements": {
+        "cpus": 1,
+        "memory": "2",
+        "storage": "5",
+        "gpu": false
+    },
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
     "portsAttributes": {
         "3000": {
             "label": "This is the blog",
             "onAutoForward": "notify"
         }
     },
-    "postCreateCommand": "cd blog && pnpm install"
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "cd blog && pnpm install && pnpm build:assets",
+
+    // Use 'postAttachCommand' to run commands after the a tool has successfully attatched to the container.
+    "postAttachCommand": "cd blog && pnpm dev"
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
+
+
+
+
+

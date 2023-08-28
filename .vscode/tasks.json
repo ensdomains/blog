@@ -2,11 +2,24 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "pnpm dev",
+            "label": "dev",
             "type": "shell",
             "command": "pnpm dev",
             "options": {
                 "cwd": "${workspaceFolder}/blog"
+            }
+        },
+        {
+            "label": "build:assets",
+            "type": "shell",
+            "command": "pnpm install && pnpm build:assets",
+            "options": {
+                "cwd": "${workspaceFolder}/blog"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
             }
         }
     ]
