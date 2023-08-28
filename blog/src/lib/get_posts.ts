@@ -30,8 +30,9 @@ export const _getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
 
         const pageMetadata = await BlogPostMetadataSchema.parseAsync(meta);
 
-        // TODO: Load metadata or extra info for a file.
-        // NOTE: keep this lightweight as it runs during dev for every page
+        // Filter out any draft posts in production
+        if (pageMetadata.draft && process.env.NODE_ENV == 'production')
+            continue;
 
         posts.push({ ...pageMetadata, file });
     }

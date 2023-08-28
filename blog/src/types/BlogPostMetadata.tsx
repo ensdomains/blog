@@ -17,6 +17,8 @@ export const BlogPostMetadataSchema = z.object({
     authors: z.array(z.string()),
     // ENS Name of the author
     youtube: z.string().optional(),
+    // Draft status of post
+    draft: z.boolean().default(false),
 });
 
 export type BlogPostMetadata = z.infer<typeof BlogPostMetadataSchema>;
