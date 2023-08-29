@@ -5,6 +5,7 @@ import { Fragment, JSX } from 'react';
 import { Article, WithContext } from 'schema-dts';
 
 import { PostCoverImage } from '@/components/post/PostCoverImage';
+import { PostFooter } from '@/components/post/PostFooter';
 import { PostHeader } from '@/components/post/PostHeader';
 import { getPostBySlug } from '@/lib/get_post_by_slug';
 import { getPostsMetadata } from '@/lib/get_posts';
@@ -122,6 +123,7 @@ const page = async ({ params }: PageProperties) => {
                     {/* Hydration errors occur when PostContent is the only child in the parent div. */}
                     <Fragment />
                 </div>
+                <PostFooter post={post} />
             </article>
         </section>
     );
