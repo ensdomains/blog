@@ -1,11 +1,9 @@
-'use client';
-
-import { CrossSVG, MenuSVG } from '@ensdomains/thorin';
-import { FC, useState } from 'react';
-import { FaDiscord, FaMedium, FaYoutube } from 'react-icons/fa';
+import Link from 'next/link';
+import { FC } from 'react';
+import { FaDiscord, FaYoutube } from 'react-icons/fa';
 import { FiGithub, FiMessageCircle, FiTwitter } from 'react-icons/fi';
 
-import { cx } from '../../lib/cx';
+import { CrossSVG, MenuSVG } from '../ClientIcons';
 
 const links = [
     { name: 'ENS Manager', to: 'https://app.ens.domains' },
@@ -18,7 +16,6 @@ const socials = [
     { icon: <FiTwitter />, to: 'https://twitter.com/ensdomains' },
     { icon: <FiGithub />, to: 'https://github.com/ensdomains' },
     { icon: <FaDiscord />, to: 'https://chat.ens.domains' },
-    { icon: <FaMedium />, to: 'https://medium.com/the-ethereum-name-service' },
     {
         icon: <FiMessageCircle />,
         to: 'https://discuss.ens.domains/',
@@ -46,16 +43,16 @@ const Content: FC = () => {
             </div>
             <div className="h-[1.4px] w-full bg-neutral-100"></div>
 
-            <div className="flex justify-between p-4">
+            <div className="flex justify-around p-4">
                 {socials.map((social) => (
-                    <a
+                    <Link
                         key={`social-${social.to}`}
                         target="_blank"
                         className="rounded-lg text-2xl text-neutral-400 transition-colors duration-300 hover:text-black"
                         href={social.to}
                     >
                         {social.icon}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </>
@@ -63,37 +60,17 @@ const Content: FC = () => {
 };
 
 export const HamburgerMenu = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
     return (
-        <>
+        <div className="group">
             <div className="text-ens-grey2 fill-ens-grey2">
-                <button
-                    className="hover:bg-ens-grey2/20 flex items-center rounded-full p-2"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <CrossSVG /> : <MenuSVG />}
+                <button className="hover:bg-ens-grey2/20 flex items-center rounded-full p-2">
+                    <CrossSVG className="hidden group-focus-within:block" />
+                    <MenuSVG className="group-focus-within:hidden" />
                 </button>
             </div>
-            {isOpen && (
-                <div className="absolute left-0 top-20 block w-full md:hidden">
-                    <div className="card w-full !rounded-none">
-                        <Content />
-                    </div>
-                </div>
-            )}
-            <div
-                className={cx(
-                    'w-80 absolute top-20',
-                    isOpen ? 'hidden md:block' : 'hidden'
-                )}
-            >
-                <div className="hidden md:block">
-                    <div className="card">
-                        <Content />
-                    </div>
-                </div>
+            <div className="card absolute left-0 top-[4.8rem] hidden w-full group-focus-within:block sm:left-[unset] sm:w-80">
+                <Content />
             </div>
-        </>
+        </div>
     );
 };

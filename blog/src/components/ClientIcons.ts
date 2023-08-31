@@ -1,3 +1,3 @@
 'use client';
 
-export { CrossSVG, MagnifyingGlassSVG } from '@ensdomains/thorin';
+export { CrossSVG, MagnifyingGlassSVG, MenuSVG } from '@ensdomains/thorin';
