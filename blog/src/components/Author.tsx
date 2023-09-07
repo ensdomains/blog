@@ -60,29 +60,25 @@ export const Author: FC<{
             {link && (
                 <Link href={'/author/' + name} className="absolute inset-0" />
             )}
-            <div
-                className={cx(
-                    'aspect-square sm:flex-1',
-                    size === 'normal'
-                        ? 'min-w-[8rem] max-w-[8rem] xs:max-w-[10rem] sm:max-w-[12rem]'
-                        : 'w-32'
-                )}
-            >
-                {avatar ? (
-                    <img src={avatar} alt={name} className="rounded-lg" />
-                ) : (
-                    <div
-                        className={
-                            'flex aspect-square h-12 w-12 items-center justify-center rounded-full text-white'
-                        }
-                        style={{
-                            background:
-                                'linear-gradient(330.4deg, #44BCF0 4.54%, #7298F8 59.2%, #A099FF 148.85%)',
-                        }}
-                    >
+            <div className="flex items-center justify-center">
+                <div
+                    className={cx(
+                        'aspect-square sm:flex-1 flex items-center justify-center rounded-full text-white',
+                        size === 'normal'
+                            ? 'min-w-[8rem] max-w-[8rem] xs:max-w-[10rem] sm:max-w-[12rem]'
+                            : 'w-32'
+                    )}
+                    style={{
+                        background:
+                            'linear-gradient(330.4deg, #44BCF0 4.54%, #7298F8 59.2%, #A099FF 148.85%)',
+                    }}
+                >
+                    {avatar ? (
+                        <img src={avatar} alt={name} className="rounded-lg" />
+                    ) : (
                         <FiUser />
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
             <div
                 className={cx(

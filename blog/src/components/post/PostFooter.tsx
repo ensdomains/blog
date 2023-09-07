@@ -1,4 +1,5 @@
 /* eslint-disable sonarjs/no-duplicate-string */
+import clsx from 'clsx';
 import Image from 'next/image';
 import { FaFacebookF, FaLinkedin } from 'react-icons/fa';
 
@@ -13,7 +14,12 @@ export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
         <div className="not-prose mx-auto mt-6 flex w-full max-w-3xl flex-col gap-4">
             {/* add a horizontal line to indicate start of footer */}
             <hr className="my-6 border-t-2" />
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div
+                className={clsx(
+                    'grid grid-cols-1 gap-4',
+                    post.authors.length > 1 ? 'sm:grid-cols-2' : ''
+                )}
+            >
                 {post.authors.map((author) => (
                     <Author name={author} socials={false} size="small" link />
                 ))}

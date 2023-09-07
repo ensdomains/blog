@@ -38,6 +38,11 @@ export const _getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
     }
 
     return posts.sort((a, b) => {
-        return new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1;
+        const aDate = new Date(a.date);
+        const bDate = new Date(b.date);
+
+        if (aDate.getTime() == bDate.getTime()) return 0;
+
+        return aDate.getTime() > bDate.getTime() ? -1 : 1;
     });
 };
