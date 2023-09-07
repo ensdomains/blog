@@ -5,7 +5,7 @@ import { PageButtons } from '@/components/PageButtons';
 import { BlogPostPreview } from '@/components/PostPreview';
 import { getPostsMetadata } from '@/lib/get_posts';
 import { createMetadata } from '@/lib/metadata';
-import { splitArray, splitArrayBiasFirst } from '@/lib/split_array';
+import { splitArrayBiasFirst } from '@/lib/split_array';
 
 const MAX_PER_PAGE = 6;
 
