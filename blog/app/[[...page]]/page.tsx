@@ -16,7 +16,7 @@ type PageProperties = {
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export async function generateStaticParams() {
     const metas = await getPostsMetadata();
-    const pages = splitArray(metas, MAX_PER_PAGE);
+    const pages = splitArrayBiasFirst(metas, MAX_PER_PAGE);
 
     const parameters: PageProperties['params'][] = pages.map((_, index) => ({
         page: [(index + 1).toString()],
@@ -59,8 +59,6 @@ export const generateMetadata = async (
 
 const page = async ({ params }: PageProperties) => {
     const postsUnlimited = await getPostsMetadata();
-
-    console.log(postsUnlimited.map((post) => post.date));
 
     const pages = splitArrayBiasFirst(postsUnlimited, MAX_PER_PAGE);
 
