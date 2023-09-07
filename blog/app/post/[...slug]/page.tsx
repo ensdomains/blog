@@ -15,6 +15,12 @@ type PageProperties = {
     params: { slug: string[] };
 };
 
+class AssetNotFoundError extends Error {
+    constructor(asset: string) {
+        super(`Asset ${asset} not found. Try doing pnpm build:assets`);
+    }
+}
+
 export const generateMetadata = async (
     { params }: PageProperties,
     parent: ResolvingMetadata
@@ -26,6 +32,10 @@ export const generateMetadata = async (
     const parentMetadata = await parent;
 
     const postCovers = covers[post.file as keyof typeof covers];
+
+    if (!postCovers) {
+        throw new AssetNotFoundError(post.file);
+    }
 
     const postCover = await postCovers.cover.then((cover) => cover.default);
     const postCoverThumb = await postCovers['cover-thumb'].then(

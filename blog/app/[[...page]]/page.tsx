@@ -5,7 +5,7 @@ import { PageButtons } from '@/components/PageButtons';
 import { BlogPostPreview } from '@/components/PostPreview';
 import { getPostsMetadata } from '@/lib/get_posts';
 import { createMetadata } from '@/lib/metadata';
-import { splitArray } from '@/lib/split_array';
+import { splitArrayBiasFirst } from '@/lib/split_array';
 
 const MAX_PER_PAGE = 6;
 
@@ -16,7 +16,7 @@ type PageProperties = {
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export async function generateStaticParams() {
     const metas = await getPostsMetadata();
-    const pages = splitArray(metas, MAX_PER_PAGE);
+    const pages = splitArrayBiasFirst(metas, MAX_PER_PAGE);
 
     const parameters: PageProperties['params'][] = pages.map((_, index) => ({
         page: [(index + 1).toString()],
@@ -60,9 +60,10 @@ export const generateMetadata = async (
 const page = async ({ params }: PageProperties) => {
     const postsUnlimited = await getPostsMetadata();
 
-    const pages = splitArray(postsUnlimited, MAX_PER_PAGE);
+    const pages = splitArrayBiasFirst(postsUnlimited, MAX_PER_PAGE);
 
     const currentPage = params.page ? Number.parseInt(params.page[0], 10) : 1;
+    const isHomePage = currentPage === 1;
 
     const posts = pages[currentPage - 1];
 
@@ -72,8 +73,18 @@ const page = async ({ params }: PageProperties) => {
 
     return (
         <div className="mt-2">
-            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-2">
-                {posts.map((post) => (
+            {isHomePage && (
+                <div className="">
+                    <span className="block p-4 text-3xl font-bold">
+                        Newest article
+                    </span>
+                    <div className="mb-4 w-full">
+                        <BlogPostPreview post={posts[0]} variant="horizontal" />
+                    </div>
+                </div>
+            )}
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2">
+                {posts.slice(isHomePage ? 1 : 0).map((post) => (
                     <li key={post.slug} className="w-full">
                         <BlogPostPreview post={post} />
                     </li>
