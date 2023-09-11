@@ -64,11 +64,11 @@ export const HamburgerMenu = () => {
         <div className="group">
             <div className="text-ens-grey2 fill-ens-grey2">
                 <button className="hover:bg-ens-grey2/20 flex items-center rounded-full p-2">
-                    <CrossSVG className="hidden group-focus-within:block" />
-                    <MenuSVG className="group-focus-within:hidden" />
+                    <CrossSVG className="no-hover:group-hover:block hidden group-focus-within:block" />
+                    <MenuSVG className="no-hover:group-hover:hidden group-focus-within:hidden" />
                 </button>
             </div>
-            <div className="card absolute left-0 top-[4.8rem] hidden w-full group-focus-within:block sm:left-[unset] sm:w-80">
+            <div className="card no-hover:group-hover:block absolute left-0 top-[4.8rem] hidden w-full group-focus-within:block sm:left-[unset] sm:w-80">
                 <Content />
             </div>
         </div>

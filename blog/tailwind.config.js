@@ -62,6 +62,8 @@ module.exports = {
             },
             screens: {
                 xs: '448px',
+                'has-hover': { raw: '(hover: hover)' },
+                'no-hover': { raw: '(hover: none)' },
             },
         },
     },

@@ -9,6 +9,7 @@ export const SearchAnchor = () => {
             className="group z-30 flex flex-1 justify-between"
             id="search_system"
         >
+            <input id="search_open" type="checkbox" className="hidden" />
             <Backdrop />
             <div className="interest-within:block absolute inset-x-0 top-5 hidden w-full sm:static sm:block">
                 <div className="w-full px-4 sm:px-0">
