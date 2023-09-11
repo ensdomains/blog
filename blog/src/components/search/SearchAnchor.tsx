@@ -1,33 +1,52 @@
+'use client';
+
+import clsx from 'clsx';
+import { useState } from 'react';
+
 import { CrossSVG, MagnifyingGlassSVG } from '../ClientIcons';
-import { Backdrop } from './Backdrop';
 import { SearchBar } from './SearchBar';
-import { SearchButton } from './SearchButton';
 
 export const SearchAnchor = () => {
+    const [searchExpanded, setSearchExpanded] = useState(false);
+
     return (
         <div
             className="group z-30 flex flex-1 justify-between"
             id="search_system"
         >
-            <Backdrop />
-            <div className="interest-within:block absolute inset-x-0 top-5 hidden w-full sm:static sm:block">
+            {searchExpanded && (
+                <div
+                    className="absolute inset-0 block h-screen bg-black/10 backdrop-blur-sm sm:hidden"
+                    onClick={() => {
+                        setSearchExpanded(true);
+                    }}
+                    onKeyDown={() => {}}
+                    role="none"
+                ></div>
+            )}
+            <div
+                className={clsx(
+                    'absolute inset-x-0 top-5 w-full sm:static sm:block',
+                    searchExpanded ? 'block' : 'hidden'
+                )}
+            >
                 <div className="w-full px-4 sm:px-0">
-                    <SearchBar />
+                    <SearchBar shouldFocus={searchExpanded} />
                 </div>
             </div>
             <div className="text-ens-grey2 flex flex-1 items-center justify-end gap-2 sm:hidden">
-                <SearchButton
-                    variant="close"
-                    className="hover:bg-ens-grey2/20 interest-within:flex hidden items-center rounded-full p-2"
+                <button
+                    onClick={(event) => {
+                        setSearchExpanded(!searchExpanded);
+                    }}
+                    className={
+                        'hover:bg-ens-grey2/20 flex items-center rounded-full p-2'
+                    }
+                    onKeyDown={() => {}}
+                    aria-expanded={searchExpanded}
                 >
-                    <CrossSVG />
-                </SearchButton>
-                <SearchButton
-                    variant="open"
-                    className="hover:bg-ens-grey2/20 interest-within:hidden flex items-center rounded-full p-2"
-                >
-                    <MagnifyingGlassSVG />
-                </SearchButton>
+                    {searchExpanded ? <CrossSVG /> : <MagnifyingGlassSVG />}
+                </button>
             </div>
         </div>
     );

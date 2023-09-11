@@ -1,15 +1,21 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
 import { AutoCloseSearch } from './AutoClose';
 import { KeyboardNavigation } from './KeyboardNavigation';
 import { SearchResults } from './SearchResults';
 
-export const SearchBar = () => {
+export const SearchBar = ({ shouldFocus }: { shouldFocus: boolean }) => {
     const [query, setQuery] = useState('');
     const reference = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (reference.current && shouldFocus) {
+            reference.current.focus();
+        }
+    }, [shouldFocus]);
 
     return (
         <div className="relative w-full sm:static sm:w-fit lg:relative">
