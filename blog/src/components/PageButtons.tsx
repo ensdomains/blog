@@ -39,6 +39,10 @@ export const PageButtons = ({
     hrefPrefix = '',
     ...properties
 }: Properties) => {
+    if (total <= 1) {
+        return;
+    }
+
     const maxPerSide = Math.floor(max / 2);
     const start = Math.max(
         Math.min(Math.max(current - maxPerSide, 1), total - max + 1),
