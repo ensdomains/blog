@@ -19,6 +19,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         {children}
                     </div>
                 </div>
+                <script
+                    defer
+                    data-domain="blog.ens.domains"
+                    src="https://plausible.io/js/script.js"
+                ></script>
             </body>
         </html>
     );
