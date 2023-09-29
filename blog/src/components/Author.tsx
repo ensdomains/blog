@@ -99,11 +99,11 @@ export const Author: FC<{
 
                     {name.endsWith('.eth') && (
                         <Link
-                            href={'https://' + name + '.link'}
+                            href={'https://ens.app/' + name}
                             className="text-ens-blue z-10 overflow-x-hidden text-ellipsis hover:opacity-90"
                             target="_blank"
                         >
-                            {name + '.link'}
+                            View Profile
                         </Link>
                     )}
                 </div>
