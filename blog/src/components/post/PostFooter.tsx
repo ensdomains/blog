@@ -1,13 +1,12 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import clsx from 'clsx';
-import Image from 'next/image';
 import { FaFacebookF, FaLinkedin } from 'react-icons/fa';
 
 import { BlogPostMetadata } from '@/types/BlogPostMetadata';
 
-import xLogo from '../../../public/icons/x.svg';
 import { Author } from '../Author';
 import { BigTag } from '../tags/BigTag';
+import { XIcon } from '../XIcon';
 
 export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
     return (
@@ -29,7 +28,7 @@ export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
                         rel="noopener noreferrer"
                         className="flex w-5 items-center"
                     >
-                        <Image src={xLogo} alt="X logo" />
+                        <XIcon />
                     </a>
                     <a
                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(

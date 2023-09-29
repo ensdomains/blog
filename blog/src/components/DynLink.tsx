@@ -1,9 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import { FiExternalLink, FiMail, FiYoutube } from 'react-icons/fi';
 
-import xLogo from '../../public/icons/x.svg';
+import { XIcon } from './XIcon';
 
 export const DynLink: FC<{ href: string }> = ({ href, ...properties }) => {
     const isExternal = href.startsWith('http');
@@ -23,9 +22,7 @@ export const DynLink: FC<{ href: string }> = ({ href, ...properties }) => {
         <span className="text-ens-blue not-prose m-0 gap-1 p-0 hover:underline">
             <span className="inline-flex pr-0.5 text-xs">
                 {isYoutube && <FiYoutube />}
-                {isTwitter && (
-                    <Image src={xLogo} alt="X" className="block h-3 w-3" />
-                )}
+                {isTwitter && <XIcon className="block h-3 w-3" />}
                 {isEmail && <FiMail />}
             </span>
             <Link
