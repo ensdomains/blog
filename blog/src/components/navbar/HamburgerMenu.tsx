@@ -1,8 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import { FaDiscord, FaYoutube } from 'react-icons/fa';
-import { FiGithub, FiMessageCircle, FiTwitter } from 'react-icons/fi';
+import { FiGithub, FiMessageCircle } from 'react-icons/fi';
 
+import xLogo from '../../../public/icons/x.svg';
 import { CrossSVG, MenuSVG } from '../ClientIcons';
 
 const links = [
@@ -13,7 +15,10 @@ const links = [
 ];
 
 const socials = [
-    { icon: <FiTwitter />, to: 'https://twitter.com/ensdomains' },
+    {
+        icon: <Image src={xLogo} className="w-5" alt="text-neutral-400" />,
+        to: 'https://twitter.com/ensdomains',
+    },
     { icon: <FiGithub />, to: 'https://github.com/ensdomains' },
     { icon: <FaDiscord />, to: 'https://chat.ens.domains' },
     {
