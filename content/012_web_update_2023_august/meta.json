@@ -4,5 +4,6 @@
     "description": "A brief overview of the changes in August 2023",
     "date": "2023-09-07",
     "tags": ["web_update"],
-    "authors": ["leontalbert.eth", "taytems.eth"]
+    "authors": ["leontalbert.eth", "taytems.eth"],
+    "draft": true
 }
