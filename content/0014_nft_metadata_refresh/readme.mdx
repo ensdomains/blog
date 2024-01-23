@@ -1,0 +1,79 @@
+# Major Refresh of NFT Images & Metadata for ENS Names
+
+We’re pleased to announce we’ve released a new metadata service for [ENS names](https://ens.domains/) with a major refresh of the NFT images and metadata.
+
+This allows a much wider range of data to be displayed, including enabling the user to have some control over it for their name, with more improvements planned for the future. This also allows the community to have input on the NFT metadata for ENS names for the first time, and we want to hear from you!
+
+## A Brief History
+
+ENS launched May 4, 2017, before both Curio Cards (May 9, 2017) and CryptoPunks (June 23, 2017). ([Check here to see if your .ETH name is “pre-Punks.”](https://medium.com/the-ethereum-name-service/do-you-have-an-og-ens-name-heres-a-new-tool-to-check-2bbe97900ce2))
+
+ERC-721 wouldn’t be released until later that year. ENS names were always by definition NFTs, but originally didn’t follow an NFT standard because none existed.
+
+In May 2019, ENS had a major upgrade, and among the new features was all .ETH names were made ERC-721 compatible NFTs. NFTs were still a niche thing and few wallets or services displayed them. The ENS team thought domain names didn’t need an image, since, unlike an NFT avatar where the image is the main thing, whether or not an ENS name has an NFT image has no effect on its function. So we locked away control of the NFT metadata. This was a mistake in hindsight but wasn’t obvious at the time.
+
+But early NFT services like OpenSea needed some way to visually display ENS names. So OpenSea created their own metadata and images for .ETH names — the familiar multi-colored images with the name in the middle.
+
+![](https://cdn-images-1.medium.com/max/800/1*F1rRWItlKE-MWu7qkR8XTQ.png)
+
+These images that OpenSea created as placeholders for their own website also have showed up in wallets and other services since most grab their NFT metadata from the OpenSea API.
+
+In the last year or so, the importance of visually seeing your NFTs in your wallet and in services like OpenSea has increased dramatically. If you can’t see it in your collection, it feels like it doesn’t exist! This means the metadata for ENS names is in fact very important. Again, seems obvious in hindsight, but wasn’t in early 2019.
+
+## New Metadata Service
+
+So we built EMS, the [ENS Metadata Service](https://github.com/ensdomains/ens-metadata-service). OpenSea has switched to using this metadata for ENS names and is in the process of refreshing the metadata for all ENS names as of this writing.
+
+_Note that this update has no effect on the ownership of names or their function in ENS. The core functions of ENS remain untouched and decentralized._
+
+If your name hasn’t refreshed on OpenSea yet and you can’t wait to see the new design for it, feel free to click the “Refresh metadata” button on the page for your name on OpenSea, wait a few minutes, then refresh the page.
+
+We encourage other services to draw directly from our metadata service as well.
+
+This new metadata service accomplishes several important things:
+
+- **Puts the core ENS team and community in control of the metadata for ENS names for the first time** (see the “New Ideas” section below on how to suggest improvements)
+- Refresh of the default image for .ETH names
+  ![](https://cdn-images-1.medium.com/max/1200/1*SV9wAaslu-wCL8ZJuKkVew.jpeg)
+
+- If you have an avatar set for your ENS name, the avatar will replace the gradient as the background. This shows how your ENS name isn’t just any NFT but is your cross-platform web3 username and profile. [(Step-by-Step Guide to Setting an NFT as your ENS Profile Avatar)](https://support.ens.domains/en/articles/7883271-how-to-set-an-avatar)
+  ![](https://cdn-images-1.medium.com/max/800/1*_xkFsem8HJfLIVsk_6LaTw.png)
+
+- Emoji support in the NFT image (finally!). ENS names have always supported emojis, but the old images didn’t display them correctly.
+  ![](https://cdn-images-1.medium.com/max/800/1*7p2NkQVpgdQJp4yY3WZ_Mg.png)
+
+- Showing other data about the ENS name in the NFT image. For example, non-normalized names will have a red background gradient and say that they are invalid to make it more difficult for people to be tricked. With our upcoming L2 options for records and subdomains, the NFT will show if the name is pointing to an L2 and which one.
+
+![](https://cdn-images-1.medium.com/max/800/1*IbRmyuxbgVUpG9lidSntig.png)
+This shows an inval
+
+![](https://cdn-images-1.medium.com/max/800/1*4bj3w2QMmmUaQYbGVwwsNA.png)
+
+## The Future
+
+We will be releasing an upgrade to ENS names soon we call the “[wrapper](https://github.com/ensdomains/name-wrapper)”. All newly created ENS names — whether they be .ETH 2LDs, subdomains, or DNS names imported into ENS — will be wrapped by default (with an opt-out available for advanced users). Owners of pre-wrapper names will be encouraged to upgrade their names (will require a transaction with gas unfortunately), but upgrading will always be optional and your name will still work just fine.
+
+The wrapper will accomplish several important things:
+
+- It will upgrade ENS names to the ERC-1155 NFT standard
+- The NFT metadata fields won’t be locked and instead will point to the ENS metadata service. This means no more relying on OpenSea or other services to have bespoke support for the ENS metadata service; it will work just like normal NFTs.
+- _All ENS names — whether they be .ETH names, subdomains, and DNS names imported to ENS — will be NFTs in the same NFT collection and show up on OpenSea, wallets, and other services._ (Currently, only .ETH names follow an NFT standard and show up in the ENS NFT collection.)
+
+The wrapper will also add better functionality around the creation and management of subdomains, but that’s beyond the scope of this blog post.
+
+We’re already working on improving the warnings in the metadata about potentially confusing names to make them more targeted.
+
+**We also would like to eventually provide an on-chain, decentralized metadata option in the future.** This new metadata service is just a first step in improving the metadata for ENS names in general.
+
+## New Ideas
+
+With the launch of this new metadata service, if the community wants the metadata refreshed, improved, etc, we now have a way to do that.
+
+Ideas we’ve had or heard from community members that would be possible to implement in the future include:
+
+- allowing users to customize the colors of the background gradient
+- allowing users to set an image that completely replaces the NFT image (with no overlay of the ENS logo and name), which could enable ENS subdomains to be used to issue NFT artwork
+- signaling in some way a name is “pre-Punks”
+- marking 3 and 4 character .ETH names in some way given their rarity and higher price
+
+We want to hear from you on this. If you have ideas for ways the image or metadata can be improved, please share it in our [Discord](https://chat.ens.domains/).
