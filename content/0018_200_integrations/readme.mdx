@@ -1,0 +1,42 @@
+We’re pleased to announce the [Ethereum Name Service](https://ens.domains/) (ENS) is now integrated in more than 200 services!
+
+You can see the full list of integrations in the “[ENS Ecosystem](https://ens.domains/#home-ecosystem)” section of [our website](https://ens.domains/). There are also screenshots of that section as of this writing at the end of this post.
+
+![](https://cdn-images-1.medium.com/max/800/1*P9WQ5F0ubT5PMGq9bnXvRg.png)
+
+For ENS to be the most useful for users, it needs to be ubiquitous, and this is a big step toward that goal. We are grateful to the ecosystem for the support. A wide range of kinds of services are represented in these integrations, from wallets and browsers to defi dapps, NFT markets, and even DNS registrars.
+
+ENS is the leading blockchain-based Internet naming protocol. It supports [all the top blockchains for payments](https://medium.com/the-ethereum-name-service/ens-now-supports-109-blockchain-addresses-5307ce5d2106), [decentralized websites](https://medium.com/the-ethereum-name-service/all-the-ways-you-can-surf-the-decentralized-web-today-bf8e7a42fa27), personal profile info, and even [custom records](https://medium.com/the-ethereum-name-service/new-custom-text-records-means-every-project-can-have-its-own-ens-record-a68022bb8f86). The top level domain .ETH is native to ENS, but you can also import traditional DNS domain names you already have (currently works with .XYZ and a few others, with the rest of the DNS namespace coming soon).
+
+2020 was [a big year for ENS](https://medium.com/the-ethereum-name-service/2020-retrospective-for-ens-7c5364142560), and we have big plans for the future: [using L2s to scale](https://twitter.com/ensdomains/status/1379831561084878849), [full DNS namespace integration](/post/full-dns-namespace-integration-to-ens-now-on-mainnets), a redesign of the Manager App, and more.
+
+## Your dapp isn’t finished without ENS
+
+We still need more integrations! The more services that have ENS integrated, the more valuable it is for all services to have ENS, and more useful it is for users. ENS is not a nice-to-have, it’s basic UX.
+
+If your service doesn’t have ENS yet, [here’s our docs](https://docs.ens.domains/). ENS is in [all the top libraries](https://docs.ens.domains/dapp-developer-guide/ens-libraries), so integrating is pretty simple. Feel free to ask questions in [our Discord](https://chat.ens.domains/).
+
+There are many ways to utilize ENS in your service to improve UX, but here are the main ways:
+
+- **Forward Resolution**: In any place where a user needs to paste in a cryptocurrency address (remember we support [all the top cryptocurrency addresses](https://github.com/ensdomains/address-encoder)), also allow them to type in an ENS name.
+  ![](https://cdn-images-1.medium.com/max/800/1*g26NaxBYgh1StF4nB15hXg.png)
+  Forward resolution on myetherwallet.com
+
+- **Usernames**: When a user logs into a dapp with their wallet, the dapp has their Ethereum address. You can do what’s called reverse resolution and see if there’s an ENS name associated with that Ethereum address, and then display the ENS name instead of the Ethereum address.
+  ![](https://cdn-images-1.medium.com/max/800/1*-ffBcCxUBDcm92k_A9tKPQ.png)
+  Reverse resolution on app.uniswap.org
+
+- **Ease of reading**: Does your service rank Ethereum users or show the activity of Ethereum addresses? Use reverse resolution there too to make it more readable.
+  ![](https://cdn-images-1.medium.com/max/800/1*wp4iJIFe6CvUJ0h_aaLFwg.png)
+  Voting on snapshot.org
+
+- **Dweb**: Want to decentralize your frontend? You can [host it on IPFS and point at it with ENS](https://medium.com/the-ethereum-name-service/cloudflare-and-fleek-make-ens-ipfs-site-deployment-as-easy-as-ever-262c990a7514). Your users have a [wide range of ways to access such websites](https://medium.com/the-ethereum-name-service/all-the-ways-you-can-surf-the-decentralized-web-today-bf8e7a42fa27), the easiest being just appending “.LINK” to the end, e.g. [almonit.eth.link](https://almonit.eth.link/#/).
+  ![](https://cdn-images-1.medium.com/max/800/1*fXZSv8KqzfD4Jzrn7emtvg.png)
+
+## Current Integrations
+
+Below are screenshots of the “[ENS Ecosystem](https://ens.domains/#home-ecosystem)” section on our website as of this writing. On [our website](https://ens.domains/#home-ecosystem), each icon is clickable to that project’s website.
+
+![](https://cdn-images-1.medium.com/max/800/1*-tj2aD-4BX31Ce_gYIaV2Q.png)
+![](https://cdn-images-1.medium.com/max/800/1*BF3FsqYXGtQgcr2kTUr1mQ.png)
+![](https://cdn-images-1.medium.com/max/800/1*i7WVrE5SC9NWcJXpJNy1qQ.png)
