@@ -1,0 +1,23 @@
+Starting today, ENS can connect with any DNS domain<sup>1</sup> for free.
+
+## History
+
+ENS has always strived to support the idea of global namespaces. For years, DNS names could be imported into ENS without a protocol fee, but incurred hefty Etherem gas fees, in some cases reaching 0.5 ETH.
+
+The reason behind the high fee is that a large amount of data (DNSSEC proof) needed to be saved to the Ethereum blockchain in order to prove ownership of a domain. While this still remains an option for people interested, interacting with the blockchain is no longer a required step in crypto-enabling a DNS name.
+
+## How It Works
+
+Gasless DNSSEC is powered by [CCIP Read (EIP-3668)](https://eips.ethereum.org/EIPS/eip-3668), an application-level standard for Ethereum smart contracts to fetch and verify offchain data. It was authored by Nick Johnson, the Founder and Lead Developer of ENS Labs.
+
+In [EP5.1](https://www.tally.xyz/gov/ens/proposal/4208408830555077285685632645423534041634535116286721240943655761928631543220), ENS DAO approved the activation of a new smart contract which implements CCIP Read at the DNS TLD level. Having CCIP Read at the TLD level means that DNS records can be verified on-demand via an offchain oracle. The result is a free way to use DNS domains in the ENS ecosystem.
+
+## Looking Ahead
+
+ENS, much like DNS, is a public good and strives to be a core part of internet infrastructure. In order for ENS to succeed, it must integrate with existing infrastructure rather than aim to replace it. Today’s announcement aims to be a step in that direction.
+
+We look forward to putting this in front of more DNS domain owners and bringing them into the ENS ecosystem.
+
+---
+
+<sup>1</sup> Any DNS name where the TLD supports [DNSSEC](https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en).
