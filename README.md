@@ -8,7 +8,7 @@ The ENS blog is available at [blog.ens.domains](https://blog.ens.domains/?ref=en
 
 ## 📖 Contributing
 
-At this point in time the blog is demo-content. All content is written in mdx, and [markdown files can be found here](./content).
+All content is written in mdx, and [markdown files can be found here](./content).
 
 ## 📄 License
 
