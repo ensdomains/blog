@@ -5,6 +5,7 @@ import { FaFacebookF, FaLinkedin } from 'react-icons/fa';
 
 import { BlogPostMetadata } from '@/types/BlogPostMetadata';
 
+import warpcastLogo from '../../../public/icons/warpcast.svg';
 import xLogo from '../../../public/icons/x.svg';
 import { Author } from '../Author';
 import { BigTag } from '../tags/BigTag';
@@ -30,6 +31,18 @@ export const PostFooter = ({ post }: { post: BlogPostMetadata }) => {
                         className="flex w-5 items-center"
                     >
                         <Image src={xLogo} alt="X logo" />
+                    </a>
+                    <a
+                        href={`https://warpcast.com/~/compose?text=${encodeURIComponent(
+                            post.title + ' | ENS Blog'
+                        )}&embeds[]=${
+                            'https://blog.ens.domains/post/' + post.slug
+                        }`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-5 items-center"
+                    >
+                        <Image src={warpcastLogo} alt="Warpcast logo" />
                     </a>
                     <a
                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
