@@ -4,8 +4,8 @@
 import Link from 'next/link';
 import { FC } from 'react';
 import { FaDiscord, FaYoutube } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { FiGithub, FiMessageCircle } from 'react-icons/fi';
-import { RiTwitterXFill } from 'react-icons/ri';
 
 import { CrossSVG, MenuSVG } from '../ClientIcons';
 
@@ -18,7 +18,7 @@ const links = [
 
 const socials = [
     {
-        icon: <RiTwitterXFill />,
+        icon: <FaXTwitter />,
         to: 'https://twitter.com/ensdomains',
     },
     { icon: <FiGithub />, to: 'https://github.com/ensdomains' },
