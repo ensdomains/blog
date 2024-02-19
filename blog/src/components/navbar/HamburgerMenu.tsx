@@ -1,10 +1,12 @@
-import Image from 'next/image';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+'use client';
 import Link from 'next/link';
 import { FC } from 'react';
 import { FaDiscord, FaYoutube } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { FiGithub, FiMessageCircle } from 'react-icons/fi';
 
-import xLogo from '../../../public/icons/x.svg';
 import { CrossSVG, MenuSVG } from '../ClientIcons';
 
 const links = [
@@ -16,7 +18,7 @@ const links = [
 
 const socials = [
     {
-        icon: <Image src={xLogo} className="w-5" alt="text-neutral-400" />,
+        icon: <FaXTwitter />,
         to: 'https://twitter.com/ensdomains',
     },
     { icon: <FiGithub />, to: 'https://github.com/ensdomains' },
@@ -68,9 +70,24 @@ export const HamburgerMenu = () => {
     return (
         <div className="group">
             <div className="text-ens-grey2 fill-ens-grey2">
-                <button className="hover:bg-ens-grey2/20 flex items-center rounded-full p-2">
-                    <CrossSVG className="no-hover:group-hover:block hidden group-focus-within:block" />
-                    <MenuSVG className="no-hover:group-hover:hidden group-focus-within:hidden" />
+                <button
+                    id="button-hamburger"
+                    className="hover:bg-ens-grey2/20 flex items-center rounded-full p-2"
+                >
+                    <div
+                        onClick={() => {
+                            const activeElement =
+                                document.activeElement as HTMLElement;
+
+                            activeElement.blur();
+                        }}
+                        className="no-hover:group-hover:block hidden group-focus-within:block"
+                    >
+                        <CrossSVG className="" />
+                    </div>
+                    <div className="no-hover:group-hover:hidden group-focus-within:hidden">
+                        <MenuSVG className="" />
+                    </div>
                 </button>
             </div>
             <div className="card no-hover:group-hover:block absolute left-0 top-[4.8rem] hidden w-full group-focus-within:block sm:left-[unset] sm:w-80">
