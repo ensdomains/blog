@@ -12,6 +12,13 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
+            <head>
+                <link
+                    rel="alternative"
+                    type="application/atom+xml"
+                    href="/rss.xml"
+                />
+            </head>
             <body>
                 <div className="">
                     <Navbar />
