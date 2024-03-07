@@ -1,24 +1,23 @@
 import './globals.css';
 
+import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 import { Navbar } from '@/components/navbar/Navbar';
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'ENS Blog',
     description: 'The official blog of the Ethereum Name Service',
+    alternates: {
+        types: {
+            'application/atom+xml': '/rss.xml',
+        },
+    },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
-            <head>
-                <link
-                    rel="alternative"
-                    type="application/atom+xml"
-                    href="/rss.xml"
-                />
-            </head>
             <body>
                 <div className="">
                     <Navbar />
