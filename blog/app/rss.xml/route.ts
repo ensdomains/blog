@@ -2,6 +2,7 @@ import { covers } from 'assets/assets';
 import { Feed } from 'feed';
 
 import { getPostsMetadata } from '@/lib/get_posts';
+
 export const GET = async (request: Request) => {
     const feed = new Feed({
         title: 'ENS Blog',
