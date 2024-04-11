@@ -53,7 +53,7 @@ export const ENSAvatar: FC<{ name: string; size?: Size }> = async ({
                             ? 'h-6 w-6'
                             : // eslint-disable-next-line unicorn/no-nested-ternary
                             size === 'medium'
-                            ? 'h-8 w-6'
+                            ? 'h-8 w-8'
                             : 'h-12 w-12'
                     )}
                     style={{
