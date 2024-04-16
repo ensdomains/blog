@@ -101,15 +101,20 @@ const page = async ({ params }: PageProperties) => {
     const { default: PostContent, readingTime } = (await import(
         `../../../../content/${post.file}/readme.mdx`
     )) as {
-        default: (properties: MDXProps) => JSX.Element;
+        default: (_properties: MDXProps) => JSX.Element;
         readingTime: string;
     };
+
+    const postImageData = await covers[post.file as keyof typeof covers]?.[
+        'cover-thumb'
+    ];
+    const postImage = postImageData?.default?.src;
 
     const schema: WithContext<Article> = {
         '@context': 'https://schema.org',
         '@type': 'Article',
         headline: post.title,
-        image: post.cover,
+        image: postImage,
         datePublished: new Date(post.date).toISOString(),
         author: post.authors?.map((author) => ({
             '@type': 'Person',
