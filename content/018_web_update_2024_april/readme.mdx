@@ -118,47 +118,48 @@ If you'd like a separate write-up on our testing infrastructure (or have any oth
 
 # Minor Updates
 
-|Topic|Update  |
-| --------------- | -- |
-| Avatar image    | Improved avatar image load times.  |
-| Browser wallet  | We enhanced handling of users with multiple browser wallets installed. We also added support for Phantom wallet.  |
-| Earni.fi        | [Earni.fi](http://earni.fi/) has become Bankless with copy and link updates made.  |
-| Language        | Chinese translation has been updated (thank you liubb:-)).  |
-| Links           | We replaced links to medium with links to mirror on ens.domains and app.ens.domains.  |
-| Load time       | Upgraded faster subname list view load time. We also reduced the ENS app bundle size. |
-| Name expiry     | We created better warnings around extending the expiration date of a name the user does not own. |
-| Payment         | ETH is now the default payment method during the registration process. |
-| Records         | More records have been loaded, by default, on the profile page.  |
-| Testnest tokens | We added Sepolia Faucet. |
-| Testnet support | Goerli is now deprecated, Sepolia and Holesky have been deployed in ENS contracts and the manager app support.  |
-| Transactions    | All multi-step transactions will no longer rely on localStorage. This is helpful for users who use private browsing sessions or otherwise disable localStorage.
-| Twitter         | We replaced the bird icon with 'X'. |
+| Topic           | Update                                                                                                                                                          |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Avatar image    | Improved avatar image load times.                                                                                                                               |
+| Browser wallet  | We enhanced handling of users with multiple browser wallets installed. We also added support for Phantom wallet.                                                |
+| Earni.fi        | [Earni.fi](http://earni.fi/) has become Bankless with copy and link updates made.                                                                               |
+| Language        | Chinese translation has been updated (thank you liubb:-)).                                                                                                      |
+| Links           | We replaced links to medium with links to mirror on ens.domains and app.ens.domains.                                                                            |
+| Load time       | Upgraded faster subname list view load time. We also reduced the ENS app bundle size.                                                                           |
+| Name expiry     | We created better warnings around extending the expiration date of a name the user does not own.                                                                |
+| Payment         | ETH is now the default payment method during the registration process.                                                                                          |
+| Records         | More records have been loaded, by default, on the profile page.                                                                                                 |
+| Testnest tokens | We added Sepolia Faucet.                                                                                                                                        |
+| Testnet support | Goerli is now deprecated, Sepolia and Holesky have been deployed in ENS contracts and the manager app support.                                                  |
+| Transactions    | All multi-step transactions will no longer rely on localStorage. This is helpful for users who use private browsing sessions or otherwise disable localStorage. |
+| Twitter         | We replaced the bird icon with 'X'.                                                                                                                             |
 
 ## Bug Fixes
 
-| Topic          | Update |
-| -------------- | ------ |
-| Avatar image   | Fixed issues with avatars uploading and displaying correctly. Avatar upload was failing for subnames and we corrected the bug.  |
-| Browser        | Resolved issue preventing NFT avatar images displaying on Firefox.  |
-| Coins          | Some coins were not being validated and this bug has been fixed.  |
-| Expirations    | The expiration on 'My Names' list was displayed as `NaN` and has been resolved.  |
-| Failures       | Identified failures from transactions found via the etherscan API have been corrected.  |
-| GitHub         | Fixed validation on GitHub record text input.  |
-| Gnosis Safe    | Resolved bug preventing Gnosis Safe users from making transactions and prevent subnames from being extended from the 'My Names' list as it's not yet supported .  |
-|Labels          | We no longer show the expiration label for names that don't have an expiration date during the send name flow. |
-| Mainnet        | An unsupported network page now navigates back to Mainnet. |
-| Message        | "Extending this name will not give you ownership of it" message displayed in the wrong screen. We've corrected this bug. |
-| Name expiry    | Removed the extend and reminder buttons on the Ownership tab of expired names.  |
-| Names          | Support for names with "#" in them was added. |
-| Registration   | We've ensured registration steps respond to a change in chainId correctly. |
-| Search         | We made the search function case-insensitive.  |
-| TLDs           | We fixed the ENS app displaying some supported TLDs as unsupported. |
-| Wallet connect | The Wallet connect on delegate.ens.domains was not working. All fixed. |
-| Wallets        | ChainId was not being cleared on disconnect and has been improved. |
+| Topic          | Update                                                                                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Avatar image   | Fixed issues with avatars uploading and displaying correctly. Avatar upload was failing for subnames and we corrected the bug.                                   |
+| Browser        | Resolved issue preventing NFT avatar images displaying on Firefox.                                                                                               |
+| Coins          | Some coins were not being validated and this bug has been fixed.                                                                                                 |
+| Expirations    | The expiration on 'My Names' list was displayed as `NaN` and has been resolved.                                                                                  |
+| Failures       | Identified failures from transactions found via the etherscan API have been corrected.                                                                           |
+| GitHub         | Fixed validation on GitHub record text input.                                                                                                                    |
+| Gnosis Safe    | Resolved bug preventing Gnosis Safe users from making transactions and prevent subnames from being extended from the 'My Names' list as it's not yet supported . |
+| Labels         | We no longer show the expiration label for names that don't have an expiration date during the send name flow.                                                   |
+| Mainnet        | An unsupported network page now navigates back to Mainnet.                                                                                                       |
+| Message        | "Extending this name will not give you ownership of it" message displayed in the wrong screen. We've corrected this bug.                                         |
+| Name expiry    | Removed the extend and reminder buttons on the Ownership tab of expired names.                                                                                   |
+| Names          | Support for names with "#" in them was added.                                                                                                                    |
+| Registration   | We've ensured registration steps respond to a change in chainId correctly.                                                                                       |
+| Search         | We made the search function case-insensitive.                                                                                                                    |
+| TLDs           | We fixed the ENS app displaying some supported TLDs as unsupported.                                                                                              |
+| Wallet connect | The Wallet connect on delegate.ens.domains was not working. All fixed.                                                                                           |
+| Wallets        | ChainId was not being cleared on disconnect and has been improved.                                                                                               |
 
 ## Small Dev Updates
 
 - Viem, Wagmi, React Query and RainbowKit have been updated to the latest versions.
 - Migrated from Jest to Vitest.
 - Subgraph label validation.
-- Updated to the latest version of The Graph: [content-hash](https://www.npmjs.com/package/@ensdomains/content-hash) rewrite in typescript.
+- Updated to the latest version of The Graph.
+- [content-hash](https://www.npmjs.com/package/@ensdomains/content-hash) rewrite in typescript.
