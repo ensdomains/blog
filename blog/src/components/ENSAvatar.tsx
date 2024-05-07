@@ -19,8 +19,8 @@ export const ENSAvatar: FC<{ name: string; size?: Size }> = async ({
     name,
     size = 'medium',
 }) => {
-    let avatar = avatars[name as keyof typeof avatars]
-        ? await avatars[name as keyof typeof avatars].avatar.then(
+    let avatar = avatars[name as keyof typeof avatars]?.['avatar']
+        ? await avatars[name as keyof typeof avatars]['avatar'].then(
               (imported) => imported.default.src
           )
         : undefined;
