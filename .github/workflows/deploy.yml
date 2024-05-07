@@ -36,13 +36,24 @@ jobs:
           echo "::set-output name=tag_name::${TAG_NAME}"
           echo "::set-output name=deploy_tag_name::deploy-${TAG_NAME}"
 
-      - name: Edgeserver Upload
-        uses: lvkdotsh/edgeserver-action@v0.1.2-pre.4
+      - name: Cloudflare Pages Upload
+        uses: cloudflare/pages-action@v1
         with:
-          app_id: "207907816382402560"
-          server: https://api.edgeserver.io
-          token: ${{ secrets.SIGNAL_TOKEN }} # ${{ secrets.EDGESERVER_TOKEN }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ens-docs
+          branch: master
           directory: blog/out
+          # gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
+
+      # - name: Edgeserver Upload
+      #   uses: lvkdotsh/edgeserver-action@v0.1.2-pre.4
+      #   with:
+      #     app_id: "207907816382402560"
+      #     server: https://api.edgeserver.io
+      #     token: ${{ secrets.SIGNAL_TOKEN }} # ${{ secrets.EDGESERVER_TOKEN }}
+      #     directory: blog/out
 
       - name: Read search.json
         id: read_search_json
