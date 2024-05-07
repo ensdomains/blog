@@ -41,7 +41,7 @@ export const Author: FC<{
             console.error('Enstate silently errored', response.body);
         }
 
-        avatar = data?.avatar;
+        avatar = data?.['avatar'];
     }
 
     if (!avatar) {

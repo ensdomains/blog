@@ -34,7 +34,7 @@ export const SearchHit: FC<{ hit: SearchEntry }> = ({ hit }) => {
                         {data?.authors?.map((author) => (
                             <img
                                 src={
-                                    data?.assets.avatars[author]?.avatar ||
+                                    data?.assets.avatars[author]?.['avatar'] ||
                                     `https://metadata.ens.domains/mainnet/avatar/${author}`
                                 }
                                 alt={author}
