@@ -41,7 +41,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ens-docs
+          projectName: ens-blog
           branch: master
           directory: blog/out
           # gitHubToken: ${{ secrets.GITHUB_TOKEN }}
