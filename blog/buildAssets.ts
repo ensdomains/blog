@@ -127,7 +127,7 @@ const getCoverImages = async () => {
 
         // Read meta.json and check for cover
         const meta = await import(`../content/${post}/meta.json`).catch(
-            () => {}
+            () => { }
         );
 
         if (meta?.cover) {
@@ -180,9 +180,8 @@ const handleCoverImages = async () => {
 
             // eslint-disable-next-line sonarjs/no-nested-template-literals
             const key = `${prefix || ''}cover${suffix ? `-${suffix}` : ''}`;
-            const output = `${ASSETS_FOLDER}/${cover.post}/${key}.${
-                format || 'webp'
-            }`;
+            const output = `${ASSETS_FOLDER}/${cover.post}/${key}.${format || 'webp'
+                }`;
 
             console.log(`Converting image to ${output}`);
 
@@ -190,9 +189,8 @@ const handleCoverImages = async () => {
 
             await sharp(cover.data).resize(width, height).toFile(output);
 
-            result += `        '${key}': import('./${cover.post}/${key}.${
-                format || 'webp'
-            }') as Promise<{default: StaticImageData}>,\n`;
+            result += `        '${key}': import('./${cover.post}/${key}.${format || 'webp'
+                }') as Promise<{default: StaticImageData}>,\n`;
         }
 
         result += '    },\n';
@@ -228,7 +226,7 @@ const getAvatarImages = async () => {
         // Read meta.json and check for cover
         const meta: BlogPostMetadata = await import(
             `../content/${post}/meta.json`
-        ).catch(() => {});
+        ).catch(() => { });
 
         if (!meta) continue;
 
@@ -307,24 +305,28 @@ const handleAvatarImages = async () => {
 
             // eslint-disable-next-line sonarjs/no-nested-template-literals
             const key = `${prefix || ''}avatar${suffix ? `-${suffix}` : ''}`;
-            const output = `${ASSETS_FOLDER}/${author}/${key}.${
-                format || 'webp'
-            }`;
+            const output = `${ASSETS_FOLDER}/${author}/${key}.${format || 'webp'
+                }`;
 
             console.log(`Converting image to ${output}`);
 
             await makeDirecectoryIfNotExists(`${ASSETS_FOLDER}/${author}`);
 
-            await sharp(avatar, {
-                pages: -1,
-                animated: true,
-            })
-                .resize(width, height)
-                .toFile(output);
+            try {
+                await sharp(avatar, {
+                    pages: -1,
+                    animated: true,
+                })
+                    .resize(width, height)
+                    .toFile(output);
+            } catch (error) {
+                console.log('Failed to convert image', error);
+                continue;
+            }
 
-            result += `        '${key}': import('./${author}/${key}.${
-                format || 'webp'
-            }') as Promise<{default: StaticImageData}>,\n`;
+
+            result += `        '${key}': import('./${author}/${key}.${format || 'webp'
+                }') as Promise<{default: StaticImageData}>,\n`;
         }
 
         result += '    },\n';

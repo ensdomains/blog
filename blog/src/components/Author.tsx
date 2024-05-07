@@ -25,8 +25,8 @@ export const Author: FC<{
 }> = async ({ name, socials = true, size = 'normal', link = false }) => {
     const author_metadata = await getAuthorMetadata(name);
 
-    let avatar = avatars[name as keyof typeof avatars]
-        ? await avatars[name as keyof typeof avatars].avatar.then(
+    let avatar = avatars[name as keyof typeof avatars]?.['avatar']
+        ? await avatars[name as keyof typeof avatars]['avatar'].then(
               (imported) => imported.default.src
           )
         : undefined;
