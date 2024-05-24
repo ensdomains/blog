@@ -2,10 +2,10 @@
 *.yaml @lucemans
 *.yml @lucemans
 /.github/* @lucemans
-README.md @v3xlabs/core
+README.md @lucemans
 
 ## Frontend
-/blog/* @svemat01 @lucemans @v3xlabs/core
+/blog/* @svemat01 @lucemans
 
 ## Blog Content
-/content/* @zadok7
+/content/* @gskril @Esk3nder
