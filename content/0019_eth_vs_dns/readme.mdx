@@ -1,0 +1,49 @@
+.ETH names and DNS names imported to ENS have many of the same capabilities but also have some important differences.
+
+→ [Step-by-Step Guide to Registering a .ETH Name](https://support.ens.domains/en/articles/7882582-how-to-register)
+
+→ [Step-by-Step Guide to Importing a DNS Domain Name to ENS](https://support.ens.domains/en/articles/7882690-claim-your-dns-name)
+
+Here’s an overview of how they compare.
+
+## Fees
+
+.ETH names have a cost scaled to time registered required by the ENS protocol: $5/year (paid in ETH) for .ETH names that are 5 characters or longer, $160/year for 4 characters, and $640/year for 3 characters (1–2 character .ETH names are not available for registration).
+
+DNS names imported to ENS have no ENS protocol fee at all.
+
+This is because the fees for .ETH names are an anti-squatting mechanism, and DNS names imported to ENS already have a fee on the DNS side. As a non-profit public good, the ENS protocol is optimized for usability, not revenue generation.
+
+## Records
+
+Both .ETH names and DNS names on ENS support the same records.
+
+## Reverse record / Web3 username
+
+Both kinds of names can be used as your portable web3 username by setting it as your reverse record (go to [app.ens.domains](http://app.ens.domains/) > My Account).
+
+## Decentralized Websites
+
+Although both kinds of names support the Content record, most services that support accessing ENS-based decentralized websites only support them for .ETH names. This may change in the future.
+
+## Security
+
+The two kinds of names have different security models.
+
+Because .ETH names are native to ENS, ENS is the only source of truth for who owns a particular one, and no admin powers exist in ENS to take away a user’s .ETH name.
+
+Such admin powers _do_ ultimately exist, however, for DNS names on ENS. Because whoever owns the name on DNS can always claim the corresponding name on ENS, the ultimate security of a DNS name on ENS depends on the security of the name on DNS.
+
+Further, while the [ENS root keyholders](https://ens.domains/about#about-root) have locked the .ETH TLD (so that they no longer control it), they have not done this for any DNS TLDs on ENS. While it is unlikely, this means that it would be possible for the ENS root keyholders to take control of a DNS TLD, and thus any of its 2LDs, on ENS.
+
+## Transferability
+
+Ownership of .ETH names can be transferred easily from one Ethereum account to another simply by sending the name as an NFT.
+
+DNS names on ENS, however, can only be transferred if the DNS name’s TXT record is first changed to the new Ethereum address. This is because the ultimate source of truth for who owns a DNS name on ENS is on DNS.
+
+## NFT standards
+
+All .ETH names are ERC721 compliant NFTs. However, DNS names on ENS do not currently follow any NFT standard and so won’t show up in the NFT section of your wallet.
+
+However, we plan to release a wrapper later this year that will allow users to turn their DNS names on ENS into ERC1155 NFTs (the wrapper will also be available for .ETH names).
