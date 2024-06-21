@@ -41,6 +41,10 @@ export async function GET(_request: NextRequest, { params }: PageProperties) {
 
     if (cover_data) {
         for (const [key, cover] of Object.entries(cover_data)) {
+            if (typeof cover === 'string') {
+                continue;
+            }
+
             const awaitedData = await cover;
 
             data.assets.covers[key] = awaitedData.default.src || data['cover'];
