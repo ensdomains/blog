@@ -5,18 +5,18 @@ on:
     branches: [master]
 
 env:
-  NODE_OPTIONS: "--max_old_space_size=8192"
+  NODE_OPTIONS: '--max_old_space_size=8192'
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -59,7 +59,7 @@ jobs:
         run: |
           SEARCH_JSON=$(cat blog/out/search.json)
           echo "::set-output name=search_json::${SEARCH_JSON}"
-      
+
       - name: Deploy search index
         uses: fjogeleit/http-request-action@v1
         with:
