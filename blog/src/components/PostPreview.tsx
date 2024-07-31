@@ -26,6 +26,10 @@ export const BlogPostPreview = async ({ post, variant }: Properties) => {
               })
         : undefined;
 
+    const potato = Object.keys(covers).includes(post.file)
+        ? covers[post.file as keyof typeof covers]['cover-potato']
+        : undefined;
+
     const { readingTime } = (await import(
         `../../../content/${post.file}/readme.mdx`
     )) as {
@@ -46,8 +50,12 @@ export const BlogPostPreview = async ({ post, variant }: Properties) => {
                 {cover ? (
                     <Image
                         src={cover}
+                        width={1200}
+                        height={600}
                         className="aspect-cover h-full w-full object-cover"
                         alt={post.title}
+                        placeholder="blur"
+                        blurDataURL={potato}
                     />
                 ) : (
                     <img
@@ -59,7 +67,7 @@ export const BlogPostPreview = async ({ post, variant }: Properties) => {
             </span>
             <span
                 className={clsx(
-                    'flex h-full flex-col gap-2 p-5 md:p-6 max-h-[200px] my-auto',
+                    'my-auto flex h-full max-h-[200px] flex-col gap-2 p-5 md:p-6',
                     variant == 'horizontal'
                         ? 'border-t md:border-none'
                         : 'border-t'
