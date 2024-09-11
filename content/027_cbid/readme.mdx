@@ -1,6 +1,6 @@
 ## Executive Summary
 
-In September 2022, Coinbase, a leading cryptocurrency exchange with over 100 million users, implemented a strategic initiative to simplify the complexity of blockchain addresses—a significant hurdle in cryptocurrency adoption. Leveraging Ethereum, ENS (Ethereum Name Service), and EIP-3668 (also known as CCIP-Read), Coinbase developed “cb.id”, an ENS-powered namespace service that converts 42-character Ethereum addresses into human-readable usernames like “jesse.cb.id”. This significantly enhanced user experience and reduced transaction errors and other risks.
+In September 2022, Coinbase, a leading cryptocurrency exchange with over 100 million users, implemented a strategic initiative to simplify the complexity of blockchain addresses—a significant hurdle in cryptocurrency adoption. Leveraging Ethereum, ENS (Ethereum Name Service), and EIP-3668 (also known as CCIP-Read), Coinbase developed "cb.id", an ENS-powered namespace service that converts 42-character Ethereum addresses into human-readable usernames like "jesse.cb.id". This significantly enhanced user experience and reduced transaction errors and other risks.
 
 Key features of the cb.id implementation include:
 
@@ -47,7 +47,7 @@ Coinbase Wallet provides a seamless onboarding experience. Upon downloading it f
 
 Users can search for Wallet profiles by entering the cb.id username, which directs them to the respective profile at profile.coinbase.com/username.eth. Additionally, profiles can be searched using .eth usernames, which are decentralized profiles indexed from the ENS ecosystem.
 
-This demonstrates Coinbase’s commitment to simplifying the user experience, making the offering more compelling to broader retail markets. By enhancing user experience and reducing transaction errors, cb.id usernames play a crucial role in achieving these goals.
+This demonstrates Coinbase's commitment to simplifying the user experience, making the offering more compelling to broader retail markets. By enhancing user experience and reducing transaction errors, cb.id usernames play a crucial role in achieving these goals.
 
 ### High-Level Description of CCIP-Read
 
@@ -84,11 +84,11 @@ Coinbase, recognized as a leader and innovative member of the Ethereum community
 
 ### Distinguishing Offchain and Onchain Names and Their Underlying Technologies
 
-Cb.id usernames represent an offchain solution where resolution and metadata are stored outside the Ethereum blockchain, typically on a centralized server, and accessed using the CCIP-Read protocol (EIP-3668). This method allows for faster data retrieval and scalability; however, it introduces a degree of centralization since the data isn’t stored onchain.
+Cb.id usernames represent an offchain solution where resolution and metadata are stored outside the Ethereum blockchain, typically on a centralized server, and accessed using the CCIP-Read protocol (EIP-3668). This method allows for faster data retrieval and scalability; however, it introduces a degree of centralization since the data isn't stored onchain.
 
 In contrast, base.eth subnames provide an onchain solution, where the names and associated data are stored directly on the blockchain, specifically on Coinbase's Layer 2 Ethereum network, Base. This is made possible by the EVMGateway, which acts like an onchain API, allowing the resolver to instruct the client to fetch data for resolving names on Base, as illustrated in the previous CCIP-Read workflow example. Specifically, when a resolver on a Layer 2 network needs to verify or retrieve offchain data, the CCIP-Read protocol utilizes the EVMGateway to interact with Ethereum Mainnet.
 
-The EVMGateway verifies the data against onchain proofs, ensuring that the resolution process remains secure, decentralized, and verifiable within the broader Ethereum ecosystem, even if the data is stored offchain. In the context of resolving names on Base L2, the resolver interacts with the EVMGateway via the CCIP-Read protocol. The EVMGateway verifies the necessary data against proofs from Ethereum Mainnet, maintaining the integrity and security of the resolution process. This onchain method aligns with blockchain’s core principles of decentralization, offering enhanced security, censorship resistance, and full user control over their identities.
+The EVMGateway verifies the data against onchain proofs, ensuring that the resolution process remains secure, decentralized, and verifiable within the broader Ethereum ecosystem, even if the data is stored offchain. In the context of resolving names on Base L2, the resolver interacts with the EVMGateway via the CCIP-Read protocol. The EVMGateway verifies the necessary data against proofs from Ethereum Mainnet, maintaining the integrity and security of the resolution process. This onchain method aligns with blockchain's core principles of decentralization, offering enhanced security, censorship resistance, and full user control over their identities.
 
 The transition from cb.id to base.eth underscores Coinbase's commitment to these principles, ensuring that user identities are fully integrated and securely managed within the blockchain ecosystem.
 
@@ -112,7 +112,7 @@ Notably, the release of base.eth subnames highlights a strategic pivot towards a
 
 ## Best Practices and Insights
 
-The cb.id implementation demonstrated how businesses could leverage ENS to simplify onchain identity management. Now, with the introduction of onchain subnames via base.eth, it sends a strong signal that adopting ENS should be the first step for any business entering the onchain economy, whether they’re considering launching their own dApp, wallet, or even their own L2 EVM.
+The cb.id implementation demonstrated how businesses could leverage ENS to simplify onchain identity management. Now, with the introduction of onchain subnames via base.eth, it sends a strong signal that adopting ENS should be the first step for any business entering the onchain economy, whether they're considering launching their own dApp, wallet, or even their own L2 EVM.
 
 **Key Insights Based on Successful Integrations:**
 
@@ -123,13 +123,13 @@ The cb.id implementation demonstrated how businesses could leverage ENS to simpl
 - **Technical Documentation:** Make use of the comprehensive documentation and resources offered by ENS Labs to guide implementation, including CCIP-Read documentation, demos, and repositories.
 - **Consider ENS for Identity Management:** ENS should be the identity management solution for businesses venturing into the onchain economy.
 
-As onchain applications and interactions evolve, ENS provides the reliability and flexibility needed to establish a strong presence. The seamless transition from cb.id to base.eth within Coinbase’s ecosystem showcases the robustness of ENS as a foundational layer for onchain identity.
+As onchain applications and interactions evolve, ENS provides the reliability and flexibility needed to establish a strong presence. The seamless transition from cb.id to base.eth within Coinbase's ecosystem showcases the robustness of ENS as a foundational layer for onchain identity.
 
 ### A Portrait of the Development of Onchain Identity Primitives
 
 Onchain identity is a burgeoning field, ripe with opportunities for nuanced and innovative applications. Primitives like the cb.id initiative demonstrate how identity management in the blockchain space can offer businesses a compelling differentiation from competitors. Key advantages of incorporating the ENS protocol in onchain identity management solutions include enhanced security, which reduces phishing and fraud risks and builds user trust. The underlying CCIP-Read technology further strengthens security by ensuring secure and verifiable data retrieval, minimizing unauthorized access. A standout differentiator of onchain identity management is its simplicity—using easy-to-remember usernames and unified profiles under a single onchain identity significantly improves the user experience across the Web3 ecosystem. Users can easily link their online identities across various platforms, such as X, email, and more, by completing their onchain profile.
 
-However, there is always room for improvement, as primitives often come with their limitations. Businesses need to consider their audience’s sensitivity to trust assumptions and evaluate whether they have the developer resources required to implement onchain namespaces on their own, given the significant technical expertise involved. The challenges of achieving seamless and secure interoperability across multiple blockchains add to this complexity, requiring extensive developer resources and domain expertise, particularly in navigating ENS. One reliable approach for decision-makers is to network within the ENS DAO, the ENS Protocol’s onchain governance organization. The DAO has established several independent teams, each with unique skills and expertise in developing onchain namespaces. For more information, visit the Governance forum and reach out to any of the Working Group stewards for further guidance.
+However, there is always room for improvement, as primitives often come with their limitations. Businesses need to consider their audience's sensitivity to trust assumptions and evaluate whether they have the developer resources required to implement onchain namespaces on their own, given the significant technical expertise involved. The challenges of achieving seamless and secure interoperability across multiple blockchains add to this complexity, requiring extensive developer resources and domain expertise, particularly in navigating ENS. One reliable approach for decision-makers is to network within the ENS DAO, the ENS Protocol's onchain governance organization. The DAO has established several independent teams, each with unique skills and expertise in developing onchain namespaces. For more information, visit the Governance forum and reach out to any of the Working Group stewards for further guidance.
 
 ### The Future of cb.id Usernames
 
@@ -157,7 +157,7 @@ Importantly, this approach allows companies to set the rules for their Layer 2 n
 - **dApps (Decentralized Applications)**: Applications that run on a decentralized network, such as Ethereum, and operate without a central authority.
 - **EVM (Ethereum Virtual Machine)**: The software platform that developers use to create dApps on Ethereum. It is the runtime environment for smart contracts on Ethereum.
 - **L2 EVMs (Layer 2 Ethereum Virtual Machines):** Secondary networks built on top of Ethereum (Layer 1) to boost scalability, lower fees, and speed up transactions. They remain compatible with Ethereum tools, enabling developers to build faster, cost-efficient dApps.
-- **Hexadecimal Address**: A long string of alphanumeric characters used in blockchain to represent a user’s wallet address, which is difficult to remember and prone to errors.
+- **Hexadecimal Address**: A long string of alphanumeric characters used in blockchain to represent a user's wallet address, which is difficult to remember and prone to errors.
 - **Gateway**: In the context of EIP-3668, it is a server that helps retrieve and provide offchain data to smart contracts on the blockchain.
 - **Resolver**: A smart contract on the Ethereum blockchain responsible for finding and providing the necessary data associated with an ENS name.
 - **Mainnet**: The main Ethereum network where actual transactions occur, as opposed to L2s and test networks where developers can test their applications.
