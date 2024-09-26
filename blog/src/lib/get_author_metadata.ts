@@ -15,7 +15,9 @@ type ENStateResponse = {
     records?: Record<PresetKeys & string, string>;
 };
 
-export const getAuthorMetadata = async (name: string) => {
+export const getAuthorMetadata = async (
+    name: string
+): Promise<ENStateResponse | undefined> => {
     const response = await fetch('https://enstate.rs/n/' + name);
 
     const data: ENStateResponse | undefined =

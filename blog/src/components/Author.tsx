@@ -117,7 +117,7 @@ export const Author: FC<{
                                     'https://x.com/' +
                                         formatRecord(
                                             'com.twitter',
-                                            author_metadata.records[
+                                            author_metadata?.records[
                                                 'com.twitter'
                                             ]
                                         ),
@@ -128,7 +128,7 @@ export const Author: FC<{
                                 [
                                     'email',
                                     'mailto:' +
-                                        author_metadata.records['email'],
+                                        author_metadata?.records['email'],
                                     <FiMail />,
                                 ],
                                 [
@@ -136,7 +136,7 @@ export const Author: FC<{
                                     'https://t.me/' +
                                         formatRecord(
                                             'org.telegram',
-                                            author_metadata.records[
+                                            author_metadata?.records[
                                                 'org.telegram'
                                             ]
                                         ),
@@ -144,7 +144,7 @@ export const Author: FC<{
                                 ],
                                 [
                                     'url',
-                                    author_metadata.records.url,
+                                    author_metadata?.records.url,
                                     <FiGlobe />,
                                 ],
                                 [
@@ -152,7 +152,7 @@ export const Author: FC<{
                                     'https://github.com/' +
                                         formatRecord(
                                             'com.github',
-                                            author_metadata.records[
+                                            author_metadata?.records[
                                                 'com.github'
                                             ]
                                         ),
@@ -162,7 +162,7 @@ export const Author: FC<{
                                     'com.discord',
                                     formatRecord(
                                         'com.discord',
-                                        author_metadata.records['com.discord']
+                                        author_metadata?.records['com.discord']
                                     ),
                                     <FaDiscord />,
                                 ],
@@ -174,7 +174,7 @@ export const Author: FC<{
                         )
                             .filter(
                                 ([record, url, _element]) =>
-                                    author_metadata.records[record] && !!url
+                                    author_metadata?.records[record] && !!url
                             )
                             .map(([record, url, element]) => (
                                 <Link
