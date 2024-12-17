@@ -11,7 +11,7 @@ export type BlogPostMetadataPlus = BlogPostMetadata & {
 };
 
 export const getPostsMetadata = async () => {
-    const folderNames = await readdir('../content');
+    const folderNames = await getPostDirectories();
 
     return unstable_cache(_getPostsMetadata, [folderNames.join(',')], {})();
 };
@@ -22,7 +22,7 @@ export const _getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
     const posts: BlogPostMetadataPlus[] = [];
 
     // Load all posts from the content directory
-    const files = await readdir('../content');
+    const files = await getPostDirectories();
 
     // For each file, get the slug and file name
     for (const file of files) {
@@ -46,3 +46,10 @@ export const _getPostsMetadata = async (): Promise<BlogPostMetadataPlus[]> => {
         return aDate.getTime() > bDate.getTime() ? -1 : 1;
     });
 };
+
+async function getPostDirectories() {
+    // Load all posts from the content directory
+    const files = await readdir('../content');
+
+    return files.filter((file) => file !== '.DS_Store');
+}

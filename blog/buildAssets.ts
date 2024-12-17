@@ -90,11 +90,15 @@ type Cover = {
     data: Buffer;
 };
 
+async function getPostDirectories() {
+    // Load all posts from the content directory
+    const files = await readdir(CONTENT_FOLDER);
+
+    return files.filter((file) => file !== '.DS_Store');
+}
+
 const getCoverImages = async () => {
-    const posts = await readdir(CONTENT_FOLDER);
-
-    console.log('Posts', posts);
-
+    const posts = await getPostDirectories();
     const covers: Cover[] = [];
 
     for (const post of posts) {
@@ -103,8 +107,6 @@ const getCoverImages = async () => {
 
         for (const format of ImageFormats) {
             const cover = `${CONTENT_FOLDER}/${post}/cover.${format}`;
-
-            console.log('Checking', cover);
 
             try {
                 await access(cover, constants.F_OK | constants.R_OK);
@@ -127,7 +129,7 @@ const getCoverImages = async () => {
 
         // Read meta.json and check for cover
         const meta = await import(`../content/${post}/meta.json`).catch(
-            () => { }
+            () => {}
         );
 
         if (meta?.cover) {
@@ -180,8 +182,9 @@ const handleCoverImages = async () => {
 
             // eslint-disable-next-line sonarjs/no-nested-template-literals
             const key = `${prefix || ''}cover${suffix ? `-${suffix}` : ''}`;
-            const output = `${ASSETS_FOLDER}/${cover.post}/${key}.${format || 'webp'
-                }`;
+            const output = `${ASSETS_FOLDER}/${cover.post}/${key}.${
+                format || 'webp'
+            }`;
 
             console.log(`Converting image to ${output}`);
 
@@ -189,8 +192,9 @@ const handleCoverImages = async () => {
 
             await sharp(cover.data).resize(width, height).toFile(output);
 
-            result += `        '${key}': import('./${cover.post}/${key}.${format || 'webp'
-                }') as Promise<{default: StaticImageData}>,\n`;
+            result += `        '${key}': import('./${cover.post}/${key}.${
+                format || 'webp'
+            }') as Promise<{default: StaticImageData}>,\n`;
         }
 
         result += '    },\n';
@@ -216,17 +220,14 @@ const AVATAR_IMG_SETTINGS: ImageSettings[] = [
 ];
 
 const getAvatarImages = async () => {
-    const posts = await readdir(CONTENT_FOLDER);
-
-    console.log('Posts', posts);
-
+    const posts = await getPostDirectories();
     const avatars: Record<string, Buffer> = {};
 
     for (const post of posts) {
         // Read meta.json and check for cover
         const meta: BlogPostMetadata = await import(
             `../content/${post}/meta.json`
-        ).catch(() => { });
+        ).catch(() => {});
 
         if (!meta) continue;
 
@@ -305,8 +306,9 @@ const handleAvatarImages = async () => {
 
             // eslint-disable-next-line sonarjs/no-nested-template-literals
             const key = `${prefix || ''}avatar${suffix ? `-${suffix}` : ''}`;
-            const output = `${ASSETS_FOLDER}/${author}/${key}.${format || 'webp'
-                }`;
+            const output = `${ASSETS_FOLDER}/${author}/${key}.${
+                format || 'webp'
+            }`;
 
             console.log(`Converting image to ${output}`);
 
@@ -324,9 +326,9 @@ const handleAvatarImages = async () => {
                 continue;
             }
 
-
-            result += `        '${key}': import('./${author}/${key}.${format || 'webp'
-                }') as Promise<{default: StaticImageData}>,\n`;
+            result += `        '${key}': import('./${author}/${key}.${
+                format || 'webp'
+            }') as Promise<{default: StaticImageData}>,\n`;
         }
 
         result += '    },\n';
