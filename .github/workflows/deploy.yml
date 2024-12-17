@@ -60,10 +60,10 @@ jobs:
           SEARCH_JSON=$(cat blog/out/search.json)
           echo "::set-output name=search_json::${SEARCH_JSON}"
 
-      - name: Deploy search index
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://search.v3x.systems/indexes/ens-blog/documents?primaryKey=slug'
-          method: 'POST'
-          bearerToken: ${{ secrets.SEARCH_TOKEN }}
-          data: ${{ steps.read_search_json.outputs.search_json }}
+      # - name: Deploy search index
+      #   uses: fjogeleit/http-request-action@v1
+      #   with:
+      #     url: 'https://search.v3x.systems/indexes/ens-blog/documents?primaryKey=slug'
+      #     method: 'POST'
+      #     bearerToken: ${{ secrets.SEARCH_TOKEN }}
+      #     data: ${{ steps.read_search_json.outputs.search_json }}
