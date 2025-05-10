@@ -117,7 +117,6 @@ const getCoverImages = async () => {
                     format,
                     data,
                 });
-
                 foundImageFile = true;
                 break;
             } catch {
@@ -177,6 +176,15 @@ const handleCoverImages = async () => {
     for (const cover of covers) {
         result += `    '${cover.post}': {\n`;
 
+        const potatoImage = await sharp(cover.data)
+            .resize(64, 36)
+            .webp({
+                quality: 4,
+                effort: 6,
+                alphaQuality: 0,
+            })
+            .toBuffer();
+
         for (const settings of COVER_IMG_SETTINGS) {
             const { prefix, suffix, width, height, format } = settings;
 
@@ -196,6 +204,9 @@ const handleCoverImages = async () => {
                 format || 'webp'
             }') as Promise<{default: StaticImageData}>,\n`;
         }
+        result += `        'cover-potato': 'data:image/webp;base64,${potatoImage.toString(
+            'base64'
+        )}',\n`;
 
         result += '    },\n';
     }
