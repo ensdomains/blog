@@ -1,0 +1,32 @@
+We’re pleased to announce ENS now supports NFT avatars for your ENS profile.
+
+What this means is you can now set an NFT you own as the avatar of your ENS profile, and dapps can then display it alongside your ENS name. [Read the spec here](https://gist.github.com/Arachnid/9db60bd75277969ee1689c8742b75182).
+
+**At launch, this feature is supported by [Uniswap](https://app.uniswap.org/) and [1inch](https://app.1inch.io/)**, in addition to the ENS Manager App itself. A big thanks to the team at Metaphor (more on them below) who took the lead on getting this integrated. We look forward to many more dapps integrating support for this over the next few weeks and months.
+
+→ [Step-by-Step Guide to Setting an NFT as your ENS Profile Avatar](https://support.ens.domains/en/articles/7883271-how-to-set-an-avatar)
+
+![](https://cdn-images-1.medium.com/max/800/1*dlmBS7dyU9WJ-dLlK8WLfg.png)
+app.uniswap.org
+
+![](https://cdn-images-1.medium.com/max/800/1*Y1a__Oep5ym9LqDFnco2CQ.png)
+app.1inch.io
+
+![](https://cdn-images-1.medium.com/max/800/1*yJEu66D7h6ojvZT-jpTFEw.png)
+app.ens.domains
+
+## Want to add avatar support to your dapp?
+
+We want this to be ubiquitous!
+
+First off, does your dapp already have ENS username support? This means that you grab the ENS name in the Ethereum account’s reverse record and use that as their cross-platform username. Here’s our [docs on how to implement](https://docs.ens.domains/dapp-developer-guide/resolving-names#reverse-resolution) (pretty straightforward).
+
+Next is avatar support. Once you’ve done reverse resolution to grab the user’s ENS name for their username, you can then grab info from that name’s records, such as their avatar. You can [read the ENS avatar spec and implement yourself](https://gist.github.com/Arachnid/9db60bd75277969ee1689c8742b75182), or use Metaphor’s [Davatar library](https://www.npmjs.com/package/@davatar/react).
+
+## Special thanks to Metaphor
+
+Metaphor took up the effort to get this feature over the finish line and getting it integrated in services. Thank you!
+
+Founded by [gail.eth](https://twitter.com/gaildewilson) and [carlosdp.eth](https://twitter.com/the_carlosdp), Metaphor is building tools for DAOs with the underlying mission to make decentralized connection fun and accessible for everyone. DM them on Twitter or join their Discord if you’d like to connect.
+
+→ [Step-by-Step Guide to Setting an NFT as your ENS Profile Avatar](https://support.ens.domains/en/articles/7883271-how-to-set-an-avatar)
